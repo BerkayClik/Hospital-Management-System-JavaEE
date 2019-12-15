@@ -1,0 +1,61 @@
+#demo{
+  position: relative;
+}
+
+.container{
+  overflow: auto;
+}
+
+.calender{
+  position: absolute;
+  top: 25px;
+  left: 25px;
+}
+
+.selectedDate{
+  margin-right: 2em;
+  position: absolute;
+  top: 300px;
+  left: 18px;
+}
+
+.leftContiner{
+  float: left;
+  width: 24%;
+  margin-top: 20em;
+  padding-left: 1.8em;
+}
+
+.rightContainer{
+  float: right;
+  width: 63%;
+  margin-right: 3em;
+  padding-right: 3em;
+}
+
+.doctors{
+  margin-left: 5px;
+  margin-top: 1em;
+  width: 160px;
+  height: 30px;
+}
+
+.showButton{
+  display: block;
+  margin: 0 auto;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #60a3bc;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+.showButton:hover {
+text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.1);
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+cursor: pointer;
+transition: all 0.4s ease 0s;
+}

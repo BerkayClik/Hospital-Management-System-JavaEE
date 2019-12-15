@@ -9,14 +9,14 @@ CREATE TABLE cs202.Roles
 
 CREATE TABLE cs202.Departments
 (
-  dept_id INT NOT NULL,
+  dept_id INT NOT NULL auto_increment,
   name INT NOT NULL,
   PRIMARY KEY (dept_id)
 );
 
 CREATE TABLE cs202.Rooms
 (
-  room_id INT NOT NULL,
+  room_id INT NOT NULL auto_increment,
   name VARCHAR(40) NOT NULL,
   PRIMARY KEY (room_id)
 );
@@ -39,10 +39,10 @@ CREATE TABLE cs202.LinkRoleRel
 
 CREATE TABLE cs202.Users
 (
-  u_id INT NOT NULL,
+  u_id INT NOT NULL auto_increment,
   name VARCHAR(45) NOT NULL,
   pw VARCHAR(50) NOT NULL,
-  user_name VARCHAR(40) NOT NULL,
+  email VARCHAR(40) NOT NULL,
   role_id INT NOT NULL,
   PRIMARY KEY (u_id),
   FOREIGN KEY (role_id) REFERENCES Roles(role_id)
@@ -58,7 +58,7 @@ CREATE TABLE cs202.UserDepRel
 
 CREATE TABLE cs202.Appointments
 (
-  app_id INT NOT NULL,
+  app_id INT NOT NULL auto_increment,
   datetime DATE NOT NULL,
   p_id INT NOT NULL,
   d_id INT NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE cs202.Appointments
 
 CREATE TABLE cs202.RoomReservations
 (
-  res_id INT NOT NULL,
+  res_id INT NOT NULL auto_increment,
   enter DATE NOT NULL,
   exit_ DATE NOT NULL,
   room_id INT NOT NULL,
@@ -85,24 +85,24 @@ CREATE TABLE cs202.OffDays
 (
   start DATE NOT NULL,
   end DATE NOT NULL,
-  id INT NOT NULL,
+  id INT NOT NULL auto_increment,
   d_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (d_id) REFERENCES Users(u_id)
 );
 
-insert into roles values('Patient',1);
-insert into roles values('Doctor',2);
-insert into roles values('Admin',3);
-insert into roles values('Nurse',4);
+insert into cs202.roles values('Patient',1);
+insert into cs202.roles values('Doctor',2);
+insert into cs202.roles values('Admin',3);
+insert into cs202.roles values('Nurse',4);
 
-insert into users values(1,'Doğukan','admin*123','dogukan',3);
-insert into users values(2,'Emre','admin*123','emre',3);
-insert into users values(3,'Berkay','admin*123','berkay',3);
+insert into cs202.users values(1,'Doğukan','admin*123','dogukan',3);
+insert into cs202.users values(2,'Emre','admin*123','emre',3);
+insert into cs202.users values(3,'Berkay','admin*123','berkay',3);
 
-insert into users values(4,'Emir','emir32','emir',2);
-insert into users values(5,'Cihan','cihan32','cihan',2);
-insert into users values(6,'Reyhan','reyhan32','reyhan',2);
+insert into cs202.users values(4,'Emir','emir32','emir',2);
+insert into cs202.users values(5,'Cihan','cihan32','cihan',2);
+insert into cs202.users values(6,'Reyhan','reyhan32','reyhan',2);
 
-insert into users values(7,'Alp','alp15','alp',4);
-insert into users values(8,'Oğuz','oguz15','oguz',4);
+insert into cs202.users values(7,'Alp','alp15','alp',4);
+insert into cs202.users values(8,'Oğuz','oguz15','oguz',4);

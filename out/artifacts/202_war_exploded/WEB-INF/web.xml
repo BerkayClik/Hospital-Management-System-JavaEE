@@ -29,4 +29,14 @@
         <servlet-name>reg</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>setApp</servlet-name>
+        <servlet-class>makeAppServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>setApp</servlet-name>
+        <url-pattern>/setAppointment</url-pattern>
+    </servlet-mapping>
 </web-app>
