@@ -52,10 +52,14 @@
       <span>Don't have account? >> </span>
       <a href="register.jsp">Sign Up</a>
     </div>
-      <div class="signUp">
+    <div class="signUp">
           <span>Jump to makeAppointment Page >> </span>
           <a href="makeAppointment.jsp">Click</a>
-      </div>
+    </div>
+    <div class="signUp">
+      <span>Jump to setOffDay Page >> </span>
+      <a href="setOffDays.jsp">Click</a>
+    </div>
   </form>
 
   <script src="js/hover&focus.js"></script>

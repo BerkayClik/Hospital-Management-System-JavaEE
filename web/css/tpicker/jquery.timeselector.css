@@ -1,0 +1,15 @@
+.timeselector { padding: 2px; line-height: 100%; color: #333; border: solid 1px #aaa; border-radius: 6px; background: #c9c9c9; position: absolute; overflow: hidden; 
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+.timeselector-item,
+.timeselector-separator { float: left; }
+.timeselector-value,
+.timeselector-button { padding: 2px 8px; font-weight: 700; text-align: center; cursor: pointer; }
+.timeselector-value { display: block; color: #444; border: solid 1px #fff; background: #eee; }
+.timeselector-separator { padding: 0 2px; margin-top: 26%; }
+.timeselector-button { display: block; text-decoration: none; color: #3383bb; border: solid 1px #ccc; background: #eee; }
+.timeselector-button:hover { color: #599fcf; border-color: #bbb; background: #f8f8f8; }
+.timeselector-up { border-width: 1px 1px 0; border-radius: 4px 4px 0 0; }
+.timeselector-down { border-width: 0 1px 1px; border-radius: 0 0 4px 4px; }

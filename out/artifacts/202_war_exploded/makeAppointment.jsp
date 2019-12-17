@@ -70,7 +70,7 @@
                     width:'340px',
                     showPrevMonth: true,
                     showNextMonth: true,
-                    date: new Date(2020,01,1)}).render();
+                    date: new Date(2020,00,1)}).render();
 
 
                 var dtdate = Y.DataType.Date;
