@@ -10,8 +10,13 @@ public class setOffDayServlet extends HttpServlet {
         String days = request.getParameter("days");
         String times = request.getParameter("times");
 
-        System.out.println(days);
-        System.out.println(times);
+        String[] daysArray = days.split("/");
+        String[] timesArray = times.split("/");
+
+        for(int i=0; i<daysArray.length; i++){
+            System.out.print(daysArray[i]);
+            System.out.println("-->" + timesArray[i]);
+        }
 
         //ArrayList<String> cars = new ArrayList<String>();
 

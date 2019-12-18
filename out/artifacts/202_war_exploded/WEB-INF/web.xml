@@ -49,7 +49,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>setOffDays</servlet-name>
-        <url-pattern>/setOD</url-pattern>
+        <url-pattern>/doctorPages/setOD</url-pattern>
     </servlet-mapping>
 
 </web-app>

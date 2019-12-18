@@ -53,12 +53,12 @@
       <a href="register.jsp">Sign Up</a>
     </div>
     <div class="signUp">
-          <span>Jump to makeAppointment Page >> </span>
-          <a href="makeAppointment.jsp">Click</a>
+          <span>Jump to Patient Home >> </span>
+          <a href="patientPages/patientHome.jsp">Click</a>
     </div>
     <div class="signUp">
-      <span>Jump to setOffDay Page >> </span>
-      <a href="setOffDays.jsp">Click</a>
+      <span>Jump to Doctor Home >> </span>
+      <a href="doctorPages/doctorHome.jsp">Click</a>
     </div>
   </form>
 

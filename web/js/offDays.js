@@ -164,7 +164,7 @@ function createForm(){
   let form = document.createElement('form');
   form.setAttribute("action", "setOD");
   form.setAttribute("method", "post");
-  form.setAttribute("style", "display: flex; justify-content: center;");
+  form.setAttribute("style", "display: flex; justify-content: center; display: none;");
 
   form.innerHTML = "<input type=\"text\" name=\"days\" value=\"\" id=\"formDays\">" +
   "<input type=\"text\" name=\"times\" value=\"\" id=\"formTimes\">" +

@@ -7,37 +7,29 @@
 }
 
 .calender{
-  position: absolute;
-  top: 25px;
-  left: 25px;
+  margin: 2em auto;
 }
 
-.selectedDate{
-  margin-right: 2em;
-  position: absolute;
-  top: 300px;
-  left: 18px;
+.selectedDate,
+.selectedDoctor{
+  width: 310px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 8px;
 }
 
-.leftContiner{
-  float: left;
-  width: 24%;
-  margin-top: 20em;
+.leftContainer{
   padding-left: 1.8em;
 }
 
 .rightContainer{
-  float: right;
-  width: 63%;
-  margin-right: 3em;
-  padding-right: 3em;
+  padding: 3em;
 }
 
 .doctors{
-  margin-left: 5px;
-  margin-top: 1em;
   width: 160px;
   height: 30px;
+  margin-left: 15px;
 }
 
 .showButton{

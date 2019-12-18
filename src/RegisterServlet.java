@@ -31,9 +31,10 @@ public class RegisterServlet extends HttpServlet {
                     "'" +hashedPass + "'," +
                     "'" + email + "'," +
             "1);";
-            System.out.println(sql);
-            if(handler.handleQuery(sql))
-                System.out.println("Registered");
+            //System.out.println(sql);
+            if(handler.handleQuery(sql)){
+                request.setAttribute("status","success");
+            }
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
