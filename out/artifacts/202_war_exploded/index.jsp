@@ -62,6 +62,15 @@
     </div>
   </form>
 
+  <%
+    String regStatus = (String) request.getAttribute("regStatus");
+    System.out.println(regStatus);
+  %>
+  <% if (regStatus != null && regStatus.equals("success")){ %>
+  <script type="text/javascript">
+    alert("You have registered.");
+  </script>
+  <%}%>
   <script src="js/hover&focus.js"></script>
   <script src="js/blankInput.js"></script>
   </body>

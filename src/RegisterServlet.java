@@ -33,7 +33,8 @@ public class RegisterServlet extends HttpServlet {
             "1);";
             //System.out.println(sql);
             if(handler.handleQuery(sql)){
-                request.setAttribute("status","success");
+                request.setAttribute("regStatus","success");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }
     }

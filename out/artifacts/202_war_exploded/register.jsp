@@ -69,6 +69,8 @@
         </div>
     </form>
 
+
+
     <script src="js/blankInput.js"></script>
     <script src="js/hover&focus.js"></script>
     <script src="js/register.js"></script>
