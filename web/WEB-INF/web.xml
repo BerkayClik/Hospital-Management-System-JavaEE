@@ -52,4 +52,13 @@
         <url-pattern>/doctor/setOD</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>setDeptName</servlet-name>
+        <servlet-class>setDeptNamesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>setDeptName</servlet-name>
+        <url-pattern>/setDeptNames</url-pattern>
+    </servlet-mapping>
+
 </web-app>

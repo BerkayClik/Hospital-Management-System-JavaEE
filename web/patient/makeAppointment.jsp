@@ -1,3 +1,7 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Monster
@@ -106,17 +110,59 @@
                 <div class="selectedDepartment">
                     <span style="font-family: sans-serif; padding-left: 9px;">Select Department: </span>
                     <select onchange="setDepartment()" id="departments">
-                        <option value=""></option>
-                        <option value="Dermatology">Dermatology</option>
-                        <option value="Cardiology">Cardiology</option>
+                        <%
+                            boolean isFirstLoad = true;
+                            Cookie[] cookies = request.getCookies();
+                            for(Cookie cookie : cookies){
+                                if(cookie.getName().equals("deptNames")){
+                                    System.out.println("isFirstLoad = false;");
+                                    isFirstLoad = false;
+                                    break;
+                                }
+                            }
+
+                            if(isFirstLoad){
+                                System.out.println("isFirstLoad = true;");
+                                response.sendRedirect("/setDeptNames");
+                            }
+
+                            boolean isDeptName = false;
+
+                            for(Cookie cookie : cookies){
+                                if(cookie.getName().equals("deptNames")){
+                                    isDeptName = true;
+                                    break;
+                                }
+                            }
+                            if(isDeptName){
+                                for(Cookie cookie : cookies){
+                                    if(cookie.getName().equals("deptNames")){
+                                        String[] deptNames = cookie.getValue().split("%2F");
+                                        for(int i=0; i<deptNames.length; i++){
+                                            if(deptNames[i].contains("+")){
+                                                String deptName = deptNames[i].replace("+", " ");
+                                                out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
+                                            }
+                                            else{
+                                                out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="selectedDoctor">
                     <span style="font-family: sans-serif; padding-left: 9px; margin-right: 36px;">Select Doctor: </span>
                     <select onchange="setDoctor()" id="doctors">
                         <option value=""></option>
-                        <option value="Emre">Emre</option>
-                        <option value="Berkay">Berkay</option>
+
+                        <%
+                           
+
+
+                        %>
                     </select>
                 </div>
 

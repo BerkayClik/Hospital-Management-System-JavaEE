@@ -13,7 +13,6 @@ public class main {
             Statement stmt = handler.getConn().createStatement();
             ResultSet rs = stmt.executeQuery("select name from departments");
             while(rs.next()){
-
                 depList.add(rs.getString(1));
             }
         }
@@ -24,9 +23,9 @@ public class main {
             System.out.println(dep);
         }
 
+        System.out.println("\n");
 
-
-        String dep = "a";//take the department input
+        String dep = "General surgery";//take the department input
         int dept_id = 0;
         try{//find the id of the given department
             Statement stmt = handler.getConn().createStatement();
@@ -55,9 +54,5 @@ public class main {
         catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
     }
 }

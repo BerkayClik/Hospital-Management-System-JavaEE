@@ -33,6 +33,7 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
         if(role != 0){
+            handler.close();
             response.addCookie(new Cookie("role_id",""+role));
             response.addCookie(new Cookie("email",email));
             response.sendRedirect("/user");

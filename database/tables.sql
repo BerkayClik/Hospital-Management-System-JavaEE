@@ -122,7 +122,7 @@ insert into cs202.users values(21,'Ipek Ceylan','b901bi6bN9pV9Z89+3Jt7g==','ipek
 
 
 insert into cs202.departments(name) values("Cardiology");
-insert into cs202.departments(name) values("Ear,Nose and Throat");
+insert into cs202.departments(name) values("Ear Nose and Throat");
 insert into cs202.departments(name) values("General surgery");
 insert into cs202.departments(name) values("Neurology");
 insert into cs202.departments(name) values("Nutrition and dietetics");

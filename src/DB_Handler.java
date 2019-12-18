@@ -41,6 +41,7 @@ public class DB_Handler {
     public void close(){
         try {
             conn.close();
+            System.out.println("Closed");
         } catch (Exception e) {
             System.out.println("Error while Closing");
         }
