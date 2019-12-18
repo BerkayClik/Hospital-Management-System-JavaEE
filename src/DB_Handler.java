@@ -23,6 +23,10 @@ public class DB_Handler {
         }
     }
 
+    public Connection getConn() {
+        return conn;
+    }
+
     public boolean handleQuery(String query) {
         try {
             stmt.executeUpdate(query);

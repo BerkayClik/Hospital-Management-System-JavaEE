@@ -53,7 +53,7 @@
                     <ul class="list-unstyled components">
                         <p>Welcome</p>
                         <li>
-                            <a href="doctorHome.jsp">Home</a>
+                            <a href="home.jsp">Home</a>
 
                         </li>
                         <li>
