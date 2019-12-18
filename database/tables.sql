@@ -10,7 +10,7 @@ CREATE TABLE cs202.Roles
 CREATE TABLE cs202.Departments
 (
   dept_id INT NOT NULL auto_increment,
-  name INT NOT NULL,
+  name VARCHAR(40) NOT NULL,
   PRIMARY KEY (dept_id)
 );
 
@@ -96,13 +96,56 @@ insert into cs202.roles values('Doctor',2);
 insert into cs202.roles values('Admin',3);
 insert into cs202.roles values('Nurse',4);
 
-insert into cs202.users values(1,'Doğukan','admin*123','dogukan',3);
-insert into cs202.users values(2,'Emre','admin*123','emre',3);
-insert into cs202.users values(3,'Berkay','admin*123','berkay',3);
+insert into cs202.users values(1,'Emir Arditi','33X+VUiYs06eTZKROmV/AA==','emir.arditi@ozu.edu.tr',3);
+insert into cs202.users values(2,'Cihan Eren','veKtX2iwifW5zoktXYb6Ug==','cihan.eren@ozu.edu.tr',3);
+insert into cs202.users values(3,'admin','OAHoK1SqcoGmfRRTPBgY2w==','admin',3);
 
-insert into cs202.users values(4,'Emir','emir32','emir',2);
-insert into cs202.users values(5,'Cihan','cihan32','cihan',2);
-insert into cs202.users values(6,'Reyhan','reyhan32','reyhan',2);
+insert into cs202.users values(4,'Emre Karakuz','I1m6zLHvcryAtRsLr1wZug==','emrekarakuz@gmail.com',2);
+insert into cs202.users values(5,'Dogukan Duduoglu','VWcUX22twzoH8tAzFy1DoA==','dogukan.duduoglu@ozu.edu.tr',2);
+insert into cs202.users values(6,'Berkay Celik','TTdKHTddkYw1OdjloidyoQ==','berkay.celik@ozu.edu.tr',2);
+insert into cs202.users values(7,'Ahmet Bilici','gNHtwNcowoI0fQRc2pE2Cw==','ahmet.cilici@ozu.edu.tr',2);
+insert into cs202.users values(8,'Ali Aydin','oGsDOs3lQ0yHqMAoGO3MNA==','ali.aydin@ozu.edu.tr',2);
+insert into cs202.users values(9,'Akif Tan','+fo/G5z3MeimQ0NvvVRZkQ==','akif.tan@ozu.edu.tr',2);
+insert into cs202.users values(10,'Dilek Akan','HHvD7vRkKzPDobGB4aKqHw==','dilek.akan@ozu.edu.tr',2);
+insert into cs202.users values(11,'Lale Tamer','H8HJ0gapI+H49dueyabR2w==','lale.tamer@ozu.edu.tr',2);
+insert into cs202.users values(12,'Mehmet Sait','3o6dlnpvfrJrlAmfLqENag==','mehmet.sait@ozu.edu.tr',2);
+insert into cs202.users values(13,'Meryem Can','5hwsC1M64N1wrdnofuoCWw==','meryem.can@ozu.edu.tr',2);
+insert into cs202.users values(14,'Ozlem Balci','qEx12zTum5MTybtGfAcf5A==','ozlem.balci@ozu.edu.tr',2);
+insert into cs202.users values(15,'Pelin Kara','IxhbyPvyrCQhRUcs+DH7GA==','pelin.kara@ozu.edu.tr',2);
+insert into cs202.users values(16,'Asli Cakir','cygUlEf9er3bboFSLgW54w==','asli.cakir@ozu.edu.tr',2);
+insert into cs202.users values(17,'Berna Turk','kU7h8C5LF2fnRxRy69G19g==','berna.turk@ozu.edu.tr',2);
+insert into cs202.users values(18,'Berkan Kaplan','XmZwPCc4bhcN4MeR9sENMA==','berkan.kaplan@ozu.edu.tr',2);
+insert into cs202.users values(19,'Cem Turan','wmaryEXBeIcLTy5DCBLj5A==','cem.turan@ozu.edu.tr',2);
+insert into cs202.users values(20,'Deniz Arslan','SUj3QCoMejgEmtoUX5VtBw==','deniz.arslan@ozu.edu.tr',2);
+insert into cs202.users values(21,'Ipek Ceylan','b901bi6bN9pV9Z89+3Jt7g==','ipek.ceylan@ozu.edu.tr',2);
 
-insert into cs202.users values(7,'Alp','alp15','alp',4);
-insert into cs202.users values(8,'Oğuz','oguz15','oguz',4);
+
+
+insert into cs202.departments(name) values("Cardiology");
+insert into cs202.departments(name) values("Ear,Nose and Throat");
+insert into cs202.departments(name) values("General surgery");
+insert into cs202.departments(name) values("Neurology");
+insert into cs202.departments(name) values("Nutrition and dietetics");
+insert into cs202.departments(name) values("Oncology");
+
+insert into cs202.UserDepRel values(1,21);
+insert into cs202.UserDepRel values(1,4);
+insert into cs202.UserDepRel values(1,7);
+insert into cs202.UserDepRel values(1,10);
+insert into cs202.UserDepRel values(2,19);
+insert into cs202.UserDepRel values(2,6);
+insert into cs202.UserDepRel values(2,9);
+insert into cs202.UserDepRel values(3,20);
+insert into cs202.UserDepRel values(3,5);
+insert into cs202.UserDepRel values(3,8);
+insert into cs202.UserDepRel values(4,11);
+insert into cs202.UserDepRel values(4,14);
+insert into cs202.UserDepRel values(4,17);
+insert into cs202.UserDepRel values(5,12);
+insert into cs202.UserDepRel values(5,15);
+insert into cs202.UserDepRel values(5,18);
+insert into cs202.UserDepRel values(6,13);
+insert into cs202.UserDepRel values(6,16);
+
+
+
