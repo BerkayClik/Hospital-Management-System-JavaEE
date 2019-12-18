@@ -11,6 +11,7 @@
 }
 
 .selectedDate,
+.selectedDepartment,
 .selectedDoctor{
   width: 310px;
   display: block;

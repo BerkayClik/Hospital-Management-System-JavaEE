@@ -44,15 +44,15 @@
 
             <ul class="list-unstyled components">
                 <p>Welcome</p>
-                <li class="active">
+                <li>
                     <a href="">Home</a>
 
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Make Appointment</a>
+                        <li class="active">
+                            <a href="">Make Appointment</a>
                         </li>
                         <li>
                             <a href="#">View Appointment</a>
@@ -102,24 +102,26 @@
                         <span id="selecteddate"></span>
                     </div>
                 </div>
+
+                <div class="selectedDepartment">
+                    <span style="font-family: sans-serif; padding-left: 9px;">Select Department: </span>
+                    <select onchange="setDepartment()" id="departments">
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Cardiology">Cardiology</option>
+                    </select>
+                </div>
                 <div class="selectedDoctor">
-                    <span style="font-family: sans-serif; padding-left: 9px;">Select Doctor: </span>
-                    <select class="doctors" id="doctors" onchange="setName()">
-                        <option value="" selected="selected"></option>
-                        <optgroup label="Cardiology">
-                            <option value="Emre">Emre</option>
-                            <option value="Berkay">Berkay</option>
-                        </optgroup>
-                        <optgroup label="Dermatology">
-                            <option value="Doğukan">Doğukan</option>
-                            <option value="Alp">Alp</option>
-                        </optgroup>
+                    <span style="font-family: sans-serif; padding-left: 9px; margin-right: 36px;">Select Doctor: </span>
+                    <select onchange="setDoctor()" id="doctors">
+                        <option value="Emre">Emre</option>
+                        <option value="Berkay">Berkay</option>
                     </select>
                 </div>
 
                 <form action="setAppointment" method="post">
-                    <input type="text" name="date" id="trDate" style="display: none">
-                    <input type="text" name="doctor" id="doctor" style="display: none">
+                    <input type="text" name="date" id="trDate" style="">
+                    <input type="text" name="department" id="department" style="">
+                    <input type="text" name="doctor" id="doctor" style="">
                     <div style="margin-top: 2em">
                         <button type="submit" name="button" class="showButton" onclick="check()">Show</button>
                     </div>

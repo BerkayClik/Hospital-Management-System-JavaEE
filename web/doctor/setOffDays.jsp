@@ -63,7 +63,7 @@
                             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Off-Day</a>
                             <ul class="collapse list-unstyled" id="pageSubmenu">
                                 <li class="active">
-                                    <a href="setOffDays.jsp">Set Off-Day</a>
+                                    <a href="">Set Off-Day</a>
                                 </li>
                                 <li>
                                     <a href="#">Show Off-Days</a>

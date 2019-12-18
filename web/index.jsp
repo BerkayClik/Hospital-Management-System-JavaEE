@@ -54,11 +54,11 @@
     </div>
     <div class="signUp">
           <span>Jump to Patient Home >> </span>
-          <a href="patientPages/patientHome.jsp">Click</a>
+          <a href="patient/patientHome.jsp">Click</a>
     </div>
     <div class="signUp">
       <span>Jump to Doctor Home >> </span>
-      <a href="doctorPages/doctorHome.jsp">Click</a>
+      <a href="doctor/doctorHome.jsp">Click</a>
     </div>
   </form>
 

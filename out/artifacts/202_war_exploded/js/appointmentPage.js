@@ -1,5 +1,5 @@
 let e = document.getElementById("doctors");
-
+let depSelect = document.getElementById("departments");
 
 function  check() {
     let date = document.getElementById("trDate").value;
@@ -14,7 +14,12 @@ function  check() {
     }
 }
 
-function setName() {
+function setDepartment() {
+    let strDepartment = depSelect.options[depSelect.selectedIndex].value;
+    document.getElementById("department").value = strDepartment;
+}
+
+function setDoctor() {
     let strDoctor = e.options[e.selectedIndex].value;
     document.getElementById("doctor").value = strDoctor;
 }
