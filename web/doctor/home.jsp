@@ -48,12 +48,20 @@
 
             <ul class="list-unstyled components">
                 <p>Welcome</p>
-                <li class="active">
+                <li>
                     <a href="home.jsp">Home</a>
 
                 </li>
-                <li>
-                    <a href="">Rooms</a>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="reserve_room.jsp">Reserve Room</a>
+                        </li>
+                        <li>
+                            <a href="#">View Appointments</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Off-Day</a>
@@ -62,12 +70,9 @@
                             <a href="setOffDays.jsp">Set Off-Day</a>
                         </li>
                         <li>
-                            <a href="#">Show Off-Days</a>
+                            <a href="">Show Off-Days</a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="">View Appointment</a>
                 </li>
                 <li>
                     <a href="">Personal Info</a>
@@ -104,9 +109,9 @@
 
 </div>
 
-<%} else{%>
-This Operation is now allowed.
-<%}%>
+<%} else{
+    response.sendRedirect("/user");
+}%>
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- Popper.JS -->

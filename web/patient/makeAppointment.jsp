@@ -39,7 +39,42 @@
 </head>
 <body  class="yui3-skin-sam">
 <div class="wrapper">
+    <%
+        String selectedDept = "";
+        String selectedDate = "";
+    %>
 
+    <%
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("selectedDept")){
+                if(cookie.getValue().contains("+")) {
+                    String selecteddept = cookie.getValue().replace("+", " ");
+                    selectedDept = selecteddept;
+                }
+                else{
+                    selectedDept = cookie.getValue();
+                }
+            }
+            if(cookie.getName().equals("dateInForm")){
+                selectedDate = cookie.getValue();
+            }
+        }
+
+        //System.out.println(selectedDept + "l64");
+        //System.out.println(selectedDate);
+    %>
+
+    <%
+        boolean success = false;
+
+        for (int i=0; i<cookies.length; i++) {
+            if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("1")) {
+                success = true;
+            }
+        }
+        if(success){
+    %>
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="whole">
@@ -105,9 +140,7 @@
                     <div id="links" style="padding-left:9px; font-family: sans-serif;">
                         Selected Date: &nbsp
                         <span id="selecteddate">
-                            <% if(request.getParameter("dateInForm") != null ){%>
-                            <%=(String) request.getParameter("dateInForm")%>
-                            <% } %>
+                            <%=selectedDate%>
                         </span>
                     </div>
                 </div>
@@ -119,7 +152,7 @@
                             <option value=""></option>
                             <%
                                 boolean isFirstLoad = true;
-                                Cookie[] cookies = request.getCookies();
+
                                 for(Cookie cookie : cookies){
                                     if(cookie.getName().equals("deptNames")){
                                         isFirstLoad = false;
@@ -146,11 +179,10 @@
                                             for(int i=0; i<deptNames.length; i++){
                                                 if(deptNames[i].contains("+")){
                                                     String deptName = deptNames[i].replace("+", " ");
-                                                    if(request.getAttribute("selectedDept") == null){
+                                                    if(selectedDept.equals("")){
                                                         out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
                                                     }
                                                     else{
-                                                        String selectedDept = (String) request.getAttribute("selectedDept");
                                                         if(selectedDept.equals(deptName)){
                                                             out.println("<option value=\"" + deptName + "\" selected>" + deptName + "</option>");
                                                         }
@@ -160,11 +192,10 @@
                                                     }
                                                 }
                                                 else{
-                                                    if(request.getAttribute("selectedDept") == null){
+                                                    if(selectedDept.equals("")){
                                                         out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
                                                     }
                                                     else{
-                                                        String selectedDept = (String) request.getAttribute("selectedDept");
                                                         if(selectedDept.equals(deptNames[i])){
                                                             out.println("<option value=\"" + deptNames[i] + "\" selected>" + deptNames[i] + "</option>");
                                                         }
@@ -179,7 +210,7 @@
                                 }
                             %>
                         </select>
-                        <input type="text" name="dateInForm"  id="dateInForm" style="display: none" value=<% if(request.getParameter("dateInForm") != null ){%><%=(String) request.getParameter("dateInForm")%><%}%>>
+                        <input type="text" name="dateInForm"  id="dateInForm" style="display: none" value=<%=selectedDate%>>
                         <button type="submit" style="display: none">S</button>
                     </form>
                 </div>
@@ -189,7 +220,7 @@
                         <option value=""></option>
                         <%
                             for(Cookie cookie : cookies){
-                                System.out.println("cookie Name: " + cookie.getName());
+                                //System.out.println("cookie Name: " + cookie.getName());
                                 if(cookie.getName().equals("doctorNames")){
                                     String[] doctorNames = cookie.getValue().split("%2F");
                                     for(int i=0; i<doctorNames.length; i++){
@@ -211,7 +242,7 @@
 
                 <form action="setAppointment" method="post">
                     <input type="text" name="date" id="trDate" style="display: none">
-                    <input type="text" name="department" id="department" style="display: none">
+                    <input type="text" name="department" id="department" style="display: none" value=<%=selectedDept%>>
                     <input type="text" name="doctor" id="doctor" style="display: none">
                     <div style="margin-top: 2em">
                         <button type="submit" name="button" class="showButton" onclick="check()">Show</button>
@@ -224,6 +255,9 @@
         </div>
     </div>
 </div>
+<%} else{
+    response.sendRedirect("/user");
+}%>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

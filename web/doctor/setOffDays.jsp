@@ -41,6 +41,17 @@
 
     </head>
     <body class="yui3-skin-sam">
+    <%
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i=0; i<cookies.length; i++) {
+            if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("2")) {
+                success = true;
+            }
+        }
+        if(success){
+    %>
         <div class="wrapper">
 
             <!-- Sidebar -->
@@ -56,22 +67,27 @@
                             <a href="home.jsp">Home</a>
 
                         </li>
-                        <li>
-                            <a href="">Rooms</a>
-                        </li>
-                        <li>
-                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Off-Day</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li class="active">
-                                    <a href="">Set Off-Day</a>
+                        <li class="active">
+                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
+                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li>
+                                    <a href="">Reserve Room</a>
                                 </li>
                                 <li>
-                                    <a href="#">Show Off-Days</a>
+                                    <a href="#">View Appointments</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="">View Appointment</a>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Off-Day</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li>
+                                    <a href="setOffDays.jsp">Set Off-Day</a>
+                                </li>
+                                <li>
+                                    <a href="">Show Off-Days</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="">Personal Info</a>
@@ -146,6 +162,9 @@
                 </div>
             </div>
         </div>
+    <%} else{
+        response.sendRedirect("/user");
+    }%>
 
 
 <%--        <!-- jQuery CDN - Slim version (=without AJAX) -->--%>

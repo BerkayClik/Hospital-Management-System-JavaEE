@@ -14,7 +14,7 @@ public class DB_Handler {
             //Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            System.out.println("Connected");
+            //System.out.println("Connected");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +41,7 @@ public class DB_Handler {
     public void close(){
         try {
             conn.close();
-            System.out.println("Closed");
+            //System.out.println("Closed");
         } catch (Exception e) {
             System.out.println("Error while Closing");
         }

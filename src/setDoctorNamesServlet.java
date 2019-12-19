@@ -46,12 +46,13 @@ public class setDoctorNamesServlet extends HttpServlet {
                 doctorNames = doctorNames + doctor + "/";
             }
             response.addCookie(new Cookie("doctorNames", URLEncoder.encode(doctorNames, "UTF-8")));
-            System.out.println("doctorNames cookie added");
+            //System.out.println("doctorNames cookie added");
             handler.close();
             //response.sendRedirect("makeAppointment.jsp");
-            request.setAttribute("selectedDept", department);
-            request.setAttribute("dateInForm", date);
-            request.getRequestDispatcher("makeAppointment.jsp").forward(request, response);
+
+            response.addCookie(new Cookie("selectedDept",  URLEncoder.encode(department, "UTF-8")));
+            response.addCookie(new Cookie("dateInForm", date));
+            response.sendRedirect("makeAppointment.jsp");
         }
         catch (Exception e){
             e.printStackTrace();
