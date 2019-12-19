@@ -15,11 +15,9 @@ public class setDeptNamesServlet extends HttpServlet {
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
         DB_Handler handler = new DB_Handler();
         handler.init();
         ArrayList<String> depList = new ArrayList<>();//list of all departments
-        ArrayList<String> docList = new ArrayList<>();//list of doctors that work in a given department
 
         try {//select all departments
             Statement stmt = handler.getConn().createStatement();
@@ -34,10 +32,11 @@ public class setDeptNamesServlet extends HttpServlet {
 
         String deptNames = "";
         for(String dep : depList){
-            System.out.println(dep);
+            //System.out.println(dep);
             deptNames = deptNames + dep + "/";
         }
         response.addCookie(new Cookie("deptNames", URLEncoder.encode(deptNames, "UTF-8")));
+        handler.close();
         response.sendRedirect("patient/makeAppointment.jsp");
     }
 }

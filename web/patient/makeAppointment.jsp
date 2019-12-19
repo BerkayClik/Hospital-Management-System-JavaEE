@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="jdk.swing.interop.SwingInterOpUtils" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -49,7 +50,7 @@
             <ul class="list-unstyled components">
                 <p>Welcome</p>
                 <li>
-                    <a href="">Home</a>
+                    <a href="home.jsp">Home</a>
 
                 </li>
                 <li>
@@ -103,64 +104,106 @@
                 <div class="yui3-u selectedDate" style="display: block;">
                     <div id="links" style="padding-left:9px; font-family: sans-serif;">
                         Selected Date: &nbsp
-                        <span id="selecteddate"></span>
+                        <span id="selecteddate">
+                            <% if(request.getParameter("dateInForm") != null ){%>
+                            <%=(String) request.getParameter("dateInForm")%>
+                            <% } %>
+                        </span>
                     </div>
                 </div>
 
-                <div class="selectedDepartment">
+                <div class="selectedDepartment" style="overflow: auto">
                     <span style="font-family: sans-serif; padding-left: 9px;">Select Department: </span>
-                    <select onchange="setDepartment()" id="departments">
-                        <%
-                            boolean isFirstLoad = true;
-                            Cookie[] cookies = request.getCookies();
-                            for(Cookie cookie : cookies){
-                                if(cookie.getName().equals("deptNames")){
-                                    System.out.println("isFirstLoad = false;");
-                                    isFirstLoad = false;
-                                    break;
-                                }
-                            }
-
-                            if(isFirstLoad){
-                                System.out.println("isFirstLoad = true;");
-                                response.sendRedirect("/setDeptNames");
-                            }
-
-                            boolean isDeptName = false;
-
-                            for(Cookie cookie : cookies){
-                                if(cookie.getName().equals("deptNames")){
-                                    isDeptName = true;
-                                    break;
-                                }
-                            }
-                            if(isDeptName){
+                    <form action="setDoctorNames" method="post" id="deptNames" style="float: right; margin-top: -2px;">
+                        <select onchange="setDepartment()" id="departments" name="departments" style="margin: 4px 20px 0 0;">
+                            <option value=""></option>
+                            <%
+                                boolean isFirstLoad = true;
+                                Cookie[] cookies = request.getCookies();
                                 for(Cookie cookie : cookies){
                                     if(cookie.getName().equals("deptNames")){
-                                        String[] deptNames = cookie.getValue().split("%2F");
-                                        for(int i=0; i<deptNames.length; i++){
-                                            if(deptNames[i].contains("+")){
-                                                String deptName = deptNames[i].replace("+", " ");
-                                                out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
-                                            }
-                                            else{
-                                                out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                        isFirstLoad = false;
+                                        break;
+                                    }
+                                }
+
+                                if(isFirstLoad){
+                                    response.sendRedirect("/setDeptNames");
+                                }
+
+                                boolean isDeptName = false;
+
+                                for(Cookie cookie : cookies){
+                                    if(cookie.getName().equals("deptNames")){
+                                        isDeptName = true;
+                                        break;
+                                    }
+                                }
+                                if(isDeptName){
+                                    for(Cookie cookie : cookies){
+                                        if(cookie.getName().equals("deptNames")){
+                                            String[] deptNames = cookie.getValue().split("%2F");
+                                            for(int i=0; i<deptNames.length; i++){
+                                                if(deptNames[i].contains("+")){
+                                                    String deptName = deptNames[i].replace("+", " ");
+                                                    if(request.getAttribute("selectedDept") == null){
+                                                        out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
+                                                    }
+                                                    else{
+                                                        String selectedDept = (String) request.getAttribute("selectedDept");
+                                                        if(selectedDept.equals(deptName)){
+                                                            out.println("<option value=\"" + deptName + "\" selected>" + deptName + "</option>");
+                                                        }
+                                                        else{
+                                                            out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
+                                                        }
+                                                    }
+                                                }
+                                                else{
+                                                    if(request.getAttribute("selectedDept") == null){
+                                                        out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                                    }
+                                                    else{
+                                                        String selectedDept = (String) request.getAttribute("selectedDept");
+                                                        if(selectedDept.equals(deptNames[i])){
+                                                            out.println("<option value=\"" + deptNames[i] + "\" selected>" + deptNames[i] + "</option>");
+                                                        }
+                                                        else{
+                                                            out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
-                        %>
-                    </select>
+                            %>
+                        </select>
+                        <input type="text" name="dateInForm"  id="dateInForm" style="display: none" value=<% if(request.getParameter("dateInForm") != null ){%><%=(String) request.getParameter("dateInForm")%><%}%>>
+                        <button type="submit" style="display: none">S</button>
+                    </form>
                 </div>
                 <div class="selectedDoctor">
                     <span style="font-family: sans-serif; padding-left: 9px; margin-right: 36px;">Select Doctor: </span>
                     <select onchange="setDoctor()" id="doctors">
                         <option value=""></option>
-
                         <%
-                           
+                            for(Cookie cookie : cookies){
+                                System.out.println("cookie Name: " + cookie.getName());
+                                if(cookie.getName().equals("doctorNames")){
+                                    String[] doctorNames = cookie.getValue().split("%2F");
+                                    for(int i=0; i<doctorNames.length; i++){
+                                        if(doctorNames[i].contains("+")){
+                                            String doctorName = doctorNames[i].replace("+", " ");
+                                            out.println("<option value=\"" + doctorName + "\">" + doctorName + "</option>");
+                                        }
+                                        else{
+                                            out.println("<option value=\"" + doctorNames[i] + "\">" + doctorNames[i] + "</option>");
+                                        }
+                                    }
 
+                                }
+                            }
 
                         %>
                     </select>
@@ -226,6 +269,17 @@
             document.getElementById("trDate").value = tr_date;
         });
     });
+</script>
+
+<script type="text/javascript">
+    document.getElementById("trDate").value = document.getElementById("dateInForm").value;
+
+    let depSelect = document.getElementById("departments");
+    let strDepartment = depSelect.options[depSelect.selectedIndex].value;
+    document.getElementById("department").value = strDepartment;
+
+
+
 </script>
 
 <script src="../js/appointmentPage.js"></script>

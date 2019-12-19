@@ -1,5 +1,5 @@
 let e = document.getElementById("doctors");
-let depSelect = document.getElementById("departments");
+
 
 function  check() {
     let date = document.getElementById("trDate").value;
@@ -15,8 +15,9 @@ function  check() {
 }
 
 function setDepartment() {
-    let strDepartment = depSelect.options[depSelect.selectedIndex].value;
-    document.getElementById("department").value = strDepartment;
+    document.getElementById("dateInForm").value = document.querySelector('#links').innerText.substring(17,27);
+    console.log("button clicked");
+    document.querySelector('#deptNames > button').click();
 }
 
 function setDoctor() {

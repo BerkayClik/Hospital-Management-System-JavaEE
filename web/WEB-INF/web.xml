@@ -61,4 +61,12 @@
         <url-pattern>/setDeptNames</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>setDocName</servlet-name>
+        <servlet-class>setDoctorNamesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>setDocName</servlet-name>
+        <url-pattern>/patient/setDoctorNames</url-pattern>
+    </servlet-mapping>
 </web-app>
