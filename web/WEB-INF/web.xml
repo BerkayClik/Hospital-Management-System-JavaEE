@@ -69,4 +69,23 @@
         <servlet-name>setDocName</servlet-name>
         <url-pattern>/patient/setDoctorNames</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getRoomNames</servlet-name>
+        <servlet-class>setRoomNamesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getRoomNames</servlet-name>
+        <url-pattern>/setRoomNames</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>showAvail</servlet-name>
+        <servlet-class>showRoomAvailability</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showAvail</servlet-name>
+        <url-pattern>/nurse/showRoomAvailability</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -96,23 +96,42 @@
         <div class="main-content">
             <div class="showAvailability">
                 <h4 style="text-align: center">Show Availability</h4>
-                <form class="" action="" method="post" style="width: 40%; margin:0 auto;">
+                <form action="showRoomAvailability" method="post" style="width: 40%; margin:0 auto;">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Room Number:  </label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose...</option>
-                            <option value="1">Room1</option>
-                            <option value="2">Room2</option>
-                            <option value="3">Room3</option>
+                        <select class="custom-select" name="roomName" id="inputGroupSelect01">
+                            <option> </option>
+                            <%
+                                cookies = request.getCookies();
+                                String htmlRoomNames = "";
+                                for(Cookie cookie : cookies){
+                                    //System.out.println(cookie.getName());
+                                    if(cookie.getName().equals("htmlRoomNames")){
+                                        htmlRoomNames = cookie.getValue();
+                                        //System.out.println(htmlRoomNames);
+                                    }
+                                }
+                                if(htmlRoomNames.equals(""))
+                                    response.sendRedirect("/setRoomNames");
+                                else{
+                                    //String roomName = (String) request.getAttribute("htmlRoomNames");
+                                    //out.println(roomName);
+                                    String[] roomNames = htmlRoomNames.split("%2F");
+                                    for(String room : roomNames){
+                                        out.println("<option value=\"" + room + "\">" + room + "</option>");
+                                    }
+                                    //out.println(htmlRoomNames);
+                                }
+                            %>
                         </select>
                     </div>
                     <div class="input-group mb-3 md-form">
                         <div class="input-group-prepend">
                             <label class="input-group-text">Date:  </label>
                         </div>
-                        <input type="date" id="inputMDEx" class="custom-select form-control">
+                        <input type="date" name="date" id="inputMDEx" class="custom-select form-control">
                     </div>
                     <div style="overflow: auto; margin-bottom: 0.5rem">
                         <div style="float: right; margin-right: 50px;">
@@ -124,13 +143,13 @@
                     </div>
                     <div style="overflow: auto; margin-bottom: 1.5rem">
                         <div style="float: right; margin-right: 50px;">
-                            <input type="text" name="time" style="width: 51px;margin-right: 12px;">
+                            <input type="text" name="time2" style="width: 51px;margin-right: 12px;">
                         </div>
                         <div style="float: left; margin-left: 50px;">
-                            <input type="text" name="time2" style="width: 51px;margin-left: 17px;">
+                            <input type="text" name="time" style="width: 51px;margin-left: 17px;">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
+                    <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
                 </form>
             </div>
         </div>
