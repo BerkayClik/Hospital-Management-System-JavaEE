@@ -1,0 +1,115 @@
+name: Emir Arditi 
+password: 123123 (33X+VUiYs06eTZKROmV/AA==)
+email: emir.arditi@ozu.edu.tr
+role_id: 3 
+
+name: Cihan Eren 
+password: 12345678 (veKtX2iwifW5zoktXYb6Ug==)
+email: cihan.eren@ozu.edu.tr
+role_id: 3
+
+name: admin
+password: (OAHoK1SqcoGmfRRTPBgY2w==)
+email: admin
+role_id: 3
+
+
+
+
+
+name: Emre Karakuz
+password: (I1m6zLHvcryAtRsLr1wZug==)
+email: emrekarakuz@gmail.com
+role_id = 2
+
+name: Dogukan Duduoglu
+password: (VWcUX22twzoH8tAzFy1DoA==)
+email: dogukan.duduoglu@ozu.edu.tr
+role_id = 2
+
+name: Berkay Celik
+password: (TTdKHTddkYw1OdjloidyoQ==)
+email: berkay.celik@ozu.edu.tr
+role_id = 2
+
+name: Ahmet Bilici
+password: (gNHtwNcowoI0fQRc2pE2Cw==)
+email: ahmet.bilici@ozu.edu.tr
+role_id = 2
+
+name: Ali Aydin
+password: (oGsDOs3lQ0yHqMAoGO3MNA==)
+email: ali.aydin@ozu.edu.tr
+role_id = 2
+
+name: Akif Tan
+password: (+fo/G5z3MeimQ0NvvVRZkQ==)
+email: akif.tan@ozu.edu.tr
+role_id = 2
+
+name: Dilek Akan
+password: (HHvD7vRkKzPDobGB4aKqHw==)
+email: dilek.akan@ozu.edu.tr
+role_id = 2
+
+name: Lale Tamer
+password: (H8HJ0gapI+H49dueyabR2w==)
+email: lale.tamer@ozu.edu.tr
+role_id = 2
+
+name: Mehmet Sait
+password: (3o6dlnpvfrJrlAmfLqENag==)
+email: mehmet.sait@ozu.edu.tr
+role_id = 2
+
+name: Meryem Can
+password: (5hwsC1M64N1wrdnofuoCWw==)
+email: meryem.can@ozu.edu.tr
+role_id = 2
+
+name: Ozlem Balci
+password: (qEx12zTum5MTybtGfAcf5A==)
+email: ozlem.balci@ozu.edu.tr
+role_id = 2
+
+name: Pelin Kara
+password: (IxhbyPvyrCQhRUcs+DH7GA==)
+email: pelin.kara@ozu.edu.tr
+role_id = 2
+
+name: Asli Cakir
+password: (cygUlEf9er3bboFSLgW54w==)
+email: asli.cakir@ozu.edu.tr
+role_id = 2
+
+name: Berna Turk
+password: (kU7h8C5LF2fnRxRy69G19g==)
+email: berna.turk@ozu.edu.tr
+role_id = 2
+
+name: Berkan Kaplan
+password: (XmZwPCc4bhcN4MeR9sENMA==)
+email: berkan.kaplan@ozu.edu.tr
+role_id = 2
+
+name: Cem Turan
+password: (wmaryEXBeIcLTy5DCBLj5A==)
+email: cem.turan@ozu.edu.tr
+role_id = 2
+
+name: Deniz Arslan
+password: (SUj3QCoMejgEmtoUX5VtBw==)
+email: deniz.arslan@ozu.edu.tr
+role_id = 2
+
+name: Ipek Ceylan
+password: (b901bi6bN9pV9Z89+3Jt7g==)
+email: ipek.ceylan@ozu.edu.tr
+role_id = 2
+
+
+
+
+
+
+
