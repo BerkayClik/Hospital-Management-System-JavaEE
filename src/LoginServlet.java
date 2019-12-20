@@ -40,8 +40,9 @@ public class LoginServlet extends HttpServlet {
             System.out.println(role);
         }
         else{
-            response.sendRedirect("index.jsp");
-            System.out.println(role);
+            request.setAttribute("status","fail");
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
       /*  if(email.equals("dogukan.duduoglu@ozu.edu.tr")){//todo verify user
             response.addCookie(new Cookie("JX_userstuff",email));

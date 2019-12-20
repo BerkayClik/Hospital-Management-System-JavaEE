@@ -62,16 +62,19 @@
                     <a href="home.jsp">Home</a>
 
                 </li>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Appointments</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="">Reserve Room</a>
+                            <a href="future_appointments.jsp">Future Appointments</a>
                         </li>
                         <li>
-                            <a href="#">View Appointments</a>
+                            <a href="past_appointments.jsp">Past Appointments</a>
                         </li>
                     </ul>
+                </li>
+                <li class="active">
+                    <a href="reserve_room.jsp">Reserve Room</a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Off-Day</a>

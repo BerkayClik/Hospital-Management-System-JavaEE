@@ -12,7 +12,7 @@ public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
-        System.out.println("Worked Line15, " + cookies.length);
+        System.out.println("UserServlet");
         for(int i=0; i<cookies.length; i++){
             if(cookies[i].getName().equals("role_id")){
                 if(cookies[i].getValue().equals("1")){

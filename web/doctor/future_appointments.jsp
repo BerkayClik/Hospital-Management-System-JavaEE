@@ -1,30 +1,33 @@
 <%--
   Created by IntelliJ IDEA.
   User: Monster
-  Date: 12/18/2019
-  Time: 12:36 AM
+  Date: 12/20/2019
+  Time: 12:25 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Home Page</title>
-        <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="../css/home.css">
+<head>
+    <meta charset="utf-8">
+    <title>Future Appointments</title>
 
-        <!-- Font Awesome JS -->
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-        <style>
-            .dropdown-toggle::after {
-                content: "";
-            }
-        </style>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="../css/apps.css">
+    <link rel="stylesheet" href="../css/inputspinner.css">
+    <link rel="stylesheet" href="../css/handle-counter.css">
 
-    </head>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <style>
+        .dropdown-toggle::after {
+            content: "";
+        }
+    </style>
+</head>
 <body>
 <%
     Cookie[] cookies = request.getCookies();
@@ -48,15 +51,15 @@
 
             <ul class="list-unstyled components">
                 <p>Welcome</p>
-                <li class="active">
+                <li>
                     <a href="home.jsp">Home</a>
 
                 </li>
-                <li>
+                <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Appointments</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="future_appointments.jsp">Future Appointments</a>
+                        <li class="active">
+                            <a href="">Future Appointments</a>
                         </li>
                         <li>
                             <a href="past_appointments.jsp">Past Appointments</a>
@@ -105,13 +108,25 @@
             </div>
         </nav>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <br><br><br>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="main-content">
+            <div class="main-form">
+                <div class="formDiv">
+                    <span>Next appointments in (days): </span>
+                    <div class="handle-counter" id="handleCounter">
+                        <button class="counter-minus btn btn-primary">-</button>
+                        <input type="text" value="1" style="height: 38px; padding: 6px 12px;">
+                        <button class="counter-plus btn btn-primary">+</button>
+                    </div>
+                </div>
+            </div>
+            <form class="" action="" method="" style="width: 30%; margin: 20px auto;">
+                <input type="text" name="" value="1" style="display: none;">
+                <button type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" style="display: block; margin-top: 7px;">Show</button>
+            </form>
+        </div>
+
     </div>
-
 </div>
-
 <%} else{
     response.sendRedirect("/user");
 }%>
@@ -122,9 +137,9 @@
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
+
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
             let bar = document.getElementById('sidebarCollapse');
@@ -137,7 +152,34 @@
         });
 
     });
+
 </script>
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../js/handleCounter.js"></script>
+<script>
+    $(function ($) {
+        var options = {
+            minimum: 1,
+            maximize: null,
+            onChange: valChanged,
+            onMinimum: function(e) {
+                console.log('reached minimum: '+e)
+            },
+            onMaximize: function(e) {
+                console.log('reached maximize'+e)
+            }
+        }
+        $('#handleCounter').handleCounter(options)
+    })
+    function valChanged(d) {
+        set();
+    }
+
+</script>
+<script src="../js/changeNumber.js"></script>
+
+
 
 </body>
 </html>

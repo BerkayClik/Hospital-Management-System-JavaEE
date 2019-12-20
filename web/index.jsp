@@ -52,14 +52,6 @@
       <span>Don't have account? >> </span>
       <a href="register.jsp">Sign Up</a>
     </div>
-    <div class="signUp">
-          <span>Jump to Patient Home >> </span>
-          <a href="patient/home.jsp">Click</a>
-    </div>
-    <div class="signUp">
-      <span>Jump to Doctor Home >> </span>
-      <a href="doctor/home.jsp">Click</a>
-    </div>
   </form>
 
   <%
