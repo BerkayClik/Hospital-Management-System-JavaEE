@@ -42,18 +42,20 @@ public class RegisterServlet extends HttpServlet {
         }
         else{
             String hashedPass = new Hash(password, email).hash();
-            //System.out.println(hashedPass);
-            handler.init();
-
-            sql = "INSERT INTO cs202.users(name, pw, email, role_id)" + " VALUES(" +
-            "'" + name + "'," +
-                    "'" +hashedPass + "'," +
-                    "'" + email + "'," +
-            "1);";
-            //System.out.println(sql);
-            if(handler.handleQuery(sql)){
+            try {
+                handler = new DB_Handler();
+                handler.init();
+                PreparedStatement pstmt = handler.getConn().prepareStatement("INSERT INTO cs202.users(name, pw, email, role_id) VALUES(?,?,?,?)" );
+                pstmt.setString(1,name);
+                pstmt.setString(2,hashedPass);
+                pstmt.setString(3,email);
+                pstmt.setInt(4,1);
+                pstmt.executeUpdate();
                 request.setAttribute("regStatus","success");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            catch (Exception e){
+                e.printStackTrace();
             }
         }
     }
