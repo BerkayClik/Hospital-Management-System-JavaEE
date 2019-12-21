@@ -65,7 +65,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="">Personal Info</a>
+                    <a href="personal_info.jsp">Personal Info</a>
                 </li>
             </ul>
             <div class="push"></div>
@@ -73,7 +73,7 @@
         <div class="logout">
             <ul class="list-unstyled components" style="padding: 0">
                 <li>
-                    <a href="#" style="margin-top: -75px; padding-left: 10px">Logout</a>
+                    <a href="../index.jsp" style="margin-top: -75px; padding-left: 10px">Logout</a>
                 </li>
             </ul>
         </div>
