@@ -1,0 +1,73 @@
+Admins:
+
+email: admin
+password: 123456
+
+email: emir.arditi@ozu.edu.tr
+password: 123123
+
+email: cihan.eren@ozu.edu.tr
+password: 12345678
+
+
+
+Doctors:
+
+email: emrekarakuz@gmail.com
+password: 123456
+
+email: dogukan.duduoglu@ozu.edu.tr
+password: Hektor*123
+
+email: berkay.celik@ozu.edu.tr
+password: 123456
+
+email: ahmet.bilici@ozu.edu.tr
+password: 654321
+
+email: ali.aydin@ozu.edu.tr
+password: 123321
+
+email: akif.tan@ozu.edu.tr
+password: 321321
+
+email: dilek.akan@ozu.edu.tr
+password: 456456
+
+email: lale.tamer@ozu.edu.tr
+password: 121212
+
+email: mehmet.sait@ozu.edu.tr
+password: 123456
+
+email: meryem.can@ozu.edu.tr
+password: 123456
+
+email: ozlem.balci@ozu.edu.tr
+password: 123456
+
+email: pelin.kara@ozu.edu.tr
+password: 123123
+
+email: asli.cakir@ozu.edu.tr
+password: 123123
+
+email: berna.turk@ozu.edu.tr
+password: 123123
+
+email: berkan.kaplan@ozu.edu.tr
+password: 654321
+
+email: cem.turan@ozu.edu.tr
+password: 654321
+
+email: deniz.arslan@ozu.edu.tr
+password: 654321
+
+email: ipek.ceylan@ozu.edu.tr
+password: 654321
+
+
+
+
+
