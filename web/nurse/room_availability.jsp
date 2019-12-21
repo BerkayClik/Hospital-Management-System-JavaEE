@@ -12,16 +12,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Room Availability</title>
     <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
-    <link rel="stylesheet" href="../css/tpicker/jquery.timeselector.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-            crossorigin="anonymous">
-    </script>
-    <script src="../js/tpicker/jquery.timeselector.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.timepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/jquery.timepicker.css" />
+    <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datepicker.css" />
+    <script type="text/javascript" src="../js/site.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/site.css"/>
+
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-       <!-- Our Custom CSS -->
+    <!-- Our Custom CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
     <link rel="stylesheet" href="../css/rooms.css">
@@ -131,29 +133,27 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text">Date:  </label>
                         </div>
-                        <input type="date" name="date" id="inputMDEx" class="custom-select form-control">
+                        <input type="date" name="date" id="inputMDEx" class="custom-select">
                     </div>
-                    <div style="overflow: auto; margin-bottom: 0.5rem">
-                        <div style="float: right; margin-right: 50px;">
-                            <span style="font-family: sans-serif; padding-left: 9px; text-decoration: underline">End Time</span>
-                        </div>
-                        <div style="float: left; margin-left: 50px;">
-                            <span style="font-family: sans-serif; padding-left: 9px; text-decoration: underline">Start Time</span>
-                        </div>
+                    <div style="margin-bottom: 0.5rem;display: flex;justify-content: space-evenly;">
+                        <div style="">
+                        <span style="font-family: sans-serif; text-decoration: underline">Start Time</span>
                     </div>
-                    <div style="overflow: auto; margin-bottom: 1.5rem">
-                        <div style="float: right; margin-right: 50px;">
-                            <input type="text" name="time2" style="width: 51px;margin-right: 12px;">
-                        </div>
-                        <div style="float: left; margin-left: 50px;">
-                            <input type="text" name="time" style="width: 51px;margin-left: 17px;">
-                        </div>
+                    <div style="">
+                        <span style="font-family: sans-serif;; text-decoration: underline">End Time</span>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
-                </form>
             </div>
+            <div style="overflow: auto; margin-bottom: 1.5rem">
+                <p id="datepairExample" style="display: flex; justify-content: space-evenly">
+                    <input type="text" name="start" class="time start" />
+                    <input type="text" name="end" class="time end" onchange="isEqual()"/>
+                </p>
+            </div>
+            <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
+            </form>
         </div>
     </div>
+</div>
 </div>
 <%} else{
     response.sendRedirect("/user");
@@ -182,25 +182,23 @@
     });
 
 </script>
-<script type="text/javascript">
-    $(function() {
-        $('[name="time"]').timeselector({
-            min: '00:00',
-            max: '23:59',
-            hours12: false
-        })
+<script src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
+<script src="http://jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
+<script src="../js/isEqual.js"></script>
+
+<script>
+    $('#datepairExample .time').timepicker({
+        'step': 60,
+        'showDuration': true,
+        'timeFormat': 'g:ia',
+        'minTime': '9:00am',
+        'maxTime': '00:01am'
     });
-    $(function() {
-        $('[name="time2"]').timeselector({
-            min: '00:00',
-            max: '23:59',
-            hours12: false
-        })
-    });
+
+    $('#datepairExample').datepair();
 </script>
-
-
 
 </body>
 </html>
+
 

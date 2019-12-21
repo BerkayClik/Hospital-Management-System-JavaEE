@@ -8,8 +8,8 @@ public class showRoomAvailability extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String roomNumber = request.getParameter("roomName");
         String date = request.getParameter("date").toString() ;
-        String start = request.getParameter("time");
-        String end = request.getParameter("time2");
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");
 
         System.out.println(roomNumber);
         System.out.println(date);

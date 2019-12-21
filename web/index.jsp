@@ -15,6 +15,9 @@
 
   </head>
   <body>
+  <%
+    response.addCookie(new Cookie("role_id", "-1"));
+  %>
   <form action="login" method="post">
     <div>
       <label style="display: block; padding-left: 0.3em;">LOGIN</label>

@@ -6,10 +6,14 @@
 ul{
   list-style: none;
 }
-#times > li,
-#selectedDays > li {
+#times > li {
   margin-top: 0.6em;
-  height: 24.4px;
+}
+
+
+#selectedDays > li{
+  margin-top: 0.6em;
+  padding: 10px;
 }
 
 li > input{
@@ -42,6 +46,7 @@ li > button {
 .selectedBoth{
   display: flex;
   justify-content: center;
+  margin-left: -105px;
 }
 
 .showButton,

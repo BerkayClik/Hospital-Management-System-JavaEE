@@ -35,7 +35,7 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 950px) {
     #sidebar {
         margin-left: -250px;
     }
@@ -127,7 +127,7 @@ ul ul a {
 }
 
 .main-content{
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 

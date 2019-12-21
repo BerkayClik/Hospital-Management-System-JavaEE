@@ -15,24 +15,24 @@ public class UserServlet extends HttpServlet {
         System.out.println("UserServlet");
         for(int i=0; i<cookies.length; i++){
             if(cookies[i].getName().equals("role_id")){
+                if(cookies[i].getValue().equals("-1")){
+                    response.addCookie(cookies[i]);
+                    response.sendRedirect("index.jsp");
+                }
                 if(cookies[i].getValue().equals("1")){
                     response.addCookie(cookies[i]);
-                    response.addCookie(cookies[i+1]);
                     response.sendRedirect("patient/home.jsp");
                 }
                 if(cookies[i].getValue().equals("2")){
                     response.addCookie(cookies[i]);
-                    response.addCookie(cookies[i+1]);
                     response.sendRedirect("doctor/home.jsp");
                 }
                 if(cookies[i].getValue().equals("3")){
                     response.addCookie(cookies[i]);
-                    response.addCookie(cookies[i+1]);
                     response.sendRedirect("admin/home.jsp");
                 }
                 if(cookies[i].getValue().equals("4")){
                     response.addCookie(cookies[i]);
-                    response.addCookie(cookies[i+1]);
                     response.sendRedirect("nurse/home.jsp");
                 }
             }
