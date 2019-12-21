@@ -18,15 +18,14 @@ public class LoginServlet extends HttpServlet {
         //handler.init();
         int role = 0;
         try {
-          // PreparedStatement pstmt = handler.getConn().prepareStatement("select role_id from user where email = ? and pw = ?");
-             handler = new DB_Handler();
-             handler.init();
-           PreparedStatement pstmt = handler.getConn().prepareStatement("select role_id from users where email = ? and pw = ?");
-           pstmt.setString(1,email);
-           pstmt.setString(2,password);
-           ResultSet rs = pstmt.executeQuery();
-           while(rs.next()){
-               role = rs.getInt(1);
+            handler = new DB_Handler();
+            handler.init();
+            PreparedStatement pstmt = handler.getConn().prepareStatement("select role_id from users where email = ? and pw = ?");
+            pstmt.setString(1,email);
+            pstmt.setString(2,password);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                role = rs.getInt(1);
            }
         }
         catch (Exception e){
