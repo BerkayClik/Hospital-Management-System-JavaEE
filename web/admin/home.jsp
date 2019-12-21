@@ -47,18 +47,6 @@
 
                 </li>
                 <li>
-                    <a href="#">Doctors</a>
-                </li>
-                <li>
-                    <a href="">Nurses</a>
-                </li>
-                <li>
-                    <a href="#">Patients</a>
-                </li>
-                <li>
-                    <a href="#">Appointments</a>
-                </li>
-                <li>
                     <a href="#">Statistics</a>
                 </li>
             </ul>

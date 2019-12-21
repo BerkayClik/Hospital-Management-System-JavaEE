@@ -56,7 +56,7 @@
                     <a href="room_availability.jsp">Room Availability</a>
                 </li>
                 <li>
-                    <a href="">Personal Info</a>
+                    <a href="personal_info.jsp">Personal Info</a>
                 </li>
             </ul>
             <div class="push"></div>

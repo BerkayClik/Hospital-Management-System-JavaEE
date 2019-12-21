@@ -95,7 +95,7 @@
                             <a href="">Make Appointment</a>
                         </li>
                         <li>
-                            <a href="#">View Appointment</a>
+                            <a href="view_appointment.jsp">View Appointment</a>
                         </li>
                     </ul>
                 </li>

@@ -77,12 +77,12 @@
                             <a href="setOffDays.jsp">Set Off-Day</a>
                         </li>
                         <li>
-                            <a href="">Show Off-Days</a>
+                            <a href="showOffDays.jsp">Show Off-Days</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="">Personal Info</a>
+                    <a href="personal_info.jsp">Personal Info</a>
                 </li>
             </ul>
             <div class="push"></div>
