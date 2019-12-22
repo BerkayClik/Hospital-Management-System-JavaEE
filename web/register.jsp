@@ -28,7 +28,10 @@
             <input type="text" name="email" id="em" value="<%= (String) request.getAttribute("email")%>">
             <%}%>
             <%if((request.getAttribute("isExists") != null)){%>
-            <span class="pwError" style="padding-right: 10px;">User Exists</span>
+            <span class="pwError" style="">User Exists</span>
+            <%}%>
+            <%if((request.getAttribute("isInvalidEmail") != null)){%>
+            <span class="pwError" style="">Invalid Email</span>
             <%}%>
         </div>
 

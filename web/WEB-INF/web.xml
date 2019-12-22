@@ -97,6 +97,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ReserveRoom</servlet-name>
+        <servlet-class>ReserveRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReserveRoom</servlet-name>
+        <url-pattern>/doctor/reserveRoom</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>makeApp</servlet-name>
         <servlet-class>SetAppointmentServlet</servlet-class>
     </servlet>

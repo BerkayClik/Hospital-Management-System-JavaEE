@@ -116,7 +116,7 @@
         <div class="logout">
             <ul class="list-unstyled components" style="padding: 0">
                 <li>
-                    <a href="#" style="margin-top: -75px; padding-left: 10px">Logout</a>
+                    <a href="../index.jsp" style="margin-top: -75px; padding-left: 10px">Logout</a>
                 </li>
             </ul>
         </div>
@@ -129,7 +129,7 @@
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
-                    <span>Hide Sidebar</span>
+                    <span>Hide</span>
                 </button>
 
             </div>
@@ -306,9 +306,9 @@
             let content = bar.querySelector('span').innerText
 
             if(content == "Show Sidebar")
-                bar.querySelector('span').innerText = "Hide Sidebar";
+                bar.querySelector('span').innerText = "Hide";
             else
-                bar.querySelector('span').innerText = "Show Sidebar";
+                bar.querySelector('span').innerText = "Show";
         });
 
     });

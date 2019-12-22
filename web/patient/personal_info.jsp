@@ -89,7 +89,7 @@
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
-                    <span>Hide Sidebar</span>
+                    <span>Hide</span>
                 </button>
 
             </div>
@@ -117,9 +117,9 @@
             let content = bar.querySelector('span').innerText
 
             if(content == "Show Sidebar")
-                bar.querySelector('span').innerText = "Hide Sidebar";
+                bar.querySelector('span').innerText = "Hide";
             else
-                bar.querySelector('span').innerText = "Show Sidebar";
+                bar.querySelector('span').innerText = "Show";
         });
 
     });

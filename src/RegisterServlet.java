@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
         return pat.matcher(email).matches();
     }
 
-    String sql;
+
     DB_Handler handler = new DB_Handler();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
@@ -47,14 +47,16 @@ public class RegisterServlet extends HttpServlet {
         }
 
         if(email.equals("") || password.length() < 6 || !password.equals(password2) || name.equals("") || isUserExist != 0 || isValid(email) == false){
-            //System.out.println(email + name);
+
             if(isUserExist != 0)
                 request.setAttribute("isExists", "true");
-                request.setAttribute("email", email);
-                request.setAttribute("name", name);
-                request.setAttribute("pw", password);
-                request.setAttribute("pw2", password2);
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+            if(!isValid(email))
+                request.setAttribute("isInvalidEmail" , "true");
+            request.setAttribute("email", email);
+            request.setAttribute("name", name);
+            request.setAttribute("pw", password);
+            request.setAttribute("pw2", password2);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
         else{
             String hashedPass = new Hash(password, email).hash();

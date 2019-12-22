@@ -49,6 +49,13 @@
       if(success){
   %> -->
 <div class="wrapper">
+    <%
+        if(request.getAttribute("errorAvail") != null){
+    %>
+    <script type="text/javascript">
+        alert("Fill all the inputs for Show Room Availability");
+    </script>
+    <%}%>
 
     <!-- Sidebar -->
     <nav id="sidebar">
@@ -111,7 +118,7 @@
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
-                    <span>Hide Sidebar</span>
+                    <span>Hide</span>
                 </button>
 
             </div>
@@ -131,22 +138,17 @@
                                 cookies = request.getCookies();
                                 String htmlRoomNames = "";
                                 for(Cookie cookie : cookies){
-                                    //System.out.println(cookie.getName());
                                     if(cookie.getName().equals("htmlRoomNames")){
                                         htmlRoomNames = cookie.getValue();
-                                        //System.out.println(htmlRoomNames);
                                     }
                                 }
                                 if(htmlRoomNames.equals(""))
                                     response.sendRedirect("/setRoomNames");
                                 else{
-                                    //String roomName = (String) request.getAttribute("htmlRoomNames");
-                                    //out.println(roomName);
                                     String[] roomNames = htmlRoomNames.split("%2F");
                                     for(String room : roomNames){
                                         out.println("<option value=\"" + room + "\">" + room + "</option>");
                                     }
-                                    //out.println(htmlRoomNames);
                                 }
                             %>
                         </select>
@@ -166,11 +168,12 @@
                         </div>
                     </div>
 
-                    <div style="overflow: auto; margin-bottom: 1.5rem">
+                    <div style="overflow: auto; margin-bottom: 1.5rem; position: relative">
                         <p id="datepairExample" style="display: flex; justify-content: space-evenly">
-                            <input type="text" name="start" class="time start" />
+                            <input type="text" name="start" class="time start" onchange="isEqual()"/>
                             <input type="text" name="end" class="time end" onchange="isEqual()"/>
                         </p>
+                        <button type="button" class="btn btn-outline-secondary" style="position: absolute; right: 0px; top: 0px; box-shadow:none" onclick="setFullDay(this)">Full Day</button>
                     </div>
                     <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
                 </form>
@@ -179,19 +182,18 @@
 
             <div class="reserve">
                 <h4 style="text-align: center">Reserve Room</h4>
-                <form class="" action="" method="post" style="width: 40%; margin:0 auto;">
+                <form class="" action="reserveRoom" method="post" style="width: 40%; margin:0 auto;">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Room Number:  </label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select" name="roomName" id="inputGroupSelect01">
                             <option> </option>
                             <%
-                                    String[] roomNames = htmlRoomNames.split("%2F");
-                                    for(String room : roomNames){
-                                        out.println("<option value=\"" + room + "\">" + room + "</option>");
-                                    }
-                                    //out.println(htmlRoomNames);
+                                String[] roomNames = htmlRoomNames.split("%2F");
+                                for(String room : roomNames){
+                                    out.println("<option value=\"" + room + "\">" + room + "</option>");
+                                }
                             %>
                         </select>
                     </div>
@@ -199,13 +201,13 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text">Date:  </label>
                         </div>
-                        <input type="date" id="inputMDEx" class="custom-select form-control">
+                        <input type="date" name="date" id="inputMDEx" class="custom-select form-control">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Patient E-mail: </span>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" name="patientEmail" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
                     <div style="margin-bottom: 0.5rem;display: flex;justify-content: space-evenly;">
                         <div style="">
@@ -215,13 +217,14 @@
                             <span style="font-family: sans-serif;; text-decoration: underline">End Time</span>
                         </div>
                     </div>
-                    <div style="overflow: auto; margin-bottom: 1.5rem">
+                    <div style="overflow: auto; margin-bottom: 1.5rem; position: relative;">
                         <p id="datepairExample2" style="display: flex; justify-content: space-evenly">
-                            <input type="text" name="start" class="time start" />
+                            <input type="text" name="start" class="time start" onchange="isEqual2()"/>
                             <input type="text" name="end" class="time end" onchange="isEqual2()"/>
                         </p>
+                        <button type="button" class="btn btn-outline-secondary" style="position: absolute; right: 0px; top: 0px; box-shadow:none" onclick="setFullDay(this)">Full Day</button>
                     </div>
-                    <button type="button" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Reserve</button>
+                    <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Reserve</button>
                 </form>
             </div>
         </div>
@@ -247,9 +250,9 @@
             let content = bar.querySelector('span').innerText
 
             if(content == "Show Sidebar")
-                bar.querySelector('span').innerText = "Hide Sidebar";
+                bar.querySelector('span').innerText = "Hide";
             else
-                bar.querySelector('span').innerText = "Show Sidebar";
+                bar.querySelector('span').innerText = "Show";
         });
 
     });
@@ -264,14 +267,14 @@
         'step': 60,
         'showDuration': true,
         'timeFormat': 'g:ia',
-        'minTime': '9:00am',
+        'minTime': '01:00am',
         'maxTime': '00:01am'
     });
     $('#datepairExample2 .time').timepicker({
         'step': 60,
         'showDuration': true,
         'timeFormat': 'g:ia',
-        'minTime': '9:00am',
+        'minTime': '01:00am',
         'maxTime': '00:01am'
     });
 

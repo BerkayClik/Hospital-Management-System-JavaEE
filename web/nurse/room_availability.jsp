@@ -50,6 +50,13 @@
     if(success){
 %>
 <div class="wrapper">
+    <%
+        if(request.getAttribute("errorAvail") != null){
+    %>
+    <script type="text/javascript">
+        alert("Fill all the inputs for Show Room Availability");
+    </script>
+    <%}%>
 
     <!-- Sidebar -->
     <nav id="sidebar">
@@ -89,7 +96,7 @@
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
-                    <span>Hide Sidebar</span>
+                    <span>Hide</span>
                 </button>
 
             </div>
@@ -151,6 +158,20 @@
                     </div>
                     <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
                 </form>
+
+                <%
+                    String roomName = (String) request.getAttribute("roomName");
+                    String date = (String) request.getAttribute("date");
+                    String start = (String) request.getAttribute("start");
+                    String end = (String) request.getAttribute("end");
+                    if(request.getAttribute("isAvailable") != null) {
+                        if (request.getAttribute("isAvailable").equals("true")) {
+                            out.println("<p>" + roomName + " is Available at " + date + " between " + start + " and " + end + "</p>");
+                        } else {
+                            out.println("<p>" + roomName + " is not Available at " + date + " between " + start + " and " + end + "</p>");
+                        }
+                    }
+                %>
         </div>
     </div>
 </div>
@@ -174,9 +195,9 @@
             let content = bar.querySelector('span').innerText
 
             if(content == "Show Sidebar")
-                bar.querySelector('span').innerText = "Hide Sidebar";
+                bar.querySelector('span').innerText = "Hide";
             else
-                bar.querySelector('span').innerText = "Show Sidebar";
+                bar.querySelector('span').innerText = "Show";
         });
 
     });

@@ -38,7 +38,6 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(new Cookie("role_id",""+role));
             response.addCookie(new Cookie("email",email));
             response.sendRedirect("/user");
-            System.out.println(role);
         }
         else{
             request.setAttribute("status","fail");
