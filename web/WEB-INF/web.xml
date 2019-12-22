@@ -79,11 +79,20 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>showAvail</servlet-name>
+        <servlet-name>showAvailDoctor</servlet-name>
         <servlet-class>showRoomAvailability</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>showAvail</servlet-name>
+        <servlet-name>showAvailDoctor</servlet-name>
+        <url-pattern>/doctor/showRoomAvailability</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>showAvailNurse</servlet-name>
+        <servlet-class>showRoomAvailability</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showAvailNurse</servlet-name>
         <url-pattern>/nurse/showRoomAvailability</url-pattern>
     </servlet-mapping>
 

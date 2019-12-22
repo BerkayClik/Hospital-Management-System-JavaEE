@@ -120,12 +120,12 @@
         <div class="main-content">
             <div class="showAvailability">
                 <h4 style="text-align: center">Show Availability</h4>
-                <form class="" action="" method="post" style="width: 40%; margin:0 auto;">
+                <form class="" action="showRoomAvailability" method="post" style="width: 40%; margin:0 auto;">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Room Number:  </label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select" name="roomName" id="inputGroupSelect01">
                             <option> </option>
                             <%
                                 cookies = request.getCookies();
