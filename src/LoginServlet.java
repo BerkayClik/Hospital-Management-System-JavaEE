@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
            while(rs.next()){
                role = rs.getInt(1);
            }
+           handler.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -44,16 +45,5 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-      /*  if(email.equals("dogukan.duduoglu@ozu.edu.tr")){//todo verify user
-            response.addCookie(new Cookie("JX_userstuff",email));
-            response.sendRedirect("/user");
-
-        }else{
-            request.setAttribute("status","fail");
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }*/
-
-
     }
 }

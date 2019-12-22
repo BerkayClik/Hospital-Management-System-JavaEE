@@ -25,6 +25,7 @@ public class RegisterServlet extends HttpServlet {
             while(rs.next()){
                 isUserExist = rs.getInt(1);
             }
+            handler.close();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -34,11 +35,11 @@ public class RegisterServlet extends HttpServlet {
             //System.out.println(email + name);
             if(isUserExist != 0)
                 request.setAttribute("isExists", "true");
-            request.setAttribute("email", email);
-            request.setAttribute("name", name);
-            request.setAttribute("pw", password);
-            request.setAttribute("pw2", password2);
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+                request.setAttribute("email", email);
+                request.setAttribute("name", name);
+                request.setAttribute("pw", password);
+                request.setAttribute("pw2", password2);
+                request.getRequestDispatcher("register.jsp").forward(request, response);
         }
         else{
             String hashedPass = new Hash(password, email).hash();
@@ -53,6 +54,7 @@ public class RegisterServlet extends HttpServlet {
                 pstmt.executeUpdate();
                 request.setAttribute("regStatus","success");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                handler.close();
             }
             catch (Exception e){
                 e.printStackTrace();

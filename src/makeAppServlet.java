@@ -56,6 +56,7 @@ public class makeAppServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        handler.close();
         ArrayList<String> unavailableTimes = new ArrayList<>();
         ArrayList<String> unavailableDays = new ArrayList<>();
 

@@ -86,8 +86,6 @@ public class SetAppointmentServlet extends HttpServlet {
 
         ////////// Appointment Insert İşlemi
         try {
-            handler = new DB_Handler();
-            handler.init();
             PreparedStatement pstmt = handler.getConn().prepareStatement("INSERT INTO `cs202`.`Appointments` (`datetime`, `p_id`, `d_id`) VALUES (?,?,?)");
             pstmt.setString(1, datetimeDB);
             pstmt.setInt(2,patientID);
@@ -98,10 +96,7 @@ public class SetAppointmentServlet extends HttpServlet {
             e.printStackTrace();
         }
         ////////////////////
-
-
-
-
+        handler.close();
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
