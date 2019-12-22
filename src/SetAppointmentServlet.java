@@ -31,12 +31,7 @@ public class SetAppointmentServlet extends HttpServlet {
             if(cookie.getName().equals("email"))
                 patientEmail = cookie.getValue();
         }
-
-        System.out.println("Selected Appointment Time: " + selectedAppTime);
-        System.out.println("Selected Date: " + selectedDay);
-        System.out.println("Selected Doctor Name: " + doctorName);
-        System.out.println("Patient E-mail: " + patientEmail);
-
+        doctorName = doctorName.substring(0,doctorName.length()-1);
         DB_Handler handler = new DB_Handler();
         handler.init();
 
@@ -44,7 +39,7 @@ public class SetAppointmentServlet extends HttpServlet {
         String day = selectedDay;
         String time = selectedAppTime;
         String docName = doctorName;
-        int patientID = 21;
+        String patMail = patientEmail;
         ///////////////////
 
         ////////day ve time ile database gönderilicek datetime oluşturma işlemi
@@ -56,23 +51,37 @@ public class SetAppointmentServlet extends HttpServlet {
         }
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String datetimeDB = formatter.format(datetime);
-        System.out.println("\nDB Time: " + datetimeDB);
         ////////////////////
 
         //doktorun idsini alma
         int doktorID = 0;
         try {
             Statement stmt = handler.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("select u_id from Users where name ='"+ docName +"'");
-            while(rs.next()){
-                doktorID=rs.getInt(1);
+            ResultSet rss = stmt.executeQuery("select u_id from Users where name ='"+ docName +"'");
+            while(rss.next()){
+                doktorID=rss.getInt(1);
             }
         }
         catch (Exception e){
             e.printStackTrace();
         }
 
-        System.out.println("doctorID: " + doktorID);
+        ////////////////////
+
+        //patient idsini alma
+        int patientID = 0;
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select u_id from Users where email ='"+ patMail +"'");
+            while(rs.next()){
+                patientID=rs.getInt(1);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         ////////////////////
 
         ////////// Appointment Insert İşlemi
@@ -84,7 +93,6 @@ public class SetAppointmentServlet extends HttpServlet {
             pstmt.setInt(2,patientID);
             pstmt.setInt(3,doktorID);
             pstmt.executeUpdate();
-            System.out.println("Done");
         }
         catch (Exception e){
             e.printStackTrace();
