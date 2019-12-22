@@ -42,6 +42,11 @@
     <%
         String selectedDept = "";
         String selectedDate = "";
+        String selectedDoctor = "";
+
+        if(request.getAttribute("doctorName") != null){
+            selectedDoctor = (String) request.getAttribute("doctorName");
+        }
     %>
 
     <%
@@ -140,7 +145,14 @@
                     <div id="links" style="padding-left:9px; font-family: sans-serif;">
                         Selected Date: &nbsp
                         <span id="selecteddate">
+                            <%
+                                //System.out.println("line144 in page: " + request.getAttribute("date"));
+                                if(request.getAttribute("date") != null){
+                                    out.println(request.getAttribute("date"));
+                                } else{
+                            %>
                             <%=selectedDate%>
+                            <% }%>
                         </span>
                     </div>
                 </div>
@@ -240,17 +252,23 @@
                     </select>
                 </div>
 
-                <form action="setAppointment" method="post">
-                    <input type="text" name="date" id="trDate" style="display: none">
-                    <input type="text" name="department" id="department" style="display: none" value=<%=selectedDept%>>
-                    <input type="text" name="doctor" id="doctor" style="display: none">
-                    <div style="margin-top: 2em">
-                        <button type="submit" name="button" class="showButton" onclick="check()">Show</button>
+                <form action="makeAppointment" method="post">
+                    <input type="text" name="date" id="trDate" style="display:none">
+                    <input type="text" name="department" id="department" style="display:none" value=<%=selectedDept%>>
+                    <input type="text" name="doctor" id="doctor" style="display:none" value=<%=selectedDoctor%>>
+                    <div style="">
+                        <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
                     </div>
                 </form>
             </div>
             <div class="rightContainer">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <%
+                    //System.out.println(request.getAttribute("html"));
+                    if(request.getAttribute("html") != null)
+                        out.println(request.getAttribute("html"));
+
+                    //System.out.println(request.getAttribute("html"));
+                %>
             </div>
         </div>
     </div>
@@ -300,19 +318,31 @@
             let date = document.getElementById("selecteddate").innerText;
             let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
             Y.one("#selecteddate").setHTML(tr_date);
-            document.getElementById("trDate").value = tr_date;
+            if(document.getElementById('resTime') == null)
+                document.getElementById("trDate").value = tr_date;
+            else{
+                document.getElementById("trDate").value = tr_date;
+                document.getElementById('doctor').value = "";
+                document.getElementsByClassName('rightContainer')[0].innerHTML = "";
+                alert("Click SHOW button to see the available times for the day you have just selected");
+            }
         });
     });
 </script>
 
 <script type="text/javascript">
-    document.getElementById("trDate").value = document.getElementById("dateInForm").value;
+    //document.getElementById("trDate").value = document.getElementById("dateInForm").value;
 
     let depSelect = document.getElementById("departments");
     let strDepartment = depSelect.options[depSelect.selectedIndex].value;
     document.getElementById("department").value = strDepartment;
 
+    document.getElementById('trDate').value = document.getElementById('selecteddate').innerText;
 
+
+    // if(document.getElementById("trDate").value == "" || document.getElementById("department").value == "" || document.getElementById("doctor").value == ""){
+    //     document.getElementsByClassName('rightContainer')[0].style.display = "none";
+    // }
 
 </script>
 

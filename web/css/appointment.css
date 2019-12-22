@@ -2,6 +2,14 @@
   position: relative;
 }
 
+label > span{
+  margin-left: 15px;
+}
+
+form > div{
+  margin-bottom: 10px;
+}
+
 .container{
   overflow: auto;
 }
@@ -25,6 +33,8 @@
 
 .rightContainer{
   padding: 3em;
+  padding-top: 0;
+  margin_bottom: 3em;
 }
 
 .doctors{
@@ -35,7 +45,7 @@
 
 .showButton{
   display: block;
-  margin: 0 auto;
+  margin: 3em auto;
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;

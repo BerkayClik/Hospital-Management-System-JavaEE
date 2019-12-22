@@ -27,7 +27,7 @@ function createForm(){
   let form = document.createElement('form');
   form.setAttribute("action", "setOD");
   form.setAttribute("method", "post");
-  form.setAttribute("style", "display: flex; justify-content: center; display: none;");
+  form.setAttribute("style", "display: flex; justify-content: center;");
 
   form.innerHTML = "<input type=\"text\" name=\"days\" value=\"\" id=\"formDays\">" +
   "<input type=\"text\" name=\"times\" value=\"\" id=\"formTimes\">" +
@@ -56,12 +56,12 @@ function setFormInp(){
     formDays.value = formDays.value + liDay.innerText + "/";
 
     while(liTime.nextSibling){
-      let inp1 = liTime.firstChild;
+      let inp1 = liTime.firstChild.firstChild;
       let inp2 = inp1.nextSibling.nextSibling;
 
       formTimes.value = formTimes.value + inp1.value + "-" + inp2.value + "/";
 
       liTime = liTime.nextSibling;
     }
-    formTimes.value = formTimes.value + liTime.firstChild.value + "-" + liTime.firstChild.nextSibling.nextSibling.value + "/";
+    formTimes.value = formTimes.value + liTime.firstChild.firstChild.value + "-" + liTime.firstChild.firstChild.nextSibling.nextSibling.value + "/";
 }

@@ -1,4 +1,5 @@
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,14 +15,18 @@ import java.util.Date;
 public class makeAppServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String date = request.getParameter("date");
-        String department = request.getParameter("department");
+        //System.out.println("date in makeAppServlet: " + date);
         String doctor = request.getParameter("doctor");
+        String doctorEncodedName = doctor.replace(" ", "-");
+
+
+
         int dId = 0;
         Object dateTime = new Object();
         try {
             Date uDate = new SimpleDateFormat("dd-MM-yyyy").parse(date);
             dateTime = new java.sql.Timestamp(uDate.getTime());
-            System.out.println(dateTime.toString());
+            System.out.println("Selected day: " + dateTime.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -51,16 +56,81 @@ public class makeAppServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        for(java.sql.Timestamp time : unavailableStart)
-            System.out.println("OffDay Start: "+time.toString());
-        for(java.sql.Timestamp time : unavailableEnd)
-            System.out.println("OffDay End: "+time.toString());
-        for(java.sql.Timestamp time : appTime)
-            System.out.println("Appointment: "+time.toString());
+        ArrayList<String> unavailableTimes = new ArrayList<>();
+        ArrayList<String> unavailableDays = new ArrayList<>();
 
-        System.out.println(department);
-        System.out.println(doctor);
+        for(java.sql.Timestamp time : unavailableStart){
+            if(time.toString().substring(0,11).equals(dateTime.toString().substring(0,11)))
+                unavailableTimes.add(time.toString().substring(11,19));
+            //System.out.println("OffDay Start: "+ time.toString());
+        }
 
+        for(java.sql.Timestamp time : unavailableEnd){
+            if(time.toString().substring(0,11).equals(dateTime.toString().substring(0,11)))
+                unavailableTimes.add(time.toString().substring(11,19));
+            //System.out.println("OffDay End: " + time.toString());
+        }
+
+        for(java.sql.Timestamp time : appTime){
+            if(time.toString().substring(0,11).equals(dateTime.toString().substring(0,11)))
+                unavailableTimes.add(time.toString().substring(11,19));
+            //System.out.println("Appointment: " + time.toString());
+        }
+
+
+//        System.out.println(department);
+//        System.out.println(doctor);
+//        System.out.println("Unavailable Times:");
+//        for(String times : unavailableTimes)
+//            System.out.println(times);
+
+        String html = "<p style=\"text-align: center; color: black; border-bottom: 1px solid black\">" +
+                "Available times for Doctor " + doctor + " at " + date + "</p>" +
+                "<div style=\"width: 80%; margin: 0 auto;\">\n" +
+                "                <form action=\"setAppointment\"  method=\"post\" style=\"width: 70%; margin: 0 auto\">\n";
+
+        String availableTime = "09:00:00";
+        int k = 1;
+        for(;;){
+            boolean isAvailable = true;
+            for(int i=0; i<unavailableTimes.size(); i++){
+                if(unavailableTimes.get(i).equals(availableTime))
+                    isAvailable = false;
+            }
+            if(!isAvailable)
+                html = html + "<div class=\"custom-control custom-radio\" style=\"width: fit-content;margin: 0 auto; position: relative\">\n" +
+                        "  <input type=\"radio\" name=\"customRadio\" value=\"" + availableTime + "\"class=\"custom-control-input\" disabled>\n" +
+                        "  <label class=\"custom-control-label\">" + availableTime +
+                        "<span style=\"font-style: italic; position: absolute; right: -100px;\">Not Available</span>" +
+                        "</label>\n" +
+                        "</div>";
+            else{
+                html = html + "<div class=\"custom-control custom-radio\" style=\"width: fit-content;margin: 0 auto\">\n" +
+                        "  <input type=\"radio\" id=\"customRadio" + k + "\" name=\"customRadio\" value=\"" + availableTime + "\"class=\"custom-control-input\" onchange=\"setTime(this)\">\n" +
+                        "  <label class=\"custom-control-label\" for=\"customRadio" + k +"\">" + availableTime +
+                        "</label>\n" +
+                        "</div>";
+                k++;
+            }
+
+            availableTime = String.valueOf(Integer.parseInt(availableTime.substring(0,2))+1) + availableTime.substring(2);
+            if(availableTime.equals("20:00:00"))
+                break;
+        }
+
+        html += "<input type=\"text\" name=\"selectedTime\" value=\"\" id=\"resTime\" style=\"display:none\">" +
+                "<br>\n" +
+                "<div class=\"\" style=\"width: fit-content; margin: 0 auto; margin-top: 2em;\">\n" +
+                "                      <input type=\"submit\" value=\"Submit\" class=\"showButton\">\n" +
+                "                  </div>" +
+                "</form></div>";
+
+        //System.out.println(html);
+        System.out.println("html is about to set");
+        if(!date.equals("") && !doctor.equals(""))
+            request.setAttribute("html", html);
+        request.setAttribute("date", date);
+        request.setAttribute("doctorName", doctorEncodedName);
         request.getRequestDispatcher("makeAppointment.jsp").forward(request, response);
     }
 

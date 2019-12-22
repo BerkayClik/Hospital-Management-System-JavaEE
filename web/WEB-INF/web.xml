@@ -33,14 +33,13 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>setApp</servlet-name>
         <servlet-class>makeAppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>setApp</servlet-name>
-        <url-pattern>/patient/setAppointment</url-pattern>
+        <url-pattern>/patient/makeAppointment</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -79,7 +78,6 @@
         <url-pattern>/setRoomNames</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>showAvail</servlet-name>
         <servlet-class>showRoomAvailability</servlet-class>
@@ -87,5 +85,14 @@
     <servlet-mapping>
         <servlet-name>showAvail</servlet-name>
         <url-pattern>/nurse/showRoomAvailability</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>makeApp</servlet-name>
+        <servlet-class>SetAppointmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>makeApp</servlet-name>
+        <url-pattern>/patient/setAppointment</url-pattern>
     </servlet-mapping>
 </web-app>

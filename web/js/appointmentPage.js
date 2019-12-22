@@ -23,4 +23,11 @@ function setDepartment() {
 function setDoctor() {
     let strDoctor = e.options[e.selectedIndex].value;
     document.getElementById("doctor").value = strDoctor;
+    document.getElementById("trDate").value = document.getElementById("selecteddate").innerText;
+}
+
+function setTime(node){
+  document.getElementById('resTime').value = node.value + "/" +
+    document.getElementById('trDate').value + "/" +
+    document.getElementById('doctor').value;
 }

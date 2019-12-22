@@ -6,9 +6,12 @@ function isEqual() {
 }
 
 function isEqualLoop() {
-    console.log("hit");
-    for(let i=0; i<document.querySelectorAll('p > input').length; i*=2){
-        if(document.querySelectorAll('p > input')[i].value == document.querySelectorAll('p > input')[i+1].value){
+    //console.log("hit");
+    for(let i=0; i<document.querySelectorAll('p > input').length; i=i+2){
+        //console.log(i);
+        if((document.querySelectorAll('p > input')[i].value == document.querySelectorAll('p > input')[i+1].value)
+            && document.querySelectorAll('p > input')[i].value != ""
+            && document.querySelectorAll('p > input')[i+1].value != ""){
             document.querySelectorAll('p > input')[i].value = document.querySelectorAll('p > input')[i+1].value = "";
             alert("Start and End Time can not be same");
         }
