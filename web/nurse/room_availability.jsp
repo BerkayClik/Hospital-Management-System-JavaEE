@@ -137,20 +137,20 @@
                     </div>
                     <div style="margin-bottom: 0.5rem;display: flex;justify-content: space-evenly;">
                         <div style="">
-                        <span style="font-family: sans-serif; text-decoration: underline">Start Time</span>
+                            <span style="font-family: sans-serif; text-decoration: underline">Start Time</span>
+                        </div>
+                        <div style="">
+                            <span style="font-family: sans-serif;; text-decoration: underline">End Time</span>
+                        </div>
                     </div>
-                    <div style="">
-                        <span style="font-family: sans-serif;; text-decoration: underline">End Time</span>
+                    <div style="overflow: auto; margin-bottom: 1.5rem">
+                        <p id="datepairExample" style="display: flex; justify-content: space-evenly">
+                            <input type="text" name="start" class="time start" />
+                            <input type="text" name="end" class="time end" onchange="isEqual()"/>
+                        </p>
                     </div>
-            </div>
-            <div style="overflow: auto; margin-bottom: 1.5rem">
-                <p id="datepairExample" style="display: flex; justify-content: space-evenly">
-                    <input type="text" name="start" class="time start" />
-                    <input type="text" name="end" class="time end" onchange="isEqual()"/>
-                </p>
-            </div>
-            <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
-            </form>
+                    <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
+                </form>
         </div>
     </div>
 </div>

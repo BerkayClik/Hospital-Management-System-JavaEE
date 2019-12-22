@@ -100,7 +100,10 @@
                             <a href="">Make Appointment</a>
                         </li>
                         <li>
-                            <a href="view_appointment.jsp">View Appointment</a>
+                            <a href="upcoming_appointments.jsp">Upcoming Appointments</a>
+                        </li>
+                        <li>
+                            <a href="previous_appointments.jsp">Previous Appointments</a>
                         </li>
                     </ul>
                 </li>
@@ -272,7 +275,17 @@
             </div>
         </div>
     </div>
-</div>
+    <%
+        System.out.println(request.getAttribute("isAppMade") != null);
+        if(request.getAttribute("isAppMade") != null){
+            System.out.println("inside IF");%>
+    <script>
+        alert("Appointment has been made");
+    </script>
+    <%}%>
+</div
+
+
 <%} else{
     response.sendRedirect("/user");
 }%>

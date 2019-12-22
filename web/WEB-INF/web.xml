@@ -95,4 +95,40 @@
         <servlet-name>makeApp</servlet-name>
         <url-pattern>/patient/setAppointment</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>upcomingAppPatient</servlet-name>
+        <servlet-class>UpcomingAppointmentsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upcomingAppPatient</servlet-name>
+        <url-pattern>/patient/upcomingApp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>upcomingAppDoctor</servlet-name>
+        <servlet-class>UpcomingAppointmentsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upcomingAppDoctor</servlet-name>
+        <url-pattern>/doctor/upcomingApp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>previousAppPatient</servlet-name>
+        <servlet-class>PreviousAppointmentsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>previousAppPatient</servlet-name>
+        <url-pattern>/patient/previousApp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>previousAppDoctor</servlet-name>
+        <servlet-class>PreviousAppointmentsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>previousAppDoctor</servlet-name>
+        <url-pattern>/doctor/previousApp</url-pattern>
+    </servlet-mapping>
 </web-app>

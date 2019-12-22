@@ -145,12 +145,14 @@ ul ul a {
 }
 
 .formDiv > span{
-  float: left;
-  margin-top: 5px;
+    display: block;
+    width: fit-content;
+    margin: 2em auto;
 }
 
 .formDiv > div{
-  float: right;
+  width: fit-content;
+    margin: 2em auto;
 }
 
 form > button{

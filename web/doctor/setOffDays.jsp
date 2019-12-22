@@ -65,10 +65,10 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Appointments</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="future_appointments.jsp">Future Appointments</a>
+                            <a href="upcoming_appointments.jsp">Future Appointments</a>
                         </li>
                         <li>
-                            <a href="past_appointments.jsp">Past Appointments</a>
+                            <a href="previous_appointments.jsp">Past Appointments</a>
                         </li>
                     </ul>
                 </li>
