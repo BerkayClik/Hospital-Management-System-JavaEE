@@ -5,8 +5,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Pattern;
 
 public class RegisterServlet extends HttpServlet {
+
+    public static boolean isValid(String email)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
     String sql;
     DB_Handler handler = new DB_Handler();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        if(email.equals("") || password.length() < 6 || !password.equals(password2) || name.equals("") || isUserExist != 0){
+        if(email.equals("") || password.length() < 6 || !password.equals(password2) || name.equals("") || isUserExist != 0 || isValid(email) == false){
             //System.out.println(email + name);
             if(isUserExist != 0)
                 request.setAttribute("isExists", "true");
