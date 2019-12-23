@@ -158,7 +158,7 @@
                     </div>
                     <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Show</button>
                 </form>
-
+                <div style="position: relative; width: fit-content; margin: 0 auto;">
                 <%
                     String roomName = (String) request.getAttribute("roomName");
                     String date = (String) request.getAttribute("date");
@@ -166,12 +166,15 @@
                     String end = (String) request.getAttribute("end");
                     if(request.getAttribute("isAvailable") != null) {
                         if (request.getAttribute("isAvailable").equals("true")) {
-                            out.println("<p>" + roomName + " is Available at " + date + " between " + start + " and " + end + "</p>");
+                            out.println("<p style=\"margin-top: 2em; text-align: center; color: black\">" + roomName + " is <u>available</u> at " + date + " between " + start + " and " + end + "</p>" +
+                            "<img src=\"../css/img/tick.png\" style=\"width: 30px; position: absolute; top: 0; right: -40px\"");
                         } else {
-                            out.println("<p>" + roomName + " is not Available at " + date + " between " + start + " and " + end + "</p>");
+                            out.println("<p style=\"margin-top: 2em; text-align: center; color: black\">" + roomName + " is not <u>available</u> at " + date + " between " + start + " and " + end + "</p>" +
+                            "<img src=\"../css/img/cross.png\" style=\"width: 30px; position: absolute; top: 0; right: -40px\"");
                         }
                     }
                 %>
+                </div>
         </div>
     </div>
 </div>

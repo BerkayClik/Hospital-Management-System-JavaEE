@@ -47,7 +47,7 @@
 
                 </li>
                 <li>
-                    <a href="#">Statistics</a>
+                    <a href="statistics.jsp">Statistics</a>
                 </li>
             </ul>
             <div class="push"></div>
