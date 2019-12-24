@@ -13,7 +13,7 @@ function done() {
 
 function fullDay(node){
     node.previousSibling.previousSibling.previousSibling.value = "09:00am";
-    node.previousSibling.value = "24:00pm";
+    node.previousSibling.value = "12:00am";
 }
 
 function reset(node) {

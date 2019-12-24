@@ -66,8 +66,7 @@
             }
         }
 
-        //System.out.println(selectedDept + "l64");
-        //System.out.println(selectedDate);
+
     %>
 
     <%
@@ -149,7 +148,6 @@
                         Selected Date: &nbsp
                         <span id="selecteddate">
                             <%
-                                //System.out.println("line144 in page: " + request.getAttribute("date"));
                                 if(request.getAttribute("date") != null){
                                     out.println(request.getAttribute("date"));
                                 } else{
@@ -235,7 +233,6 @@
                         <option value=""></option>
                         <%
                             for(Cookie cookie : cookies){
-                                //System.out.println("cookie Name: " + cookie.getName());
                                 if(cookie.getName().equals("doctorNames")){
                                     String[] doctorNames = cookie.getValue().split("%2F");
                                     for(int i=0; i<doctorNames.length; i++){
@@ -266,19 +263,15 @@
             </div>
             <div class="rightContainer">
                 <%
-                    //System.out.println(request.getAttribute("html"));
                     if(request.getAttribute("html") != null)
                         out.println(request.getAttribute("html"));
-
-                    //System.out.println(request.getAttribute("html"));
                 %>
             </div>
         </div>
     </div>
     <%
-        System.out.println(request.getAttribute("isAppMade") != null);
         if(request.getAttribute("isAppMade") != null){
-            System.out.println("inside IF");%>
+    %>
     <script>
         alert("Appointment has been made");
     </script>

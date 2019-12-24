@@ -30,11 +30,13 @@ public class makeAppServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         DB_Handler handler = new DB_Handler();
         handler.init();
         ArrayList<Timestamp> unavailableStart = new ArrayList<>();
         ArrayList<java.sql.Timestamp> unavailableEnd = new ArrayList<>();
         ArrayList<java.sql.Timestamp> appTime = new ArrayList<>();
+
         try{
             Statement stmt = handler.getConn().createStatement();
             ResultSet nameToId = stmt.executeQuery("select u_id from users where name = '"+doctor+"'");
@@ -78,12 +80,18 @@ public class makeAppServlet extends HttpServlet {
             //System.out.println("Appointment: " + time.toString());
         }
 
+        /*
+            UnavailableTimes =[15:00,18:00] şuanda  (offday 15:00-18:00 arası)
+            fakat [15:00, 16:00, 17:00] olmalı
 
-//        System.out.println(department);
-//        System.out.println(doctor);
-//        System.out.println("Unavailable Times:");
-//        for(String times : unavailableTimes)
-//            System.out.println(times);
+            Appointment olan kısım çalışıyo çünkü tek başlangıç saati var
+            fakat offdayde sadece başlangıç ve bitiş
+            saatleri dolu gözüküyor
+
+        */
+
+
+
 
         String html = "<p style=\"text-align: center; color: black; border-bottom: 1px solid black\">" +
                 "Available times for Doctor " + doctor + " at " + date + "</p>" +
@@ -126,8 +134,7 @@ public class makeAppServlet extends HttpServlet {
                 "                  </div>" +
                 "</form></div>";
 
-        //System.out.println(html);
-        System.out.println("html is about to set");
+
         if(!date.equals("") && !doctor.equals(""))
             request.setAttribute("html", html);
         request.setAttribute("date", date);

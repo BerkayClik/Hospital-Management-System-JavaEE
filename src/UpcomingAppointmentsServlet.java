@@ -1,9 +1,17 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class UpcomingAppointmentsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -15,9 +23,104 @@ public class UpcomingAppointmentsServlet extends HttpServlet {
         }
         String inNextDays = request.getParameter("days");
 
+//        System.out.println("User Email: " + userEmail);
+//        System.out.println("In next days: " + inNextDays);
 
-        System.out.println("User Email: " + userEmail);
-        System.out.println("In next days: " + inNextDays);
+        DB_Handler handler = new DB_Handler();
+        handler.init();
+
+        //user id bulma
+        int userID = 0;
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select u_id from cs202.Users where email ='"+ userEmail +"'");
+            while(rs.next()){
+                userID = rs.getInt(1);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        System.out.println("doctorID: " + userID);
+        //şimdiki zamanı çekme
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String currentDate = formatter.format(date);
+        //System.out.println(currentDate);
+        ////////////////
+        int year = Integer.parseInt(currentDate.split("-")[0]);
+        int month = Integer.parseInt(currentDate.split("-")[1]);
+        int day = Integer.parseInt(currentDate.split("-")[2]);
+
+        ArrayList<String> stringtimeDB = new ArrayList<>();
+        stringtimeDB.add(currentDate.replace("-","/"));
+        for(int i=0; i<Integer.parseInt(inNextDays); i++){
+            boolean isNewYear = false;
+            if(month == 12 && day == 31){
+                year++;
+                month = day = 1;
+                isNewYear = true;
+            }
+            if(((day == 31) && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12))
+                    || ((day == 30) && (month == 4 || month == 6 || month == 9 || month == 11)) || ((day == 28) && month == 2)){
+                day = 1;
+                month++;
+            }
+            else{
+                if(!isNewYear)
+                    day++;
+            }
+
+            if(month < 10 && day < 10)
+                stringtimeDB.add(year + "-0" + month + "-0" + day);
+            else{
+                if(month < 10)
+                    stringtimeDB.add(year + "-0" + month + "-" + day);
+                else if(day < 10){
+                    stringtimeDB.add(year + "-" + month + "-0" + day);
+                }
+                else
+                    stringtimeDB.add(year + "-" + month + "-" + day);
+            }
+        }
+
+        System.out.println("Current Date +" + inNextDays + " days:");
+        System.out.println(stringtimeDB);
+
+        ///stringtimeDB arraylistindeki günler string, datetime a çevrilmesi lazım
+        ///////////////
+        //Databaseten doktorun randevusu olan günleri çekme
+        ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
+        ArrayList<String> handledDateTimeDB = new ArrayList<>();
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
+            while(rs.next()){
+                datetimeDB2.add(rs.getTimestamp(1));
+                handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("\nAll appointments of Doctor ID " + userID + ":");
+        System.out.println(datetimeDB2);
+        System.out.println("handleDateTimeDB: ");
+        System.out.println(handledDateTimeDB);
+
+        ArrayList<String> reservedDays = new ArrayList<>();
+        for(int i=0;i<handledDateTimeDB.size();i++ ){
+            for(int j = 0; j<stringtimeDB.size(); j++){
+                if(stringtimeDB.get(j).equals(handledDateTimeDB.get(i))) {
+                    reservedDays.add(formatter2.format(datetimeDB2.get(i)));
+                }
+            }
+
+        }
+        ///////
+        System.out.println(reservedDays);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
