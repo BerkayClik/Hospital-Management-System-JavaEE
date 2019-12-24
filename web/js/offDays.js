@@ -29,9 +29,9 @@ function createForm(){
   form.setAttribute("method", "post");
   form.setAttribute("style", "display: flex; justify-content: center;");
 
-  form.innerHTML = "<input type=\"text\" name=\"days\" value=\"\" id=\"formDays\">" +
-  "<input type=\"text\" name=\"times\" value=\"\" id=\"formTimes\">" +
-  "<button type=\"submit\" name=\"button\">Set</button>";
+  form.innerHTML = "<input type=\"text\" name=\"days\" value=\"\" id=\"formDays\" style='display: none'>" +
+  "<input type=\"text\" name=\"times\" value=\"\" id=\"formTimes\" style='display: none'>" +
+  "<button type=\"submit\" name=\"button\" style='display: none'>Set</button>";
 
   cont.appendChild(form);
   setFormInp();
