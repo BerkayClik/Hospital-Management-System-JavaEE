@@ -4,7 +4,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PreviousAppointmentsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -15,13 +20,29 @@ public class PreviousAppointmentsServlet extends HttpServlet {
                 userEmail = cookie.getValue();
         }
         String prevDays = request.getParameter("days");
+        DB_Handler handler = new DB_Handler();
+        handler.init();
+        int userID = 0;
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select u_id from cs202.Users where email ='"+ userEmail +"'");
+            while(rs.next()){
+                userID = rs.getInt(1);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
 
         System.out.println("User Email: " + userEmail);
         System.out.println("Past "  + prevDays + " days ");
 
-
-        /*MEVCUT GUNDEN ONCESINI BULMA
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String currentDate = formatter.format(date);
+        //MEVCUT GUNDEN ONCESINI BULMA
 
         int year = Integer.parseInt(currentDate.split("-")[0]);
         int month = Integer.parseInt(currentDate.split("-")[1]);
@@ -61,21 +82,52 @@ public class PreviousAppointmentsServlet extends HttpServlet {
             }
 
             if(month < 10 && day < 10)
-                System.out.println(year + "/0" + month + "/0" + day);
+                stringtimeDB.add(year + "-0" + month + "-0" + day);
             else{
                 if(month < 10)
-                    System.out.println(year + "/0" + month + "/" + day);
+                    stringtimeDB.add(year + "-0" + month + "-" + day);
                 else if(day < 10){
-                    System.out.println(year + "/" + month + "/0" + day);
+                    stringtimeDB.add(year + "-" + month + "-0" + day);
                 }
                 else
-                    System.out.println(year + "/" + month + "/" + day);
+                    stringtimeDB.add(year + "-" + month + "-" + day);
             }
         }
 
         System.out.println("Current Date -" + prevDays + " days:");
         System.out.println(stringtimeDB);
-        */
+
+        ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
+        ArrayList<String> handledDateTimeDB = new ArrayList<>();
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
+            while(rs.next()){
+                datetimeDB2.add(rs.getTimestamp(1));
+                handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("\nAll appointments of Doctor ID " + userID + ":");
+        System.out.println(datetimeDB2);
+        System.out.println("handleDateTimeDB: ");
+        System.out.println(handledDateTimeDB);
+
+        ArrayList<String> reservedDays = new ArrayList<>();
+        for(int i=0;i<handledDateTimeDB.size();i++ ){
+            for(int j = 0; j<stringtimeDB.size(); j++){
+                System.out.println("This is stringtimedb: "+stringtimeDB.get(j));
+                System.out.println("This is handleddatetimedb: "+handledDateTimeDB.get(i));
+                if(stringtimeDB.get(j).equals(handledDateTimeDB.get(i))) {
+                    reservedDays.add(formatter2.format(datetimeDB2.get(i)));
+                }
+            }
+
+        }
+        ///////
+        System.out.println(reservedDays);
 
     }
 
