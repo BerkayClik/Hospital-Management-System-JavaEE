@@ -59,7 +59,7 @@ CREATE TABLE cs202.UserDepRel
 CREATE TABLE cs202.Appointments
 (
   app_id INT NOT NULL auto_increment,
-  datetime DATE NOT NULL,
+  datetime DATETIME NOT NULL,
   p_id INT NOT NULL,
   d_id INT NOT NULL,
   PRIMARY KEY (app_id),
@@ -70,8 +70,8 @@ CREATE TABLE cs202.Appointments
 CREATE TABLE cs202.RoomReservations
 (
   res_id INT NOT NULL auto_increment,
-  enter DATE NOT NULL,
-  exit_ DATE NOT NULL,
+  enter DATETIME NOT NULL,
+  exit_ DATETIME NOT NULL,
   room_id INT NOT NULL,
   p_id INT NOT NULL,
   d_id INT NOT NULL,
@@ -83,8 +83,8 @@ CREATE TABLE cs202.RoomReservations
 
 CREATE TABLE cs202.OffDays
 (
-  start DATE NOT NULL,
-  end DATE NOT NULL,
+  start DATETIME NOT NULL,
+  end DATETIME NOT NULL,
   id INT NOT NULL auto_increment,
   d_id INT NOT NULL,
   PRIMARY KEY (id),
