@@ -27,6 +27,7 @@ public class PreviousAppointmentsServlet extends HttpServlet {
             Statement stmt = handler.getConn().createStatement();
             ResultSet rs = stmt.executeQuery("select u_id from cs202.Users where email ='"+ userEmail +"'");
             while(rs.next()){
+
                 userID = rs.getInt(1);
             }
         }
@@ -99,6 +100,18 @@ public class PreviousAppointmentsServlet extends HttpServlet {
 
         ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
         ArrayList<String> handledDateTimeDB = new ArrayList<>();
+        int role = 0;
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select role_id from users where u_id = "+userID);
+            rs.next();
+            role = rs.getInt(1);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println("This is the role id: "+role);
+        if (role == 2){
         try {
             Statement stmt = handler.getConn().createStatement();
             ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
@@ -107,8 +120,23 @@ public class PreviousAppointmentsServlet extends HttpServlet {
                 handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
             }
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
+        }
+        if (role == 1){
+            try {
+                Statement stmt = handler.getConn().createStatement();
+                ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='"+ userID + "'");
+                while(rs.next()){
+                    datetimeDB2.add(rs.getTimestamp(1));
+                    handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         }
         System.out.println("\nAll appointments of Doctor ID " + userID + ":");
         System.out.println(datetimeDB2);
