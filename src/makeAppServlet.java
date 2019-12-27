@@ -15,7 +15,6 @@ import java.util.Date;
 public class makeAppServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String date = request.getParameter("date");
-        //System.out.println("date in makeAppServlet: " + date);
         String doctor = request.getParameter("doctor");
         String doctorEncodedName = doctor.replace(" ", "-");
 
@@ -26,7 +25,7 @@ public class makeAppServlet extends HttpServlet {
         try {
             Date uDate = new SimpleDateFormat("dd-MM-yyyy").parse(date);
             dateTime = new java.sql.Timestamp(uDate.getTime());
-            System.out.println("Selected day: " + dateTime.toString());
+            //System.out.println("Selected day: " + dateTime.toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -62,33 +61,33 @@ public class makeAppServlet extends HttpServlet {
         ArrayList<String> unavailableTimes = new ArrayList<>();
         ArrayList<String> unavailableDays = new ArrayList<>();
 
-        for(java.sql.Timestamp time : unavailableStart){
-            if(time.toString().substring(0,11).equals(dateTime.toString().substring(0,11)))
-                unavailableTimes.add(time.toString().substring(11,19));
-            //System.out.println("OffDay Start: "+ time.toString());
+        for(int i=0; i<unavailableStart.size(); i++){
+            if(unavailableStart.get(i).toString().substring(0,11).equals(dateTime.toString().substring(0,11))){
+                unavailableTimes.add(unavailableStart.get(i).toString().substring(11,19));
+                String time = unavailableStart.get(i).toString().substring(11,19);
+                for(;;){
+                    time = (Integer.parseInt(time.split(":")[0])+1) +
+                            ":" +
+                            time.split(":")[1] +
+                            ":" +
+                            time.split(":")[2];
+                    //System.out.println(time);
+                    if(!unavailableEnd.get(i).toString().substring(11,19).equals(time))
+                        unavailableTimes.add(time);
+                    else
+                        break;
+                }
+
+            }
         }
 
-        for(java.sql.Timestamp time : unavailableEnd){
-            if(time.toString().substring(0,11).equals(dateTime.toString().substring(0,11)))
-                unavailableTimes.add(time.toString().substring(11,19));
-            //System.out.println("OffDay End: " + time.toString());
-        }
+//        System.out.println("Offday times: ");
+//        System.out.println(unavailableTimes);
 
         for(java.sql.Timestamp time : appTime){
             if(time.toString().substring(0,11).equals(dateTime.toString().substring(0,11)))
                 unavailableTimes.add(time.toString().substring(11,19));
-            //System.out.println("Appointment: " + time.toString());
         }
-
-        /*
-            UnavailableTimes =[15:00,18:00] şuanda  (offday 15:00-18:00 arası)
-            fakat [15:00, 16:00, 17:00] olmalı
-
-            Appointment olan kısım çalışıyo çünkü tek başlangıç saati var
-            fakat offdayde sadece başlangıç ve bitiş
-            saatleri dolu gözüküyor
-
-        */
 
 
 

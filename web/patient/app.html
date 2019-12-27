@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Make Appointment</title>
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/appointment.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <style>
+        .dropdown-toggle::after {
+            content: "";
+        }
+        .yui3-button {
+            margin:10px 0px 10px 0px;
+            color: #fff;
+            background-color: #3476b7;
+        }
+    </style>
+  </head>
+  <body class="yui3-skin-sam">
+  
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="whole">
+            <div class="sidebar-header">
+                <h3>Hospital Management System</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Welcome</p>
+                <li>
+                    <a href="home.jsp">Home</a>
+
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li class="active">
+                            <a href="">Make Appointment</a>
+                        </li>
+                        <li>
+                            <a href="upcoming_appointments.jsp">Upcoming Appointments</a>
+                        </li>
+                        <li>
+                            <a href="previous_appointments.jsp">Previous Appointments</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="personal_info.jsp">Personal Info</a>
+                </li>
+            </ul>
+            <div class="push"></div>
+        </div>
+        <div class="logout">
+            <ul class="list-unstyled components" style="padding: 0">
+                <li>
+                    <a href="../index.jsp" style="margin-top: -75px; padding-left: 10px">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Hide</span>
+                </button>
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+      <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+        <div id="leftcolumn" class="yui3-u">
+           <!-- Container for the calendar -->
+           <div id="mycalendar"></div>
+        </div>
+        <div id="rightcolumn" class="yui3-u">
+         <div id="links" style="padding-left:20px;">
+            Selected date: <span id="selecteddate"></span>
+         </div>
+       </div>
+      </div>
+
+      <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+        <div id="leftcolumn" class="yui3-u">
+           <!-- Container for the calendar -->
+           <div id="mycalendar2"></div>
+        </div>
+        <div id="rightcolumn" class="yui3-u">
+         <div id="links" style="padding-left:20px;">
+            Selected date: <span id="selecteddate2"></span>
+         </div>
+       </div>
+      </div>
+    </div>
+    <%} else{
+    response.sendRedirect("/user");
+}%>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            let bar = document.getElementById('sidebarCollapse');
+            let content = bar.querySelector('span').innerText
+
+            if(content == "Show Sidebar")
+                bar.querySelector('span').innerText = "Hide";
+            else
+                bar.querySelector('span').innerText = "Show";
+        });
+      });
+    </script>
+
+    <script type="text/javascript">
+      YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
+
+          var calendar1 = new Y.Calendar({
+            contentBox: "#mycalendar",
+            width:'340px',
+            date: new Date()
+          }).render();
+
+          var calendar2 = new Y.Calendar({
+            contentBox: "#mycalendar2",
+            width:'340px',
+            date: new Date()
+          }).render();
+
+          var dtdate = Y.DataType.Date;
+
+          calendar1.on("selectionChange", function (ev) {
+            var newDate = ev.newSelection[0];
+            Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+          });
+
+          calendar2.on("selectionChange", function (ev) {
+            var newDate = ev.newSelection[0];
+            Y.one("#selecteddate2").setHTML(dtdate.format(newDate));
+          });
+      });
+    </script>
+    <script src="offDays.js"></script>
+  </body>
+</html>

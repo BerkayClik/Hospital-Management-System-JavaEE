@@ -136,13 +136,15 @@
 
         <div class="container">
             <div id="demo" class="yui3-skin-sam yui3-g">
-                <div class="yui3-u calender">
+                <div class="yui3-u calender" style="position: relative">
+                    <button style="position: absolute; right: -70px; padding: 5px 10px; border-radius: 11px;" class="btn btn-info">Click</button>
                     <div id="mycalendar"></div>
                 </div>
-
             </div>
-            <div class="leftContainer">
 
+            <span style="font-style: italic;font-size: 0.8rem;text-align: center;display: block;margin-top: -17px;margin-bottom: 26px;">To see between multiple days, click to right-upper button</span>
+
+            <div class="leftContainer">
                 <div class="yui3-u selectedDate" style="display: block;">
                     <div id="links" style="padding-left:9px; font-family: sans-serif;">
                         Selected Date: &nbsp

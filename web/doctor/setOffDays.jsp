@@ -48,6 +48,24 @@
 %>
 <div class="wrapper">
 
+    <%
+        if(request.getAttribute("success") != null){
+            if(request.getAttribute("success").equals("false")){
+    %>
+    <script type="text/javascript">
+        alert("There is already an off-day/appointment in the date/times you have selected")
+    </script>
+    <%}}%>
+
+    <%
+        if(request.getAttribute("success") != null){
+            if(request.getAttribute("success").equals("true")){
+    %>
+    <script type="text/javascript">
+        alert("Offdays are set")
+    </script>
+    <%}}%>
+
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="whole">

@@ -31,3 +31,5 @@ function setTime(node){
     document.getElementById('trDate').value + "/" +
     document.getElementById('doctor').value;
 }
+
+
