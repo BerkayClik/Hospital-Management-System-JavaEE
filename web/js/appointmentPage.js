@@ -15,9 +15,13 @@ function  check() {
 }
 
 function setDepartment() {
-    document.getElementById("dateInForm").value = document.querySelector('#links').innerText.substring(17,27);
+    //document.getElementById("dateInForm").value = document.querySelector('#links').innerText.substring(17,27);
     console.log("button clicked");
     document.querySelector('#deptNames > button').click();
+}
+
+function setDepartment2() {
+    
 }
 
 function setDoctor() {

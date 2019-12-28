@@ -40,3 +40,20 @@ function setFullDay(node){
   startTimeInp.value = "00:00am";
   endTimeInp.value = "23:59pm";
 }
+
+function setFormInput(node){
+  let time = (parseInt(node.value.split(':')[0])+1) + ":" + node.value.split(':')[1];
+  if(time == "12:00am"){
+    time = "12:00pm";
+    console.log(time);
+  }
+  else if(time == "13:00pm"){
+    time = "1:00pm";
+  }
+  console.log(time == "12:00am");
+  document.getElementById('times').value = node.value + "-" + time;
+}
+
+function setFormInput2(node){
+  document.getElementById('times').value = document.getElementById('times').value.split('-')[0] + "-" + node.value;
+}

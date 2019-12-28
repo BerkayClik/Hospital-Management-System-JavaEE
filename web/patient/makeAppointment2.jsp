@@ -6,16 +6,25 @@
 <%--
   Created by IntelliJ IDEA.
   User: Monster
-  Date: 12/15/2019
-  Time: 10:05 PM
+  Date: 12/28/2019
+  Time: 5:19 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <title>Make Appointment</title>
     <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.timepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/jquery.timepicker.css" />
+    <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datepicker.css" />
+    <script type="text/javascript" src="../js/site.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/site.css"/>
+
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
@@ -43,10 +52,15 @@
         String selectedDept = "";
         String selectedDate = "";
         String selectedDoctor = "";
+        String selectedTimesStart = "";
+        String selectedTimesEnd = "";
 
         if(request.getAttribute("doctorName") != null){
             selectedDoctor = (String) request.getAttribute("doctorName");
         }
+//        if(request.getAttribute("timeInForm") != null){
+//            selectedTimes = (String) request.getAttribute("");
+//        }
     %>
 
     <%
@@ -61,8 +75,15 @@
                     selectedDept = cookie.getValue();
                 }
             }
-            if(cookie.getName().equals("dateInForm")){
-                selectedDate = cookie.getValue();
+            if(cookie.getName().equals("dateInForm2") && !cookie.getValue().equals("")){
+                selectedDate = cookie.getValue().split("%2F")[0] + "/" + cookie.getValue().split("%2F")[1];
+            }
+            if(cookie.getName().equals("timeInForm2") && !cookie.getValue().equals("")){
+                selectedTimesStart = cookie.getValue().split("%3A")[0] + ":" + cookie.getValue().split("%3A")[1].split("-")[0];
+                selectedTimesEnd = cookie.getValue().split("%3A")[1].split("-")[1] + ":" + cookie.getValue().split("%3A")[2];
+
+                //System.out.println("selectedTimesStart: " + selectedTimesStart);
+                //System.out.println("selectedTimesEnd: " + selectedTimesEnd);
             }
         }
 
@@ -135,19 +156,32 @@
         </nav>
 
         <div class="container">
-            <div id="demo" class="yui3-skin-sam yui3-g">
-                <div class="yui3-u calender" style="position: relative">
-                    <button style="position: absolute; right: -70px; padding: 5px 10px; border-radius: 11px;" class="btn btn-info" onclick="window.location.href = 'makeAppointment2.jsp';">Click</button>
-                    <div id="mycalendar"></div>
+            <div class="" style="display: flex; justify-content: center">
+                <div id="demo" class="yui3-skin-sam yui3-g" style="margin-right: 1em;">
+                    <div class="yui3-u calender" style="position: relative">
+                        <div id="mycalendar"></div>
+                    </div>
+                </div>
+
+                <div id="demo" class="yui3-skin-sam yui3-g" style="margin-left: 1em">
+                    <div class="yui3-u calender" style="position: relative">
+                        <button style="position: absolute; right: -70px; padding: 5px 10px; border-radius: 11px;" class="btn btn-info" onclick="window.location.href = 'makeAppointment.jsp';">Click</button>
+                        <div id="mycalendar2"></div>
+                    </div>
                 </div>
             </div>
 
-            <span style="font-style: italic;font-size: 0.8rem;text-align: center;display: block;margin-top: -17px;margin-bottom: 26px;">To see between multiple days, click to right-upper button</span>
+            <div style="display: flex; justify-content: space-evenly; margin-top: -25px">
+                <span style="display: block; margin-right: -35px;">Start Date</span>
+                <span style="display: block">End Date</span>
+            </div>
+
+            <span style="font-style: italic;font-size: 0.8rem;text-align: center;display: block;margin-top: 15px;margin-bottom: 26px;">To check only one day, click to right-upper button</span>
 
             <div class="leftContainer">
                 <div class="yui3-u selectedDate" style="display: block;">
-                    <div id="links" style="padding-left:9px; font-family: sans-serif;">
-                        Selected Date: &nbsp
+                    <div id="links" style="padding-left:9px; font-family: sans-serif; margin-bottom: 15px;">
+                        Selected Dates: &nbsp
                         <span id="selecteddate">
                             <%
                                 if(request.getAttribute("date") != null){
@@ -159,10 +193,18 @@
                         </span>
                     </div>
                 </div>
+                <div class="selectedDate" style="padding-left: 9px; height: 40px">
+                    <span>Times: </span>
+                    <p id="datepairExample" style="display: inline;">
+                        <input type="text" name="start" class="time start" style="margin-left: 15px; height: 30px;" onchange="setFormInput(this)" value=<%=selectedTimesStart%>>
+                        between
+                        <input type="text" name="end" class="time end" style="height: 30px;" onchange="isEqual(), setFormInput2(this)" value=<%=selectedTimesEnd%>>
+                    </p>
+                </div>
 
                 <div class="selectedDepartment" style="overflow: auto">
                     <span style="font-family: sans-serif; padding-left: 9px;">Select Department: </span>
-                    <form action="setDoctorNames" method="post" id="deptNames" style="float: right; margin-top: -2px;">
+                    <form action="setDoctorNames2" method="post" id="deptNames" style="float: right; margin-top: -2px;">
                         <select onchange="setDepartment()" id="departments" name="departments" style="margin: 4px 20px 0 0;">
                             <option value=""></option>
                             <%
@@ -223,9 +265,11 @@
                                         }
                                     }
                                 }
+                                request.setAttribute("page", "makeApp2");
                             %>
                         </select>
-                        <input type="text" name="dateInForm"  id="dateInForm" style="display: none" value=<%=selectedDate%>>
+                        <input type="text" name="dateInForm" id="dateInForm" style="" value=<%=selectedDate%>>
+                        <input type="text" name="timeInForm" id="timeInForm" style="" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
                         <button type="submit" style="display: none">S</button>
                     </form>
                 </div>
@@ -254,47 +298,35 @@
                     </select>
                 </div>
 
-                <form action="makeAppointment" method="post">
-                    <input type="text" name="date" id="trDate" style="display:none">
-                    <input type="text" name="department" id="department" style="display:none" value=<%=selectedDept%>>
-                    <input type="text" name="doctor" id="doctor" style="display:none" value=<%=selectedDoctor%>>
+                <form action="makeAppointment2" method="post">
+                    <input type="text" name="date" id="trDate" style="">
+                    <input type="text" name="times" id="times" style="" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
+                    <input type="text" name="department" id="department" style="" value=<%=selectedDept%>>
+                    <input type="text" name="doctor" id="doctor" style="" value=<%=selectedDoctor%>>
                     <div style="">
                         <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
                     </div>
                 </form>
             </div>
             <div class="rightContainer">
-                <%
-                    if(request.getAttribute("html") != null)
-                        out.println(request.getAttribute("html"));
-                %>
             </div>
         </div>
     </div>
-    <%
-        if(request.getAttribute("isAppMade") != null){
-    %>
-    <script>
-        alert("Appointment has been made");
-    </script>
-    <%}%>
 </div>
 
 
-<%} else{
-    response.sendRedirect("/user");
-}%>
-
 <!-- jQuery CDN - Slim version (=without AJAX) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 <!-- Popper.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
+
+<script src="../js/isEqual.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
             let bar = document.getElementById('sidebarCollapse');
@@ -305,7 +337,6 @@
             else
                 bar.querySelector('span').innerText = "Show";
         });
-
     });
 </script>
 <script type="text/javascript">
@@ -317,29 +348,101 @@
             showNextMonth: true,
             date: new Date(2020,00,1)}).render();
 
+        var calendar2 = new Y.Calendar({
+            contentBox: "#mycalendar2",
+            width:'340px',
+            showPrevMonth: true,
+            showNextMonth: true,
+            date: new Date(2020,00,1)}).render();
 
         var dtdate = Y.DataType.Date;
 
         calendar.on("selectionChange", function (ev) {
             var newDate = ev.newSelection[0];
-            Y.one("#selecteddate").setHTML(dtdate.format(newDate));
-            let date = document.getElementById("selecteddate").innerText;
+            //Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+            let date =  dtdate.format(newDate);
             let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
-            Y.one("#selecteddate").setHTML(tr_date);
-            if(document.getElementById('resTime') == null)
-                document.getElementById("trDate").value = tr_date;
+
+            document.getElementById('selecteddate').innerText = tr_date;
+            document.getElementById("trDate").value = tr_date;
+        });
+
+        calendar2.on("selectionChange", function (ev) {
+            var newDate = ev.newSelection[0];
+            //Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+            //console.log(dtdate.format(newDate));
+            let date = dtdate.format(newDate);
+            let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
+            //Y.one("#selecteddate").setHTML(tr_date);
+            //console.log("change on calendar2");
+            //console.log(tr_date);
+            if(isBigger(tr_date)){
+                alert("You can not select end date before or equal to the start date");
+                document.getElementById("trDate").value = document.getElementById("trDate").value.split("/")[0];
+                document.getElementById('selecteddate').innerText = document.getElementById('selecteddate').innerText.substring(0,10);
+            }
             else{
-                document.getElementById("trDate").value = tr_date;
-                document.getElementById('doctor').value = "";
-                document.getElementsByClassName('rightContainer')[0].innerHTML = "";
-                alert("Click SHOW button to see the available times for the day you have just selected");
+                document.getElementById('selecteddate').innerText = document.getElementById('selecteddate').innerText.substring(0,10) + "/" + tr_date;
+                document.getElementById("trDate").value = document.getElementById("trDate").value.split("/")[0] + "/" + tr_date;
+                document.getElementById('dateInForm').value = document.getElementById("trDate").value;
             }
         });
+
+        function isBigger(date){
+            let isBigger = false;
+
+            if(parseInt(document.getElementById("trDate").value.substring(6)) > parseInt(date.substring(6))){
+                isBigger = true;
+            }
+            else{
+                if(parseInt(document.getElementById("trDate").value.split("-")[1]) > parseInt(date.split("-")[1])){
+                    isBigger = true;
+                }
+                else{
+                    if(parseInt(document.getElementById("trDate").value.split("-")[0]) >= parseInt(date.split("-")[0])
+                        && parseInt(document.getElementById("trDate").value.split("-")[1]) == parseInt(date.split("-")[1])){
+                        isBigger = true;
+                    }
+                }
+            }
+            return isBigger;
+        }
     });
 </script>
 
+
+
 <script type="text/javascript">
-    //document.getElementById("trDate").value = document.getElementById("dateInForm").value;
+    function setFormInput(node){
+        if(document.getElementsByClassName("end")[0].value == ""){
+            let time = (parseInt(node.value.split(':')[0])+1) + ":" + node.value.split(':')[1];
+            if(time == "12:00am"){
+                time = "12:00pm";
+                console.log(time);
+            }
+            else if(time == "13:00pm"){
+                time = "1:00pm";
+            }
+            console.log(time == "12:00am");
+            document.getElementById('times').value = node.value + "-" + time;
+            document.getElementById("timeInForm").value = node.value + "-" + time;
+
+        }
+        else{
+            console.log("Delay");
+            let delay = 300;
+            setTimeout(function() {
+                document.getElementById('times').value = node.value + "-" + document.getElementsByClassName("end")[0].value;
+                document.getElementById("timeInForm").value = node.value + "-" +  document.getElementsByClassName("end")[0].value;
+            }, delay);
+        }
+
+    }
+
+    function setFormInput2(node){
+        document.getElementById('times').value = document.getElementById('times').value.split('-')[0] + "-" + node.value;
+
+    }
 
     let depSelect = document.getElementById("departments");
     let strDepartment = depSelect.options[depSelect.selectedIndex].value;
@@ -347,15 +450,28 @@
 
     document.getElementById('trDate').value = document.getElementById('selecteddate').innerText;
 
+</script>
 
-    // if(document.getElementById("trDate").value == "" || document.getElementById("department").value == "" || document.getElementById("doctor").value == ""){
-    //     document.getElementsByClassName('rightContainer')[0].style.display = "none";
-    // }
+<script src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
+<script src="http://jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
+<script>
+    $('#datepairExample .time').timepicker({
+        'step': 60,
+        'showDuration': true,
+        'timeFormat': 'g:ia',
+        'minTime': '9:00am',
+        'maxTime': '19:00pm'
+    });
+
+    $('#datepairExample').datepair();
 
 </script>
 
 <script src="../js/appointmentPage.js"></script>
 
+<%} else{
+    response.sendRedirect("/user");
+}%>
 </body>
 </html>
 

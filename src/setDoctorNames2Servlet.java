@@ -1,5 +1,3 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -11,11 +9,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class setDoctorNamesServlet extends HttpServlet {
+public class setDoctorNames2Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //System.out.println(department);
         String department = request.getParameter("departments");
         String date = request.getParameter("dateInForm");
+        String time = request.getParameter("timeInForm");
 
         DB_Handler handler = new DB_Handler();
         handler.init();
@@ -51,26 +50,20 @@ public class setDoctorNamesServlet extends HttpServlet {
             //response.sendRedirect("makeAppointment.jsp");
 
             response.addCookie(new Cookie("selectedDept",  URLEncoder.encode(department, "UTF-8")));
-            response.addCookie(new Cookie("dateInForm", date));
-            response.sendRedirect("makeAppointment.jsp");
+            //response.addCookie(new Cookie("dateInForm", date));
+            System.out.println("time: " + time);
+            System.out.println( URLEncoder.encode(time, "UTF-8"));
+            response.addCookie(new Cookie("timeInForm2", URLEncoder.encode(time, "UTF-8")));
+            response.addCookie(new Cookie("dateInForm2", URLEncoder.encode(date, "UTF-8")));
+            response.sendRedirect("makeAppointment2.jsp");
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doGet");
 
-        String department = request.getParameter("departments");
-        String date = request.getParameter("dateInForm");
-
-        System.out.println(department);
-        System.out.println(date);
-
-        request.setAttribute("selectedDept", department);
-        request.setAttribute("dateInForm", date);
-
-
-        request.getRequestDispatcher("makeAppointment.jsp").forward(request, response);
     }
+
 }
+

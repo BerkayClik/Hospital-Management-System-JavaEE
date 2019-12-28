@@ -43,6 +43,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>makeApp</servlet-name>
+        <servlet-class>SetAppointmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>makeApp</servlet-name>
+        <url-pattern>/patient/setAppointment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>makeApp2</servlet-name>
+        <servlet-class>SetAppointmentServlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>makeApp2</servlet-name>
+        <url-pattern>/patient/makeAppointment2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>setOffDays</servlet-name>
         <servlet-class>setOffDayServlet</servlet-class>
     </servlet>
@@ -67,6 +85,15 @@
     <servlet-mapping>
         <servlet-name>setDocName</servlet-name>
         <url-pattern>/patient/setDoctorNames</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>setDocName2</servlet-name>
+        <servlet-class>setDoctorNames2Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>setDocName2</servlet-name>
+        <url-pattern>/patient/setDoctorNames2</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -103,15 +130,6 @@
     <servlet-mapping>
         <servlet-name>ReserveRoom</servlet-name>
         <url-pattern>/doctor/reserveRoom</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>makeApp</servlet-name>
-        <servlet-class>SetAppointmentServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>makeApp</servlet-name>
-        <url-pattern>/patient/setAppointment</url-pattern>
     </servlet-mapping>
 
     <servlet>
