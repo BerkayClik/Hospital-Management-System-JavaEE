@@ -124,6 +124,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>showOD</servlet-name>
+        <servlet-class>ShowOffDaysServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showOD</servlet-name>
+        <url-pattern>/doctor/showOD</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ReserveRoom</servlet-name>
         <servlet-class>ReserveRoomServlet</servlet-class>
     </servlet>
@@ -134,11 +143,11 @@
 
     <servlet>
         <servlet-name>upcomingAppPatient</servlet-name>
-        <servlet-class>UpcomingAppointmentsServlet</servlet-class>
+        <servlet-class>UpcomingAppointmentsServlet2</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>upcomingAppPatient</servlet-name>
-        <url-pattern>/patient/upcomingApp</url-pattern>
+        <url-pattern>/patient/upcomingApp2</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -152,11 +161,11 @@
 
     <servlet>
         <servlet-name>previousAppPatient</servlet-name>
-        <servlet-class>PreviousAppointmentsServlet</servlet-class>
+        <servlet-class>PreviousAppointmentsServlet2</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>previousAppPatient</servlet-name>
-        <url-pattern>/patient/previousApp</url-pattern>
+        <url-pattern>/patient/previousApp2</url-pattern>
     </servlet-mapping>
 
     <servlet>

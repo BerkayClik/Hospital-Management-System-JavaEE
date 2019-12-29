@@ -15,6 +15,8 @@ public class SetAppointmentServlet2 extends HttpServlet {
         String startTime = times.split("-")[0];
         String endTime = times.split("-")[1];
 
+        startTime = changeFormat(startTime);
+        endTime = changeFormat(endTime);
 
         System.out.println("startDate: " + startDate);
         System.out.println("endDate: " + endDate);
@@ -22,9 +24,19 @@ public class SetAppointmentServlet2 extends HttpServlet {
         System.out.println("endTime: " + endTime);
         System.out.println("Doctor: " + doctor);
 
+
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+
+    public String changeFormat(String time){
+        if(time.split(":")[1].substring(2).equals("pm") && !time.equals("12:00pm")){
+            time = ((Integer.parseInt(time.split(":")[0]))+12) + ":" + time.split(":")[1];
+        }
+        return time.substring(0,time.length()-2);
     }
 }

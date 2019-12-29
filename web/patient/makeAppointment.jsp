@@ -325,14 +325,61 @@
             Y.one("#selecteddate").setHTML(dtdate.format(newDate));
             let date = document.getElementById("selecteddate").innerText;
             let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
-            Y.one("#selecteddate").setHTML(tr_date);
-            if(document.getElementById('resTime') == null)
-                document.getElementById("trDate").value = tr_date;
+
+            if(checkWithCurrentDate(tr_date)){
+                document.getElementById("selecteddate").innerText = "";
+            }
             else{
-                document.getElementById("trDate").value = tr_date;
-                document.getElementById('doctor').value = "";
-                document.getElementsByClassName('rightContainer')[0].innerHTML = "";
-                alert("Click SHOW button to see the available times for the day you have just selected");
+                Y.one("#selecteddate").setHTML(tr_date);
+                if(document.getElementById('resTime') == null)
+                    document.getElementById("trDate").value = tr_date;
+                else{
+                    document.getElementById("trDate").value = tr_date;
+                    document.getElementById('doctor').value = "";
+                    document.getElementsByClassName('rightContainer')[0].innerHTML = "";
+                    alert("Click SHOW button to see the available times for the day you have just selected");
+                }
+            }
+
+
+            function checkWithCurrentDate(date){
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = dd + '-' + mm + '-' + yyyy;
+
+                console.log("today= " + today);
+                if(isBefore(date, today)){
+                    console.log("statement: " + isBefore(date, today));
+                    alert("Today is: " + today + ", you cannot select previous days");
+                    return true;
+                }
+                else{
+                    console.log("statement: " + isBefore(date, today));
+                    return false;
+                }
+            }
+
+            function isBefore(selectedDate, today){
+                let isBefore = false;
+                if(parseInt(selectedDate.split("-")[2]) < parseInt(today.split("-")[2])){
+                    isBefore = true;
+                }
+                else{
+                    if(parseInt(selectedDate.split("-")[1]) < parseInt(today.split("-")[1])
+                        && parseInt(selectedDate.split("-")[2]) == parseInt(today.split("-")[2])){
+                        isBefore = true;
+                    }
+                    else{
+                        if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
+                            && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
+                            isBefore = true;
+                        }
+                    }
+                }
+                return isBefore;
             }
         });
     });

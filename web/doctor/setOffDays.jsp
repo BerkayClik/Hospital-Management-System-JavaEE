@@ -229,46 +229,99 @@
             let day;
             let month;
             let year;
+            let date = "";
             let dateArray = [];
             for(let i=0; i<ev.newSelection.length; i++){
                 day = ev.newSelection[i].getDate();
                 month = ev.newSelection[i].getMonth()+1;
                 year = ev.newSelection[i].getFullYear();
-                let date = "" + day + "-" + month + "-" + year;
+                date = "" + day + "-" + month + "-" + year;
                 dateArray[i] = date;
             }
-            let list = document.getElementById('selectedDays');
-
-            let timesList = document.getElementById('times');
-
-            while( list.firstChild ){
-                list.removeChild(list.firstChild);
+            console.log("dateArray: " + dateArray);
+            if(checkWithCurrentDate(dateArray[dateArray.length-1]) || checkWithCurrentDate(dateArray[0])){
+                //console.log("line242");
+                //console.log("dateArray1: " + dateArray);
+                dateArray.pop();
+                //console.log("dateArray2: " + dateArray);
             }
-            while(timesList.firstChild){
-                timesList.removeChild(timesList.firstChild);
+            else if(checkWithCurrentDate(dateArray[0])){
+                dateArray.shift();
             }
-            for(let i=0; i<dateArray.length; i++){
-                let li = document.createElement("LI");
-                var text = document.createTextNode(dateArray[i]);
-                li.appendChild(text);
-                list.appendChild(li);
+            else{
+                let list = document.getElementById('selectedDays');
+                let timesList = document.getElementById('times');
 
-                let li2 = document.createElement("LI");
-                li2.innerHTML = "<p id=\"datepairExample\"><input type=\"text\" name=\"time\" class=\"time start\" style=\"margin: 0 5px\"/>" +
-                    "to" +
-                    "<input type=\"text\" name=\"time\" class=\"time end\" onchange='isEqualLoop()' style=\"margin: 0 5px\"/>" +
-                    "<button type=\"button\" name=\"button\" onclick=\"fullDay(this)\" style=\"margin-right: 5px\">Full Day</button>" +
-                    "<button type=\"button\" name=\"button\" onclick=\"reset(this)\" style=\"margin-right: 5px\">Reset</button></p>";
-                timesList.appendChild(li2);
-                $('#datepairExample .time').timepicker({
-                    'step': 60,
-                    'showDuration': true,
-                    'timeFormat': 'g:ia',
-                    'minTime': '9:00am',
-                    'maxTime': '00:01am'
-                });
+                while( list.firstChild ){
+                    list.removeChild(list.firstChild);
+                }
+                while(timesList.firstChild){
+                    timesList.removeChild(timesList.firstChild);
+                }
+                for(let i=0; i<dateArray.length; i++){
+                    let li = document.createElement("LI");
+                    var text = document.createTextNode(dateArray[i]);
+                    li.appendChild(text);
+                    list.appendChild(li);
 
-                $('li > p').datepair();
+                    let li2 = document.createElement("LI");
+                    li2.innerHTML = "<p id=\"datepairExample\"><input type=\"text\" name=\"time\" class=\"time start\" style=\"margin: 0 5px\"/>" +
+                        "to" +
+                        "<input type=\"text\" name=\"time\" class=\"time end\" onchange='isEqualLoop()' style=\"margin: 0 5px\"/>" +
+                        "<button type=\"button\" name=\"button\" onclick=\"fullDay(this)\" style=\"margin-right: 5px\">Full Day</button>" +
+                        "<button type=\"button\" name=\"button\" onclick=\"reset(this)\" style=\"margin-right: 5px\">Reset</button></p>";
+                    timesList.appendChild(li2);
+                    $('#datepairExample .time').timepicker({
+                        'step': 60,
+                        'showDuration': true,
+                        'timeFormat': 'g:ia',
+                        'minTime': '9:00am',
+                        'maxTime': '00:01am'
+                    });
+
+                    $('li > p').datepair();
+                }
+            }
+
+
+            function checkWithCurrentDate(date){
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = dd + '-' + mm + '-' + yyyy;
+
+                //console.log("today= " + today);
+                if(isBefore(date, today)){
+                    console.log("statement: " + isBefore(date, today));
+                    alert("Today is: " + today + ", you cannot select previous days");
+                    return true;
+                }
+                else{
+                    console.log("statement: " + isBefore(date, today));
+                    return false;
+                }
+            }
+
+            function isBefore(selectedDate, today){
+                let isBefore = false;
+                if(parseInt(selectedDate.split("-")[2]) < parseInt(today.split("-")[2])){
+                    isBefore = true;
+                }
+                else{
+                    if(parseInt(selectedDate.split("-")[1]) < parseInt(today.split("-")[1])
+                        && parseInt(selectedDate.split("-")[2]) == parseInt(today.split("-")[2])){
+                        isBefore = true;
+                    }
+                    else{
+                        if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
+                            && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
+                            isBefore = true;
+                        }
+                    }
+                }
+                return isBefore;
             }
         });
 

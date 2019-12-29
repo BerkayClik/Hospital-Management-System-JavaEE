@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PreviousAppointmentsServlet extends HttpServlet {
+public class PreviousAppointmentsServlet2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
         String userEmail = "";
@@ -112,21 +112,9 @@ public class PreviousAppointmentsServlet extends HttpServlet {
         }
         //System.out.println("This is the role id: "+role);
         if (role == 2){
-        try {
-            Statement stmt = handler.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
-            while(rs.next()){
-                datetimeDB2.add(rs.getTimestamp(1));
-                handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (role == 1){
             try {
                 Statement stmt = handler.getConn().createStatement();
-                ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='"+ userID + "'");
+                ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
                 while(rs.next()){
                     datetimeDB2.add(rs.getTimestamp(1));
                     handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
@@ -135,7 +123,19 @@ public class PreviousAppointmentsServlet extends HttpServlet {
             catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+            if (role == 1){
+                try {
+                    Statement stmt = handler.getConn().createStatement();
+                    ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='"+ userID + "'");
+                    while(rs.next()){
+                        datetimeDB2.add(rs.getTimestamp(1));
+                        handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
 //        System.out.println("\nAll appointments of Doctor ID " + userID + ":");
@@ -187,7 +187,7 @@ public class PreviousAppointmentsServlet extends HttpServlet {
 
         html += "</ul>\n" +
                 "            <ul class=\"list\">\n" +
-                "                <span>Patient Name</span>\n" +
+                "                <span>Doctor Name</span>\n" +
                 "                <li>Emre</li>\n" +
                 "                <li>Karakuz</li>\n" +
                 "            </ul>";
@@ -198,9 +198,4 @@ public class PreviousAppointmentsServlet extends HttpServlet {
         request.getRequestDispatcher("previous_appointments.jsp").forward(request,response);
 
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
 }

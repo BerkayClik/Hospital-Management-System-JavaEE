@@ -126,6 +126,13 @@
             </form>
         </div>
 
+        <div class="result" style="display: flex; justify-content: space-evenly;">
+            <%
+                if(request.getAttribute("html") != null)
+                    out.println(request.getAttribute("html"));
+            %>
+        </div>
+
     </div>
 </div>
 <%} else{

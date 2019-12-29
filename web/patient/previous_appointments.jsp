@@ -116,10 +116,17 @@
                     </div>
                 </div>
             </div>
-            <form class="" action="previousApp" method="post" style="width: 30%; margin: 20px auto;">
+            <form class="" action="previousApp2" method="post" style="width: 30%; margin: 20px auto;">
                 <input type="text" name="days" value="1" style="display: none;">
                 <button type="submit" class="btn btn-primary" aria-pressed="false" style="display: block; margin-top: 7px;">Show</button>
             </form>
+        </div>
+
+        <div class="result" style="display: flex; justify-content: space-evenly;">
+            <%
+                if(request.getAttribute("html") != null)
+                    out.println(request.getAttribute("html"));
+            %>
         </div>
 
     </div>

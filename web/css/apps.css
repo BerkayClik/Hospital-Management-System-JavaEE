@@ -159,3 +159,19 @@ form > button{
   display: block;
   margin: 35px auto 0 auto;
 }
+
+.result{
+    margin-bottom: 15px;
+}
+
+ul{
+    list-style: none;
+}
+
+ul > span{
+    text-decoration: underline;
+}
+
+.list > li{
+    margin-top: 10px;
+}

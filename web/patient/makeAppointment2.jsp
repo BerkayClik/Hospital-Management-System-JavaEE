@@ -268,8 +268,8 @@
                                 request.setAttribute("page", "makeApp2");
                             %>
                         </select>
-                        <input type="text" name="dateInForm" id="dateInForm" style="" value=<%=selectedDate%>>
-                        <input type="text" name="timeInForm" id="timeInForm" style="" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
+                        <input type="text" name="dateInForm" id="dateInForm" style="display: none;" value=<%=selectedDate%>>
+                        <input type="text" name="timeInForm" id="timeInForm" style="display: none;" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
                         <button type="submit" style="display: none">S</button>
                     </form>
                 </div>
@@ -299,10 +299,10 @@
                 </div>
 
                 <form action="makeAppointment2" method="post">
-                    <input type="text" name="date" id="trDate" style="">
-                    <input type="text" name="times" id="times" style="" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
-                    <input type="text" name="department" id="department" style="" value=<%=selectedDept%>>
-                    <input type="text" name="doctor" id="doctor" style="" value=<%=selectedDoctor%>>
+                    <input type="text" name="date" id="trDate" style="display: none;">
+                    <input type="text" name="times" id="times" style="display: none;" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
+                    <input type="text" name="department" id="department" style="display: none;" value=<%=selectedDept%>>
+                    <input type="text" name="doctor" id="doctor" style="display: none;" value=<%=selectedDoctor%>>
                     <div style="">
                         <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
                     </div>
@@ -362,20 +362,22 @@
             //Y.one("#selecteddate").setHTML(dtdate.format(newDate));
             let date =  dtdate.format(newDate);
             let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
+            console.log("tr_date: " + tr_date);
+            if(checkWithCurrentDate(tr_date)){
 
-            document.getElementById('selecteddate').innerText = tr_date;
-            document.getElementById("trDate").value = tr_date;
+            }
+            else{
+                document.getElementById('selecteddate').innerText = tr_date;
+                document.getElementById("trDate").value = tr_date;
+            }
         });
 
         calendar2.on("selectionChange", function (ev) {
             var newDate = ev.newSelection[0];
-            //Y.one("#selecteddate").setHTML(dtdate.format(newDate));
-            //console.log(dtdate.format(newDate));
+
             let date = dtdate.format(newDate);
-            let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
-            //Y.one("#selecteddate").setHTML(tr_date);
-            //console.log("change on calendar2");
-            //console.log(tr_date);
+            let tr_date = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);//Gün-ay-yıl
+
             if(isBigger(tr_date)){
                 alert("You can not select end date before or equal to the start date");
                 document.getElementById("trDate").value = document.getElementById("trDate").value.split("/")[0];
@@ -386,6 +388,7 @@
                 document.getElementById("trDate").value = document.getElementById("trDate").value.split("/")[0] + "/" + tr_date;
                 document.getElementById('dateInForm').value = document.getElementById("trDate").value;
             }
+
         });
 
         function isBigger(date){
@@ -395,7 +398,8 @@
                 isBigger = true;
             }
             else{
-                if(parseInt(document.getElementById("trDate").value.split("-")[1]) > parseInt(date.split("-")[1])){
+                if(parseInt(document.getElementById("trDate").value.split("-")[1]) > parseInt(date.split("-")[1])
+                    && parseInt(document.getElementById("trDate").value.substring(6)) > parseInt(date.substring(6))){
                     isBigger = true;
                 }
                 else{
@@ -406,6 +410,46 @@
                 }
             }
             return isBigger;
+        }
+
+        function checkWithCurrentDate(date){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = dd + '-' + mm + '-' + yyyy;
+
+            console.log("today= " + today);
+            if(isBefore(date, today)){
+                console.log("statement: " + isBefore(date, today));
+                alert("Today is: " + today + ", you cannot select previous days");
+                return true;
+            }
+            else{
+                console.log("statement: " + isBefore(date, today));
+                return false;
+            }
+        }
+
+        function isBefore(selectedDate, today){
+            let isBefore = false;
+            if(parseInt(selectedDate.split("-")[2]) < parseInt(today.split("-")[2])){
+                isBefore = true;
+            }
+            else{
+                if(parseInt(selectedDate.split("-")[1]) < parseInt(today.split("-")[1])
+                    && parseInt(selectedDate.split("-")[2]) == parseInt(today.split("-")[2])){
+                    isBefore = true;
+                }
+                else{
+                    if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
+                        && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
+                        isBefore = true;
+                    }
+                }
+            }
+            return isBefore;
         }
     });
 </script>

@@ -1,5 +1,3 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UpcomingAppointmentsServlet extends HttpServlet {
+public class UpcomingAppointmentsServlet2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
         String userEmail = "";
@@ -194,19 +192,20 @@ public class UpcomingAppointmentsServlet extends HttpServlet {
 
         html += "</ul>\n" +
                 "            <ul class=\"list\">\n" +
-                "                <span>Patient Name</span>\n" +
+                "                <span>Doctor Name</span>\n" +
                 "                <li>Emre</li>\n" +
                 "                <li>Karakuz</li>\n" +
                 "            </ul>";
 
 
-            //request.setAttribute("value", "");
+        //request.setAttribute("value", "");
         request.setAttribute("html", html);
         request.getRequestDispatcher("upcoming_appointments.jsp").forward(request,response);
 
-        }
-
-        protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        }
     }
+
+    protected void doGet (HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
+
+    }
+}
