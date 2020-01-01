@@ -50,7 +50,7 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
         for(int i=0; i<Integer.parseInt(prevDays); i++){
             boolean isNewYear = false;
             if(month == 1 && day == 1){
-                year++;
+                year--;
                 day = 31;
                 month = 12;
                 isNewYear = true;
@@ -119,11 +119,18 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        System.out.println(doctorID);
+        System.out.println(doctorNames);
+        System.out.println(handledDateTimeDB);
+        System.out.println(handledDateTimeDB.size());
+        System.out.println(stringtimeDB.size());
         //Handling date and times
         ArrayList<String> reservedDoctors = new ArrayList<>();
         ArrayList<String> reservedDays = new ArrayList<>();
         for(int i=0;i<handledDateTimeDB.size();i++ ){
             for(int j = 0; j<stringtimeDB.size(); j++){
+                System.out.println("stDB:"+stringtimeDB.get(j));
+                System.out.println("htDB:"+handledDateTimeDB.get(i));
                 if(stringtimeDB.get(j).equals(handledDateTimeDB.get(i))) {
                     reservedDays.add(formatter2.format(datetimeDB2.get(i)));
                     reservedDoctors.add(doctorNames.get(i));
@@ -131,8 +138,6 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
             }
         }
         handler.close();
-        System.out.println(reservedDoctors);
-        System.out.println(reservedDays);
         ///////
 
         String html = "<ul class=\"list\">\n" +
