@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class setDoctorNames2Servlet extends HttpServlet {
+public class SetDoctorNames2Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //System.out.println(department);
         String department = request.getParameter("departments");

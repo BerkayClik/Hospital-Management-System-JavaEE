@@ -211,9 +211,28 @@
             showPrevMonth: true,
             showNextMonth: true,
             selectionMode: 'multiple',
-            disabledDatesRule: "tuesdays_and_fridays",
+            disabledDatesRule: "sundays",
             date: new Date(2020, 0, 1)
         }).render();
+
+        var rules = {
+            "all": {
+                "all": {
+                    "all": {
+                        "0,": "sundays"
+                    }
+                }
+            }
+        };
+
+        calendar.set("customRenderer", {
+            rules: rules,
+            filterFunction: function (date, node, rules) {
+                if (Y.Array.indexOf(rules, 'sundays') >= 0) {
+                    node.addClass("redtext");
+                }
+            }
+        });
 
         calendar.set("headerRenderer", function (curDate) {
             var ydate = Y.DataType.Date,

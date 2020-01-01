@@ -43,6 +43,7 @@ public class PreviousAppointmentsServlet extends HttpServlet {
         SimpleDateFormat formatter2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String currentDate = formatter.format(date);
+        System.out.println("Current Date: " + currentDate);
         //MEVCUT GUNDEN ONCESINI BULMA
 
         int year = Integer.parseInt(currentDate.split("-")[0]);
@@ -50,11 +51,11 @@ public class PreviousAppointmentsServlet extends HttpServlet {
         int day = Integer.parseInt(currentDate.split("-")[2]);
 
         ArrayList<String> stringtimeDB = new ArrayList<>();
-        stringtimeDB.add(currentDate.replace("-","/"));
+        stringtimeDB.add(currentDate.replace("/","-"));
         for(int i=0; i<Integer.parseInt(prevDays); i++){
             boolean isNewYear = false;
             if(month == 1 && day == 1){
-                year++;
+                year--;
                 day = 31;
                 month = 12;
                 isNewYear = true;
@@ -96,7 +97,7 @@ public class PreviousAppointmentsServlet extends HttpServlet {
         }
 
 //        System.out.println("Current Date -" + prevDays + " days:");
-//        System.out.println(stringtimeDB);
+        System.out.println(stringtimeDB);
 
         ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
         ArrayList<String> handledDateTimeDB = new ArrayList<>();

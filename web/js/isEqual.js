@@ -41,6 +41,11 @@ function setFullDay(node){
   endTimeInp.value = "23:59pm";
 }
 
+function reset(){
+  document.getElementsByClassName('start')[0].value = "";
+  document.getElementsByClassName('end')[0].value = "";
+}
+
 function setFormInput(node){
   let time = (parseInt(node.value.split(':')[0])+1) + ":" + node.value.split(':')[1];
   if(time == "12:00am"){

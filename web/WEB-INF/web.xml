@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>setApp</servlet-name>
-        <servlet-class>makeAppServlet</servlet-class>
+        <servlet-class>MakeAppServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>setApp</servlet-name>
@@ -62,7 +62,7 @@
 
     <servlet>
         <servlet-name>setOffDays</servlet-name>
-        <servlet-class>setOffDayServlet</servlet-class>
+        <servlet-class>SetOffDayServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>setOffDays</servlet-name>
@@ -71,7 +71,7 @@
 
     <servlet>
         <servlet-name>setDeptName</servlet-name>
-        <servlet-class>setDeptNamesServlet</servlet-class>
+        <servlet-class>SetDeptNamesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>setDeptName</servlet-name>
@@ -80,7 +80,7 @@
 
     <servlet>
         <servlet-name>setDocName</servlet-name>
-        <servlet-class>setDoctorNamesServlet</servlet-class>
+        <servlet-class>SetDoctorNamesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>setDocName</servlet-name>
@@ -89,7 +89,7 @@
 
     <servlet>
         <servlet-name>setDocName2</servlet-name>
-        <servlet-class>setDoctorNames2Servlet</servlet-class>
+        <servlet-class>SetDoctorNames2Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>setDocName2</servlet-name>
@@ -98,7 +98,7 @@
 
     <servlet>
         <servlet-name>getRoomNames</servlet-name>
-        <servlet-class>setRoomNamesServlet</servlet-class>
+        <servlet-class>SetRoomNamesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getRoomNames</servlet-name>
@@ -107,11 +107,11 @@
 
     <servlet>
         <servlet-name>showAvailDoctor</servlet-name>
-        <servlet-class>showRoomAvailability</servlet-class>
+        <servlet-class>ShowRoomAvailability2</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>showAvailDoctor</servlet-name>
-        <url-pattern>/doctor/showRoomAvailability</url-pattern>
+        <url-pattern>/doctor/showRoomAvailability2</url-pattern>
     </servlet-mapping>
 
     <servlet>

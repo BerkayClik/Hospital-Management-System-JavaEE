@@ -1,10 +1,10 @@
-<%--
+<!-- <%--
   Created by IntelliJ IDEA.
   User: Monster
   Date: 12/20/2019
   Time: 1:17 AM
   To change this template use File | Settings | File Templates.
---%>
+--%> -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" dir="ltr">
 <head>
@@ -37,25 +37,25 @@
     </style>
 </head>
 <body>
-<%
-    Cookie[] cookies = request.getCookies();
-    boolean success = false;
+<!-- <%
+      Cookie[] cookies = request.getCookies();
+      boolean success = false;
 
-    for (int i=0; i<cookies.length; i++) {
-        if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("2")) {
-            success = true;
-        }
-    }
-    if(success){
-%>
+      for (int i=0; i<cookies.length; i++) {
+          if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("2")) {
+              success = true;
+          }
+      }
+      if(success){
+  %> -->
 <div class="wrapper">
-    <%
+    <!-- <%
         if(request.getAttribute("errorAvail") != null){
     %>
     <script type="text/javascript">
         alert("Fill all the inputs for Show Room Availability");
     </script>
-    <%}%>
+    <%}%> -->
 
     <!-- Sidebar -->
     <nav id="sidebar">
@@ -134,7 +134,7 @@
                         </div>
                         <select class="custom-select" name="roomName" id="inputGroupSelect01">
                             <option> </option>
-                            <%
+                            <!-- <%
                                 cookies = request.getCookies();
                                 String htmlRoomNames = "";
                                 for(Cookie cookie : cookies){
@@ -150,7 +150,7 @@
                                         out.println("<option value=\"" + room + "\">" + room + "</option>");
                                     }
                                 }
-                            %>
+                            %> -->
                         </select>
                     </div>
                     <div class="input-group mb-3 md-form">
@@ -181,46 +181,53 @@
             </div>
 
 
-
-
-            <%
-                if(request.getAttribute("roomName") != null){
-            %>
-            <div style="position: relative; width: fit-content; margin: 0 auto;">
-                <%
-                    String roomName = (String) request.getAttribute("roomName");
-                    String date = (String) request.getAttribute("date");
-                    String start = (String) request.getAttribute("start");
-                    String end = (String) request.getAttribute("end");
-                    if(request.getAttribute("isAvailable") != null) {
-                        if (request.getAttribute("isAvailable").equals("true")) {
-                            out.println("<p style=\"margin-top: 2em; text-align: center; color: black\">" + roomName + " is <u>available</u> at " + date + " between " + start + " and " + end + "</p>" +
-                                    "<img src=\"../css/img/tick.png\" style=\"width: 30px; position: absolute; top: 0; right: -40px\"");
-                        } else {
-                            out.println("<p style=\"margin-top: 2em; text-align: center; color: black\">" + roomName + " is not <u>available</u> at " + date + " between " + start + " and " + end + "</p>" +
-                                    "<img src=\"../css/img/cross.png\" style=\"width: 30px; position: absolute; top: 0; right: -40px\"");
-                        }
-                    }
-                %>
-            </div>
             <div class="reserve">
                 <h4 style="text-align: center">Reserve Room</h4>
-                <%
-                out.println("<p style=\"margin-top: 2em; text-align: center; color: black\">" + "Click the button to reserve " + roomName + " after entering patient's email ");
-                %>
-                <form class="" action="reserveRoom" method="post" style="">
-                    <div class="input-group mb-3" style="margin: 0 auto; width: 80%;">
+                <form class="" action="reserveRoom" method="post" style="width: 40%; margin:0 auto;">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Room Number:  </label>
+                        </div>
+                        <select class="custom-select" name="roomName" id="inputGroupSelect01">
+                            <option> </option>
+                            <!-- <%
+                                String[] roomNames = htmlRoomNames.split("%2F");
+                                for(String room : roomNames){
+                                    out.println("<option value=\"" + room + "\">" + room + "</option>");
+                                }
+                            %> -->
+                        </select>
+                    </div>
+                    <div class="input-group mb-3 md-form">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Date:  </label>
+                        </div>
+                        <input type="date" name="date" id="inputMDEx" class="custom-select form-control">
+                    </div>
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Patient E-mail: </span>
                         </div>
                         <input type="text" name="patientEmail" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
+                    <div style="margin-bottom: 0.5rem;display: flex;justify-content: space-evenly;">
+                        <div style="">
+                            <span style="font-family: sans-serif; text-decoration: underline">Start Time</span>
+                        </div>
+                        <div style="">
+                            <span style="font-family: sans-serif;; text-decoration: underline">End Time</span>
+                        </div>
+                    </div>
+                    <div style="overflow: auto; margin-bottom: 1.5rem; position: relative;">
+                        <p id="datepairExample2" style="display: flex; justify-content: space-evenly">
+                            <input type="text" name="start" class="time start" onchange="isEqual2()"/>
+                            <input type="text" name="end" class="time end" onchange="isEqual2()"/>
+                        </p>
+                        <button type="button" class="btn btn-outline-secondary" style="position: absolute; right: 0px; top: 0px; box-shadow:none" onclick="setFullDay(this)">Full Day</button>
+                    </div>
                     <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Reserve</button>
                 </form>
             </div>
-            <%
-                }
-            %>
         </div>
     </div>
 

@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class makeAppServlet extends HttpServlet {
+public class MakeAppServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String date = request.getParameter("date");
         String doctor = request.getParameter("doctor");

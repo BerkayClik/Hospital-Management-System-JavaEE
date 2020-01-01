@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class showRoomAvailability extends HttpServlet {
+public class ShowRoomAvailability2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String roomNumber = request.getParameter("roomName");
         String date = request.getParameter("date").toString() ;
@@ -150,7 +150,5 @@ public class showRoomAvailability extends HttpServlet {
 
         }
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
 }

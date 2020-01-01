@@ -27,7 +27,6 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
             Statement stmt = handler.getConn().createStatement();
             ResultSet rs = stmt.executeQuery("select u_id from cs202.Users where email ='"+ userEmail +"'");
             while(rs.next()){
-
                 userID = rs.getInt(1);
             }
         }
@@ -50,7 +49,7 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
         int day = Integer.parseInt(currentDate.split("-")[2]);
 
         ArrayList<String> stringtimeDB = new ArrayList<>();
-        stringtimeDB.add(currentDate.replace("-","/"));
+        stringtimeDB.add(currentDate.replace("/","-"));
         for(int i=0; i<Integer.parseInt(prevDays); i++){
             boolean isNewYear = false;
             if(month == 1 && day == 1){
@@ -95,8 +94,8 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
             }
         }
 
-//        System.out.println("Current Date -" + prevDays + " days:");
-//        System.out.println(stringtimeDB);
+        System.out.println("Current Date -" + prevDays + " days:");
+        System.out.println(stringtimeDB);
 
         ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
         ArrayList<String> handledDateTimeDB = new ArrayList<>();
@@ -111,37 +110,22 @@ public class PreviousAppointmentsServlet2 extends HttpServlet {
             e.printStackTrace();
         }
         //System.out.println("This is the role id: "+role);
-        if (role == 2){
-            try {
-                Statement stmt = handler.getConn().createStatement();
-                ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
-                while(rs.next()){
-                    datetimeDB2.add(rs.getTimestamp(1));
-                    handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
-                }
+        try {
+            Statement stmt = handler.getConn().createStatement();
+            ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='"+ userID + "'");
+            while(rs.next()){
+                datetimeDB2.add(rs.getTimestamp(1));
+                handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
             }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (role == 1){
-                try {
-                    Statement stmt = handler.getConn().createStatement();
-                    ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='"+ userID + "'");
-                    while(rs.next()){
-                        datetimeDB2.add(rs.getTimestamp(1));
-                        handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
         }
-//        System.out.println("\nAll appointments of Doctor ID " + userID + ":");
-//        System.out.println(datetimeDB2);
-//        System.out.println("handleDateTimeDB: ");
-//        System.out.println(handledDateTimeDB);
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nAll appointments of Patient ID " + userID + ":");
+        System.out.println(datetimeDB2);
+        System.out.println("handleDateTimeDB: ");
+        System.out.println(handledDateTimeDB);
 
         ArrayList<String> reservedDays = new ArrayList<>();
         for(int i=0;i<handledDateTimeDB.size();i++ ){

@@ -65,7 +65,7 @@
                 selectedDate = cookie.getValue();
             }
         }
-
+        //System.out.println("Selected Date: " + selectedDate);
 
     %>
 
@@ -225,8 +225,8 @@
                                 }
                             %>
                         </select>
-                        <input type="text" name="dateInForm"  id="dateInForm" style="display: none" value=<%=selectedDate%>>
-                        <button type="submit" style="display: none">S</button>
+                        <input type="text" name="dateInForm"  id="dateInForm" style="" value=<%=selectedDate%>>
+                        <button type="submit" style="">S</button>
                     </form>
                 </div>
                 <div class="selectedDoctor">
@@ -255,9 +255,9 @@
                 </div>
 
                 <form action="makeAppointment" method="post">
-                    <input type="text" name="date" id="trDate" style="display:none">
-                    <input type="text" name="department" id="department" style="display:none" value=<%=selectedDept%>>
-                    <input type="text" name="doctor" id="doctor" style="display:none" value=<%=selectedDoctor%>>
+                    <input type="text" name="date" id="trDate" style="">
+                    <input type="text" name="department" id="department" style="" value=<%=selectedDept%>>
+                    <input type="text" name="doctor" id="doctor" style="" value=<%=selectedDoctor%>>
                     <div style="">
                         <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
                     </div>
@@ -315,7 +315,27 @@
             width:'340px',
             showPrevMonth: true,
             showNextMonth: true,
+            disabledDatesRule: "sundays",
             date: new Date(2020,00,1)}).render();
+
+        var rules = {
+            "all": {
+                "all": {
+                    "all": {
+                        "0,": "sundays"
+                    }
+                }
+            }
+        };
+
+        calendar.set("customRenderer", {
+            rules: rules,
+            filterFunction: function (date, node, rules) {
+                if (Y.Array.indexOf(rules, 'sundays') >= 0) {
+                    node.addClass("redtext");
+                }
+            }
+        });
 
 
         var dtdate = Y.DataType.Date;
@@ -331,10 +351,13 @@
             }
             else{
                 Y.one("#selecteddate").setHTML(tr_date);
-                if(document.getElementById('resTime') == null)
+                if(document.getElementById('resTime') == null){
                     document.getElementById("trDate").value = tr_date;
+                    document.getElementById('dateInForm').value = tr_date;
+                }
                 else{
                     document.getElementById("trDate").value = tr_date;
+                    document.getElementById('dateInForm').value = tr_date;
                     document.getElementById('doctor').value = "";
                     document.getElementsByClassName('rightContainer')[0].innerHTML = "";
                     alert("Click SHOW button to see the available times for the day you have just selected");

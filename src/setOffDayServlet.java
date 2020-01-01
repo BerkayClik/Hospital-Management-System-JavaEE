@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class setOffDayServlet extends HttpServlet {
+public class SetOffDayServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String days = request.getParameter("days");
         String times = request.getParameter("times");

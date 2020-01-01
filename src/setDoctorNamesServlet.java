@@ -11,12 +11,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class setDoctorNamesServlet extends HttpServlet {
+public class SetDoctorNamesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //System.out.println(department);
         String department = request.getParameter("departments");
         String date = request.getParameter("dateInForm");
-
+        //System.out.println("date ın setDoctorNamesServlet: " + date);
         DB_Handler handler = new DB_Handler();
         handler.init();
 
@@ -59,18 +59,6 @@ public class setDoctorNamesServlet extends HttpServlet {
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doGet");
 
-        String department = request.getParameter("departments");
-        String date = request.getParameter("dateInForm");
-
-        System.out.println(department);
-        System.out.println(date);
-
-        request.setAttribute("selectedDept", department);
-        request.setAttribute("dateInForm", date);
-
-
-        request.getRequestDispatcher("makeAppointment.jsp").forward(request, response);
     }
 }

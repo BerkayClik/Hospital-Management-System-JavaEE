@@ -117,7 +117,7 @@
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li class="active">
-                            <a href="">Make Appointment</a>
+                            <a href="makeAppointment.jsp">Make Appointment</a>
                         </li>
                         <li>
                             <a href="upcoming_appointments.jsp">Upcoming Appointments</a>
@@ -346,6 +346,7 @@
             width:'340px',
             showPrevMonth: true,
             showNextMonth: true,
+            disabledDatesRule: "sundays",
             date: new Date(2020,00,1)}).render();
 
         var calendar2 = new Y.Calendar({
@@ -353,7 +354,36 @@
             width:'340px',
             showPrevMonth: true,
             showNextMonth: true,
+            disabledDatesRule: "sundays",
             date: new Date(2020,00,1)}).render();
+
+        var rules = {
+            "all": {
+                "all": {
+                    "all": {
+                        "0,0": "sundays",
+                    }
+                }
+            }
+        };
+
+        calendar.set("customRenderer", {
+            rules: rules,
+            filterFunction: function (date, node, rules) {
+                if (Y.Array.indexOf(rules, 'sundays') >= 0) {
+                    node.addClass("redtext");
+                }
+            }
+        });
+
+        calendar2.set("customRenderer", {
+            rules: rules,
+            filterFunction: function (date, node, rules) {
+                if (Y.Array.indexOf(rules, 'sundays') >= 0) {
+                    node.addClass("redtext");
+                }
+            }
+        });
 
         var dtdate = Y.DataType.Date;
 
