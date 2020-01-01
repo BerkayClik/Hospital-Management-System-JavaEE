@@ -27,7 +27,6 @@ public class PreviousAppointmentsServlet extends HttpServlet {
             Statement stmt = handler.getConn().createStatement();
             ResultSet rs = stmt.executeQuery("select u_id from cs202.Users where email ='"+ userEmail +"'");
             while(rs.next()){
-
                 userID = rs.getInt(1);
             }
         }
@@ -35,15 +34,10 @@ public class PreviousAppointmentsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
-        System.out.println("User Email: " + userEmail);
-        System.out.println("Past "  + prevDays + " days ");
-
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatter2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String currentDate = formatter.format(date);
-        System.out.println("Current Date: " + currentDate);
         //MEVCUT GUNDEN ONCESINI BULMA
 
         int year = Integer.parseInt(currentDate.split("-")[0]);
@@ -96,74 +90,54 @@ public class PreviousAppointmentsServlet extends HttpServlet {
             }
         }
 
-//        System.out.println("Current Date -" + prevDays + " days:");
-        System.out.println(stringtimeDB);
-
+        //database doktorun randevusu olan günleri çekme
         ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
         ArrayList<String> handledDateTimeDB = new ArrayList<>();
-        int role = 0;
+        ArrayList<Integer> patientID = new ArrayList<>();
         try {
             Statement stmt = handler.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("select role_id from users where u_id = "+userID);
-            rs.next();
-            role = rs.getInt(1);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        //System.out.println("This is the role id: "+role);
-        if (role == 2){
-        try {
-            Statement stmt = handler.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where d_id ='"+ userID + "'");
+            ResultSet rs = stmt.executeQuery("select datetime,p_id from cs202.Appointments where d_id ='"+ userID + "'");
             while(rs.next()){
                 datetimeDB2.add(rs.getTimestamp(1));
+                patientID.add(rs.getInt(2));
                 handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        if (role == 1){
+        //Getting Patient Names From Patient ID
+        ArrayList<String> patientNames = new ArrayList<>();
+        for(int i = 0;i<patientID.size();i++){
             try {
                 Statement stmt = handler.getConn().createStatement();
-                ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='"+ userID + "'");
-                while(rs.next()){
-                    datetimeDB2.add(rs.getTimestamp(1));
-                    handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
+                ResultSet rs = stmt.executeQuery("select name from cs202.Users where u_id =" + patientID.get(i)+"");
+                while (rs.next()) {
+                    patientNames.add(rs.getString(1));
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-        }
-//        System.out.println("\nAll appointments of Doctor ID " + userID + ":");
-//        System.out.println(datetimeDB2);
-//        System.out.println("handleDateTimeDB: ");
-//        System.out.println(handledDateTimeDB);
-
+        //Handling date and times
+        ArrayList<String> reservedPatients = new ArrayList<>();
         ArrayList<String> reservedDays = new ArrayList<>();
         for(int i=0;i<handledDateTimeDB.size();i++ ){
             for(int j = 0; j<stringtimeDB.size(); j++){
-                //System.out.println("This is stringtimedb: "+stringtimeDB.get(j));
-                //System.out.println("This is handleddatetimedb: "+handledDateTimeDB.get(i));
                 if(stringtimeDB.get(j).equals(handledDateTimeDB.get(i))) {
                     reservedDays.add(formatter2.format(datetimeDB2.get(i)));
+                    reservedPatients.add(patientNames.get(i));
                 }
             }
-
         }
+        handler.close();
         ///////
-        System.out.println(reservedDays);
 
         String html = "<ul class=\"list\">\n" +
                 "                <span>Date</span>";
 
         ArrayList<String> Date = new ArrayList<>();
         ArrayList<String> time = new ArrayList<>();
-        String pName;
 
         for(int i=0; i<reservedDays.size(); i++){
             Date.add(reservedDays.get(i).split(" ")[0].split("-")[2] +
@@ -188,13 +162,14 @@ public class PreviousAppointmentsServlet extends HttpServlet {
 
         html += "</ul>\n" +
                 "            <ul class=\"list\">\n" +
-                "                <span>Patient Name</span>\n" +
-                "                <li>Emre</li>\n" +
-                "                <li>Karakuz</li>\n" +
-                "            </ul>";
+                "                <span>Patient Name</span>\n";
+        for(int i=0; i<reservedPatients.size();i++){
+            html += "<li>" + reservedPatients.get(i) + "</li>";
+
+        }
+        html += "</ul>";
 
 
-        //request.setAttribute("value", "");
         request.setAttribute("html", html);
         request.getRequestDispatcher("previous_appointments.jsp").forward(request,response);
 

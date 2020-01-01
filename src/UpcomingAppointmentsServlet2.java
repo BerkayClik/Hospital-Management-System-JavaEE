@@ -21,8 +21,6 @@ public class UpcomingAppointmentsServlet2 extends HttpServlet {
         }
         String inNextDays = request.getParameter("days");
 
-//        System.out.println("User Email: " + userEmail);
-//        System.out.println("In next days: " + inNextDays);
 
         DB_Handler handler = new DB_Handler();
         handler.init();
@@ -81,77 +79,51 @@ public class UpcomingAppointmentsServlet2 extends HttpServlet {
                     stringtimeDB.add(year + "-" + month + "-" + day);
             }
         }
-
-        System.out.println("Current Date +" + inNextDays + " days:");
-        System.out.println(stringtimeDB);
-
-
-        ///stringtimeDB arraylistindeki günler string, datetime a çevrilmesi lazım
-        ///////////////
-        //Databaseten doktorun randevusu olan günleri çekme
+        //Databaseten hastanın randevusu olsan günleri çekme
         ArrayList<Timestamp> datetimeDB2 = new ArrayList<>();
         ArrayList<String> handledDateTimeDB = new ArrayList<>();
-        int role = 0;
+        ArrayList<Integer> doctorID = new ArrayList<>();
         try {
             Statement stmt = handler.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("select role_id from users where u_id = " + userID);
-            rs.next();
-            role = rs.getInt(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //System.out.println("This is the role id: " + role);
-        try {
-            Statement stmt = handler.getConn().createStatement();
-            ResultSet rs = stmt.executeQuery("select datetime from cs202.Appointments where p_id ='" + userID + "'");
+            ResultSet rs = stmt.executeQuery("select datetime,d_id from cs202.Appointments where p_id ='" + userID + "'");
             while (rs.next()) {
                 datetimeDB2.add(rs.getTimestamp(1));
+                doctorID.add(rs.getInt(2));
                 handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("\nAll appointments of PatientID " + userID + ":");
-        System.out.println(datetimeDB2);
-        System.out.println("handleDateTimeDB: ");
-        System.out.println(handledDateTimeDB);
-
+        //Getting Doctor Names From Patient ID
+        ArrayList<String> doctorNames = new ArrayList<>();
+        for(int i = 0;i<doctorID.size();i++){
+            try {
+                Statement stmt = handler.getConn().createStatement();
+                ResultSet rs = stmt.executeQuery("select name from cs202.Users where u_id =" + doctorID.get(i)+"");
+                while (rs.next()) {
+                    doctorNames.add(rs.getString(1));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //Handling Date and Names
+        ArrayList<String> reservedDoctors = new ArrayList<>();
         ArrayList<String> reservedDays = new ArrayList<>();
         for (int i = 0; i < handledDateTimeDB.size(); i++) {
             for (int j = 0; j < stringtimeDB.size(); j++) {
-                //System.out.println("This is stringtimedb: " + stringtimeDB.get(j));
-                //System.out.println("This is handleddatetimedb: " + handledDateTimeDB.get(i));
-
                 if (stringtimeDB.get(j).equals(handledDateTimeDB.get(i))) {
                     reservedDays.add(formatter2.format(datetimeDB2.get(i)));
+                    reservedDoctors.add(doctorNames.get(i));
                 }
             }
 
         }
+        handler.close();
         ///////
-        System.out.println(reservedDays);
-
         String html = "<ul class=\"list\">\n" +
                 "                <span>Date</span>";
 
-        /*
-        <ul class="list">
-            <span>Date</span>
-            <li>01-01-2020</li>
-            <li>01-01-2020</li>
-        </ul>
-        <ul class="list">
-            <span>Time</span>
-            <li>09:00</li>
-            <li>09:00</li>
-        </ul>
-        <ul class="list">
-            <span>Patient Name</span>
-            <li>Emre</li>
-            <li>Karakuz</li>
-        </ul>
-         */
 
         ArrayList<String> Date = new ArrayList<>();
         ArrayList<String> time = new ArrayList<>();
@@ -166,39 +138,6 @@ public class UpcomingAppointmentsServlet2 extends HttpServlet {
             time.add(reservedDays.get(i).split(" ")[1]);
         }
 
-        /*DOCTORNAMES START*/
-        ArrayList<String> doctorID  = new ArrayList<String>();
-        if (role == 1){
-            try {
-                Statement stmt = handler.getConn().createStatement();
-                ResultSet rs = stmt.executeQuery("select datetime,d_id from cs202.Appointments where p_id ='"+ userID + "'");
-                while(rs.next()){
-                    datetimeDB2.add(rs.getTimestamp(1));
-                    handledDateTimeDB.add(formatter.format(rs.getTimestamp(1)));
-                    doctorID.add(rs.getString(2));
-                }
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        ArrayList<String> doctorNames = new ArrayList<>();
-        for(Object a:doctorID){
-            try {
-                Statement stmt = handler.getConn().createStatement();
-                ResultSet rs = stmt.executeQuery("select name from users where u_id ='"+a+"'");
-                while (rs.next()){
-                    doctorNames.add(rs.getString(1));
-
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println(doctorNames);
-
-        /*DOCTORNAMES END*/
 
         for(int i=0; i<reservedDays.size(); i++){
             html += "<li>" + Date.get(i) + "</li>";
@@ -210,14 +149,13 @@ public class UpcomingAppointmentsServlet2 extends HttpServlet {
         for(int i=0; i<reservedDays.size(); i++){
             html += "<li>" + time.get(i) + "</li>";
         }
-
         html += "</ul>\n" +
                 "            <ul class=\"list\">\n" +
-                "                <span>Doctor Name</span>\n" +
-                "                <li>Emre</li>\n" +
-                "                <li>Karakuz</li>\n" +
-                "            </ul>";
-
+                "                <span>Doctor Name</span>\n";
+        for(int i=0; i<reservedDoctors.size();i++){
+            html += "<li>" + reservedDoctors.get(i) + "</li>";
+        }
+        html += "</ul>";
 
         //request.setAttribute("value", "");
         request.setAttribute("html", html);
