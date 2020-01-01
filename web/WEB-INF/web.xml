@@ -169,11 +169,29 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>previousAppDoctor</servlet-name>
-        <servlet-class>PreviousAppointmentsServlet</servlet-class>
-    </servlet>
+    <servlet-name>previousAppDoctor</servlet-name>
+    <servlet-class>PreviousAppointmentsServlet</servlet-class>
+</servlet>
     <servlet-mapping>
         <servlet-name>previousAppDoctor</servlet-name>
         <url-pattern>/doctor/previousApp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>statistics</servlet-name>
+        <servlet-class>AdminStatisticsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>statistics</servlet-name>
+        <url-pattern>/admin/statistics</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userStats</servlet-name>
+        <servlet-class>UserStatsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userStats</servlet-name>
+        <url-pattern>/admin/userStats</url-pattern>
     </servlet-mapping>
 </web-app>

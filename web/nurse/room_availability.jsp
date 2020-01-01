@@ -140,7 +140,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text">Date:  </label>
                         </div>
-                        <input type="date" name="date" id="inputMDEx" class="custom-select">
+                        <input type="date" name="date" id="inputMDEx" class="custom-select" onchange="check()">
                     </div>
                     <div style="margin-bottom: 0.5rem;display: flex;justify-content: space-evenly;">
                         <div style="">
@@ -204,6 +204,17 @@
         });
 
     });
+    let delay = 300;
+    setTimeout(function() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('inputMDEx').value = yyyy + "-" + mm + "-" + dd;
+
+    }, delay);
+
 
 </script>
 <script src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
@@ -220,6 +231,8 @@
     });
 
     $('#datepairExample').datepair();
+
+
 </script>
 
 </body>

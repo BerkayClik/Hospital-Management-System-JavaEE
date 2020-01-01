@@ -157,7 +157,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text">Date:  </label>
                         </div>
-                        <input type="date" name="date" id="inputMDEx" class="custom-select">
+                        <input type="date" name="date" id="inputMDEx" class="custom-select" onchange="check()">
                     </div>
                     <div style="margin-bottom: 0.5rem;display: flex;justify-content: space-evenly;">
                         <div style="">
@@ -215,10 +215,10 @@
                         </div>
                         <input type="text" name="patientEmail" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
-                    <input type="text" name="roomName" class="form-control" value=<%= %>>
-                    <input type="text" name="date" class="form-control" value=<%= %>>
-                    <input type="text" name="start" class="form-control" value=<%= %>>
-                    <input type="text" name="end" class="form-control" value=<%= %>>
+                    <input type="text" name="roomName" class="form-control" value=<%=roomName %>>
+                    <input type="text" name="date" class="form-control" value=<%=date %>>
+                    <input type="text" name="start" class="form-control" value=<%=start %>>
+                    <input type="text" name="end" class="form-control" value=<%=end %>>
                     <button type="submit" class="btn btn-outline-secondary" style="display: block; margin: 0 auto;">Reserve</button>
                 </form>
             </div>
@@ -253,7 +253,20 @@
                 bar.querySelector('span').innerText = "Show";
         });
 
+
     });
+    let delay = 300;
+    setTimeout(function() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById('inputMDEx').value = yyyy + "-" + mm + "-" + dd;
+
+    }, delay);
+
+
 
 </script>
 <script src="http://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>

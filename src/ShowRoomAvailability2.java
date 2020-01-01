@@ -16,7 +16,7 @@ import java.util.Locale;
 public class ShowRoomAvailability2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String roomNumber = request.getParameter("roomName");
-        String date = request.getParameter("date").toString() ;
+        String date = request.getParameter("date");
         String start = request.getParameter("start");
         String end = request.getParameter("end");
         String dbDate = "";
@@ -32,7 +32,9 @@ public class ShowRoomAvailability2 extends HttpServlet {
             }
         }
 
-        if(roomNumber.equals("") || start.equals("") || end.equals("")){
+        System.out.println(date);
+
+        if(roomNumber.equals("") || start.equals("") || end.equals("") || date.equals("")){
             request.setAttribute("errorAvail", "true");
             if(user.equals("doctor"))
                 request.getRequestDispatcher("reserve_room.jsp").forward(request,response);
@@ -60,7 +62,7 @@ public class ShowRoomAvailability2 extends HttpServlet {
                 e.printStackTrace();
             }
             //kullanıcın girdiği end time -1 dakika
-            String userEnd=dbDate + " " + (Integer.parseInt(end.substring(0,2))-1) + ":58";//10:00
+            String userEnd=dbDate + " " + (Integer.parseInt(end.substring(0,2))) + ":58";//10:00
             if(userEnd.length() == 15)//09:59
                 userEnd = userEnd.substring(0,11) + "0" + userEnd.substring(11);
             System.out.println(userEnd);
@@ -119,7 +121,16 @@ public class ShowRoomAvailability2 extends HttpServlet {
                     while(rs.next()){
                         successList.add(rs.getInt(1));
                     }
-                    userStart = userStart.substring(0,11) + (Integer.parseInt(userStart.substring(11,13))+1) + userStart.substring(13);
+                    //System.out.println("UserStart: " + userStart);
+                    String time = userStart.substring(11).split(":")[0];
+                    int hours = Integer.parseInt(time);
+                    if(hours+1 < 10){
+                        userStart = userStart.substring(0,11) + (hours+1) + ":01";
+                    }
+                    else{
+                        userStart = userStart.substring(0,11) + (Integer.parseInt(userStart.split(" ")[1].split(":")[0])+1) + ":01";
+                    }
+
                 }
             }
             catch (Exception e){

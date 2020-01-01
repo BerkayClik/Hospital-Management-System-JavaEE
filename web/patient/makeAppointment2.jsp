@@ -109,14 +109,14 @@
 
             <ul class="list-unstyled components">
                 <p>Welcome</p>
-                <li>
+                <li class="active">
                     <a href="home.jsp">Home</a>
 
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li class="active">
+                        <li>
                             <a href="makeAppointment.jsp">Make Appointment</a>
                         </li>
                         <li>
@@ -124,6 +124,9 @@
                         </li>
                         <li>
                             <a href="previous_appointments.jsp">Previous Appointments</a>
+                        </li>
+                        <li>
+                            <a href="filter_appointment.jsp">Filter Appointments</a>
                         </li>
                     </ul>
                 </li>
@@ -414,11 +417,15 @@
                 document.getElementById('selecteddate').innerText = document.getElementById('selecteddate').innerText.substring(0,10);
             }
             else{
-                document.getElementById('selecteddate').innerText = document.getElementById('selecteddate').innerText.substring(0,10) + "/" + tr_date;
-                document.getElementById("trDate").value = document.getElementById("trDate").value.split("/")[0] + "/" + tr_date;
-                document.getElementById('dateInForm').value = document.getElementById("trDate").value;
+                if(document.getElementById('selecteddate').innerText.length == 10 || document.getElementById('selecteddate').innerText.length == 21) {
+                    document.getElementById('selecteddate').innerText = document.getElementById('selecteddate').innerText.substring(0, 10) + "/" + tr_date;
+                    document.getElementById("trDate").value = document.getElementById("trDate").value.split("/")[0] + "/" + tr_date;
+                    document.getElementById('dateInForm').value = document.getElementById("trDate").value;
+                }
+                else{
+                    alert("Select start date");
+                }
             }
-
         });
 
         function isBigger(date){

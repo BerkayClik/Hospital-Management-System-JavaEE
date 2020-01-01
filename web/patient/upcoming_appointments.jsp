@@ -60,21 +60,24 @@
 
             <ul class="list-unstyled components">
                 <p>Welcome</p>
-                <li>
+                <li class="active">
                     <a href="home.jsp">Home</a>
 
                 </li>
-                <li class="active">
+                <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="makeAppointment.jsp">Make Appointment</a>
                         </li>
                         <li>
-                            <a href="">Upcoming Appointments</a>
+                            <a href="upcoming_appointments.jsp">Upcoming Appointments</a>
                         </li>
                         <li>
                             <a href="previous_appointments.jsp">Previous Appointments</a>
+                        </li>
+                        <li>
+                            <a href="filter_appointment.jsp">Filter Appointments</a>
                         </li>
                     </ul>
                 </li>

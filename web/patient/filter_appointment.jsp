@@ -1,23 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: Monster
-  Date: 12/20/2019
-  Time: 12:25 PM
+  Date: 12/18/2019
+  Time: 12:32 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Future Appointments</title>
-
+    <title>Home Page</title>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="../css/apps.css">
-    <link rel="stylesheet" href="../css/inputspinner.css">
-    <link rel="stylesheet" href="../css/handle-counter.css">
+    <link rel="stylesheet" href="../css/home.css">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -27,6 +23,7 @@
             content: "";
         }
     </style>
+
 </head>
 <body>
 <%
@@ -34,13 +31,14 @@
     boolean success = false;
 
     for (int i=0; i<cookies.length; i++) {
-        if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("2")) {
+        if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("1")) {
             success = true;
         }
     }
     if(success){
 %>
 <div class="wrapper">
+
 
     <!-- Sidebar -->
     <nav id="sidebar">
@@ -51,32 +49,24 @@
 
             <ul class="list-unstyled components">
                 <p>Welcome</p>
-                <li>
+                <li class="active">
                     <a href="home.jsp">Home</a>
 
                 </li>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View Appointments</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li class="active">
-                            <a href="">Future Appointments</a>
-                        </li>
-                        <li>
-                            <a href="previous_appointments.jsp">Past Appointments</a>
-                        </li>
-                    </ul>
-                </li>
                 <li>
-                    <a href="reserve_room.jsp">Reserve Room</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Off-Day</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointment</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="setOffDays.jsp">Set Off-Day</a>
+                            <a href="makeAppointment.jsp">Make Appointment</a>
                         </li>
                         <li>
-                            <a href="showOffDays.jsp">Show Off-Days</a>
+                            <a href="upcoming_appointments.jsp">Upcoming Appointments</a>
+                        </li>
+                        <li>
+                            <a href="previous_appointments.jsp">Previous Appointments</a>
+                        </li>
+                        <li>
+                            <a href="filter_appointment.jsp">Filter Appointments</a>
                         </li>
                     </ul>
                 </li>
@@ -99,38 +89,14 @@
     <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                     <span>Hide</span>
                 </button>
-
             </div>
         </nav>
 
-        <div class="main-content">
-            <div class="main-form">
-                <div class="formDiv">
-                    <span>Upcoming appointments in (days): </span>
-                    <div class="handle-counter" id="handleCounter">
-                        <button class="counter-minus btn btn-primary">-</button>
-                        <input type="text" value="1" style="height: 38px; padding: 6px 12px;">
-                        <button class="counter-plus btn btn-primary">+</button>
-                    </div>
-                </div>
-            </div>
-            <form class="" action="upcomingApp" method="post" style="width: 30%; margin: 20px auto;">
-                <input type="text" name="days" value="1" style="display: none;">
-                <button type="submit" class="btn btn-primary" aria-pressed="false" style="display: block; margin-top: 7px;">Show</button>
-            </form>
-        </div>
 
-        <div class="result" style="display: flex; justify-content: space-evenly;">
-        <%
-            if(request.getAttribute("html") != null)
-                out.println(request.getAttribute("html"));
-        %>
-         </div>
 
     </div>
 </div>
@@ -144,9 +110,9 @@
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-
 <script type="text/javascript">
     $(document).ready(function () {
+
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
             let bar = document.getElementById('sidebarCollapse');
@@ -159,34 +125,7 @@
         });
 
     });
-
 </script>
-
-<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="../js/handleCounter.js"></script>
-<script>
-    $(function ($) {
-        var options = {
-            minimum: 1,
-            maximize: null,
-            onChange: valChanged,
-            onMinimum: function(e) {
-                console.log('reached minimum: '+e)
-            },
-            onMaximize: function(e) {
-                console.log('reached maximize'+e)
-            }
-        }
-        $('#handleCounter').handleCounter(options)
-    })
-    function valChanged(d) {
-        set();
-    }
-
-</script>
-<script src="../js/changeNumber.js"></script>
-
-
 
 </body>
 </html>

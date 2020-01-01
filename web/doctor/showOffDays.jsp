@@ -102,13 +102,14 @@
                 </button>
             </div>
         </nav>
-
-        <%
-            if(request.getAttribute("html") == null)
-                response.sendRedirect("showOD");
-            else
-                out.println(request.getAttribute("html"));
-        %>
+        <div class="result" style="display: flex; justify-content: space-evenly;">
+            <%
+                if(request.getAttribute("html") == null)
+                    response.sendRedirect("showOD");
+                else
+                    out.println(request.getAttribute("html"));
+            %>
+        </div>
     </div>
 
 </div>

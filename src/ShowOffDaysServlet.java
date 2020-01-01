@@ -48,7 +48,7 @@ public class ShowOffDaysServlet extends HttpServlet {
             ResultSet rs = stmt.executeQuery("select start,end from cs202.OffDays where d_id =" + doctorID);
             while(rs.next()){
                 offDaysStart.add(rs.getTimestamp(1));
-                offDaysEnd.add(rs.getTimestamp(1));
+                offDaysEnd.add(rs.getTimestamp(2));
             }
         }
         catch (Exception e){
@@ -76,5 +76,20 @@ public class ShowOffDaysServlet extends HttpServlet {
             </tr>
         </table>
          */
+
+        String html = "<table style=\"width:70%; margin: 0 auto; border-collapse: separate; border-spacing: 0 1em;\">\n" +
+                "            <tr>\n" +
+                "                <th>Starts</th>\n" +
+                "                <th>Ends</th>\n" +
+                "            </tr>\n";
+
+        for(int i=0; i<offDaysStart.size(); i++){
+            html += "<tr><td>" + offDaysStart.get(i).toString().substring(0,16) + "</td>" ;
+            html += "<td>" + offDaysEnd.get(i).toString().substring(0,16) + "</td></tr>" ;
+        }
+        html += "</table>";
+
+        request.setAttribute("html", html);
+        request.getRequestDispatcher("showOffDays.jsp").forward(request,response);
     }
 }

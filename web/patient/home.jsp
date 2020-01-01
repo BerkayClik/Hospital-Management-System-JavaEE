@@ -65,6 +65,9 @@
                         <li>
                             <a href="previous_appointments.jsp">Previous Appointments</a>
                         </li>
+                        <li>
+                            <a href="filter_appointment.jsp">Filter Appointments</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

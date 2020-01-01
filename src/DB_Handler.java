@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class DB_Handler {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/cs202";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/cs202?autoReconnect=true&useSSL=false";
     private static final String USER = "root";
     private static final String PASS = "13212karE";
 

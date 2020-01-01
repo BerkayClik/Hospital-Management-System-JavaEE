@@ -62,3 +62,25 @@ function setFormInput(node){
 function setFormInput2(node){
   document.getElementById('times').value = document.getElementById('times').value.split('-')[0] + "-" + node.value;
 }
+
+function check() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    var date = document.getElementById('inputMDEx').value;
+    if (date.length==10) {
+
+        var d1 = Date.parse(date);
+        var d2 = Date.parse(today);
+        if (d1 <= d2) {
+            document.getElementById('inputMDEx').value = yyyy + "-" + mm + "-" + dd;
+            alert("Today is: " + today + " Please select a date in the future");
+        }
+        console.log("today= " + today);
+        console.log("date = " + date);
+    }
+
+}
