@@ -112,11 +112,18 @@
         </div>
 
         <form action="statistics" method="post">
-            <input type="text" name="date" id="trDate" style="">
+            <input type="text" name="date" id="trDate" style="display: none">
             <div style="">
                 <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
             </div>
         </form>
+
+        <div>
+            <%
+                if(request.getAttribute("html") != null)
+                    out.println(request.getAttribute("html"));
+            %>
+        </div>
 
     </div>
 </div>
@@ -286,7 +293,7 @@
                     isBefore = true;
                 }
                 else{
-                    if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
+                    if(parseInt(selectedDate.split("-")[0]) < parseInt(today.split("-")[0])
                         && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
                         isBefore = true;
                     }

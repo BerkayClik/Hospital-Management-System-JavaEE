@@ -399,7 +399,7 @@
                         isBefore = true;
                     }
                     else{
-                        if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
+                        if(parseInt(selectedDate.split("-")[0]) < parseInt(today.split("-")[0])
                             && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
                             isBefore = true;
                         }

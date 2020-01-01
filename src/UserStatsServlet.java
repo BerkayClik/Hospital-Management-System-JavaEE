@@ -33,5 +33,44 @@ public class UserStatsServlet extends HttpServlet {
         System.out.println(names);
         System.out.println(roleNames);
         System.out.println(emails);
+
+
+         /*
+        <table style="width:70%; margin: 0 auto; border-collapse: separate; border-spacing: 0 1em;">
+            <tr>
+                <th>User Name</th>
+                <th>Role</th>
+                <th>E-mail</th>
+            </tr>
+            <tr>
+                <td>01-01-2020</td>
+                <td>09:00:00</td>
+            </tr>
+            <tr>
+                <td>01-02-2020</td>
+                <td>16:00:00</td>
+            </tr>
+        </table>
+         */
+
+         String html ="<p style=\"color: black; text-align: center;\">Current Users in DB</p>" +
+                 "<div>" +
+                 "<table style=\"width:70%; margin: 0 auto; border-collapse: separate; border-spacing: 0 1em;\">\n" +
+                 "            <tr>\n" +
+                 "                <th>User Name</th>\n" +
+                 "                <th style=\"width: 30%\">Role</th>\n" +
+                 "                <th style=\"width: 30%\">E-mail</th>\n" +
+                 "            </tr>";
+
+         for(int i=0; i<names.size(); i++){
+             html += "<tr><td>" + names.get(i) + "</td>" +
+                     "<td>" + roleNames.get(i) + "</td>" +
+                     "<td>" + emails.get(i) + "</td><tr>";
+         }
+
+         html += "</table></div>";
+
+         request.setAttribute("html", html);
+         request.getRequestDispatcher("users.jsp").forward(request,response);
     }
 }
