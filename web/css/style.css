@@ -1,0 +1,209 @@
+div{
+    position: relative;
+    margin: 0 0.625em 2.8em 0;
+}
+
+body{
+    background : rgba(0,0,0,0.3);
+}
+
+form{
+    position: relative;
+    width: 350px;
+    margin: 2em auto;
+    padding: 30px 20px 0px;
+    background: white;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+input {
+    position: absolute;
+    top: 26px;
+    left: 0px;
+    background: rgb(245,248,250);
+    outline: none;
+    height: 1.5em;
+    border: none;
+    border-bottom: grey 1px solid;
+    font-size: 0.9em;
+    width: 340px;
+    padding: 7px 5px;
+    color: black;
+    transition: 1s;
+}
+
+
+button {
+    display: block;
+    margin: 2px auto 0;
+    padding: 7px 5px;
+    color: #FFF;
+    background-color: #666;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    border: 1px solid #666;
+    border-width: 1px 1px 3px;
+}
+
+button:hover{
+    border-width: 1px 1px 3px;
+    animation: signInButton 700ms;
+    -webkit-animation: signInButton 700ms;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+input:focus,
+input:hover{
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(29,161,242);
+    height: 2em;
+}
+
+div:last-child{
+    padding-bottom: 1em;
+}
+
+a{
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+/* ------- Class Styles ------- */
+.div-form {
+    display: block;
+    margin: 0 auto;
+    color: grey;
+}
+
+.emailInputDiv,
+.nameInputDiv,
+.passwordInputDiv,
+.passwordInputDiv2{
+    padding-top: 5px;
+    background: rgb(245,248,250);
+}
+
+.email,
+.password,
+.name{
+    display: block;
+    padding: 0 0 0.5em 0.3em;
+}
+
+.error{
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    font-style: italic;
+    font-size: 0.8em;
+    color: red;
+    border-radius: 3px;
+    animation: errorColor 1000ms;
+    -webkit-animation: errorColor 1000ms;
+}
+
+.signInButton{
+    display : block;
+    width : 7em;
+    margin: 0.5em auto 0;
+}
+
+.signUp,
+.signIn{
+    float: right;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+.pw2Error,
+.pwError{
+    position: absolute;
+    color: red;
+    font-size: 0.8em;
+    font-style: italic;
+    right: 0;
+    bottom: -14px;
+}
+
+/* ------- HOVER -------*/
+
+.signInButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.signInButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -10px;
+    transition: 0.5s;
+}
+
+.signInButton:hover span {
+    padding-right: 25px;
+}
+
+.signInButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/* ------- KEY FRAME ------- */
+
+@-webkit-keyframes errorColor {
+    0% {
+        background-color: red;
+        color: white;
+    }
+    100% {
+        background-color: white;
+        color: red;
+    }
+}
+
+@keyframes errorColor {
+    0% {
+        background-color: red;
+        color: white;
+    }
+    100% {
+        background-color: white;
+        color: red;
+    }
+}
+@-webkit-keyframes signInButton {
+    0% {
+        background-color: red;
+        color: white;
+    }
+    100% {
+        background-color: white;
+        color: red;
+    }
+}
+
+@keyframes signInButton {
+    0% {
+        background-color: #666;
+        border: 1px solid #666;
+        border-width: 1px 1px 3px;
+    }
+    100% {
+        background-color: #525252;
+        border: 1px solid #525252;
+        border-width: 1px 1px 3px;
+    }
+}
