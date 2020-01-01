@@ -8,8 +8,10 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import java.util.GregorianCalendar;
+
 
 public class SetOffDayServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -133,10 +135,38 @@ public class SetOffDayServlet extends HttpServlet {
                 }
                 else{
                     success = true;
+
+                    String enter = enterList.get(i);
+                    String exit = endList.get(i);
+
+                    java.util.Date finalEnter = new java.util.Date();
+                    java.util.Date finalExit = new java.util.Date();
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    try {
+                        Date enterDate = dateFormat.parse(enter);
+                        Date exitDate = dateFormat.parse(exit);
+                        Calendar calendarEnter = new GregorianCalendar();
+                        Calendar calendarExit = new GregorianCalendar();
+                        calendarExit.setTime(exitDate);
+                        calendarExit.add(Calendar.MINUTE,-1);
+                        calendarEnter.setTime(enterDate);
+                        calendarEnter.add(Calendar.MINUTE,1);
+                        finalExit = calendarExit.getTime();
+                        finalEnter = calendarEnter.getTime();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    String requiredEnter = dateFormat.format(finalEnter);
+                    String requiredExit = dateFormat.format(finalExit);
+                    System.out.println(requiredEnter);
+                    System.out.println(requiredExit);
+
+
                     String sql2 = "INSERT INTO offdays(start,end,d_id) VALUES(?,?,?)";
                     PreparedStatement ps22 = handler.getConn().prepareStatement(sql2);
-                    ps22.setString(1,enterList.get(i));
-                    ps22.setString(2,endList.get(i));
+                    ps22.setString(1,requiredEnter);
+                    ps22.setString(2,requiredExit);
                     ps22.setInt(3,dID);
                     ps22.executeUpdate();
                 }
