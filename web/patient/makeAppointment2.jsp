@@ -271,8 +271,8 @@
                                 request.setAttribute("page", "makeApp2");
                             %>
                         </select>
-                        <input type="text" name="dateInForm" id="dateInForm" style="display: none;" value=<%=selectedDate%>>
-                        <input type="text" name="timeInForm" id="timeInForm" style="display: none;" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
+                        <input type="text" name="dateInForm" id="dateInForm" style="display:none" value=<%=selectedDate%>>
+                        <input type="text" name="timeInForm" id="timeInForm" style="display:none" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
                         <button type="submit" style="display: none">S</button>
                     </form>
                 </div>
@@ -302,16 +302,20 @@
                 </div>
 
                 <form action="makeAppointment2" method="post">
-                    <input type="text" name="date" id="trDate" style="display: none;">
-                    <input type="text" name="times" id="times" style="display: none;" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
-                    <input type="text" name="department" id="department" style="display: none;" value=<%=selectedDept%>>
-                    <input type="text" name="doctor" id="doctor" style="display: none;" value=<%=selectedDoctor%>>
+                    <input type="text" name="date" id="trDate" style="display:none">
+                    <input type="text" name="times" id="times" style="display:none" value=<%=selectedTimesStart + "-" + selectedTimesEnd%>>
+                    <input type="text" name="department" id="department" style="display:none" value=<%=selectedDept%>>
+                    <input type="text" name="doctor" id="doctor" style="display:none" value=<%=selectedDoctor%>>
                     <div style="">
                         <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
                     </div>
                 </form>
             </div>
             <div class="rightContainer">
+                <%
+                    if(request.getAttribute("html") != null)
+                        out.println(request.getAttribute("html"));
+                %>
             </div>
         </div>
     </div>
@@ -522,7 +526,7 @@
 
     function setFormInput2(node){
         document.getElementById('times').value = document.getElementById('times').value.split('-')[0] + "-" + node.value;
-
+        document.getElementById("timeInForm").value = document.getElementById('times').value.split('-')[0] + "-" + node.value;
     }
 
     let depSelect = document.getElementById("departments");

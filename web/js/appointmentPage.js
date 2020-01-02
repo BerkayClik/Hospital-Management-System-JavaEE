@@ -21,7 +21,7 @@ function setDepartment() {
 }
 
 function setDepartment2() {
-    
+
 }
 
 function setDoctor() {
@@ -36,4 +36,8 @@ function setTime(node){
     document.getElementById('doctor').value;
 }
 
-
+function setTime2(node) {
+    document.getElementById('resTime').value = node.value + "/" +
+      node.parentNode.parentNode.parentNode.firstChild.nextSibling.innerText + "/" +
+      document.getElementById('doctor').value;
+}

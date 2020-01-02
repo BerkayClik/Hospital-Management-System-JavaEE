@@ -32,6 +32,10 @@ public class SetAppointmentServlet extends HttpServlet {
                 patientEmail = cookie.getValue();
         }
         doctorName = doctorName.substring(0,doctorName.length()-1);
+        System.out.println(selectedAppTime);
+        System.out.println(selectedDay);
+        System.out.println(doctorName);
+
         DB_Handler handler = new DB_Handler();
         handler.init();
 

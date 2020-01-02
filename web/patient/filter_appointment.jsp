@@ -30,9 +30,18 @@
     Cookie[] cookies = request.getCookies();
     boolean success = false;
 
+    String selectedDept = "";
+
+
     for (int i=0; i<cookies.length; i++) {
         if (cookies[i].getName().equals("role_id") && cookies[i].getValue().equals("1")) {
             success = true;
+        }
+        if(cookies[i].getName().equals("selectedDept")) {
+            if (cookies[i].getValue().contains("+")) {
+                String selecteddept = cookies[i].getValue().replace("+", " ");
+                selectedDept = selecteddept;
+            }
         }
     }
     if(success){
@@ -96,6 +105,74 @@
             </div>
         </nav>
 
+        <div class="selectedDepartment" style="display: flex; justify-content: center;">
+            <span style="font-family: sans-serif; padding-left: 9px; display:block; margin-right: 10px;">Select Department: </span>
+            <form action="filterApp" method="post" id="deptNames" style="margin-top: -2px; display: flex; justify-content: center">
+                <select onchange="setDepartment()" id="departments" name="departments" style="margin: 4px 20px 0 0;">
+                    <option value=""></option>
+                    <%
+                        boolean isFirstLoad = true;
+
+                        for(Cookie cookie : cookies){
+                            if(cookie.getName().equals("deptNames")){
+                                isFirstLoad = false;
+                                break;
+                            }
+                        }
+
+                        if(isFirstLoad){
+                            response.sendRedirect("/setDeptNames");
+                        }
+
+                        boolean isDeptName = false;
+
+                        for(Cookie cookie : cookies){
+                            if(cookie.getName().equals("deptNames")){
+                                isDeptName = true;
+                                break;
+                            }
+                        }
+                        if(isDeptName){
+                            for(Cookie cookie : cookies){
+                                if(cookie.getName().equals("deptNames")){
+                                    String[] deptNames = cookie.getValue().split("%2F");
+                                    for(int i=0; i<deptNames.length; i++){
+                                        if(deptNames[i].contains("+")){
+                                            String deptName = deptNames[i].replace("+", " ");
+                                            if(selectedDept.equals("")){
+                                                out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
+                                            }
+                                            else{
+                                                if(selectedDept.equals(deptName)){
+                                                    out.println("<option value=\"" + deptName + "\" selected>" + deptName + "</option>");
+                                                }
+                                                else{
+                                                    out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            if(selectedDept.equals("")){
+                                                out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                            }
+                                            else{
+                                                if(selectedDept.equals(deptNames[i])){
+                                                    out.println("<option value=\"" + deptNames[i] + "\" selected>" + deptNames[i] + "</option>");
+                                                }
+                                                else{
+                                                    out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    %>
+                </select>
+                <button type="submit" style="">S</button>
+            </form>
+        </div>
 
 
     </div>

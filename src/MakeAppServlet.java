@@ -77,7 +77,6 @@ public class MakeAppServlet extends HttpServlet {
                     else
                         break;
                 }
-
             }
         }
 

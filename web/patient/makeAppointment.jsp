@@ -228,8 +228,8 @@
                                 }
                             %>
                         </select>
-                        <input type="text" name="dateInForm"  id="dateInForm" style="" value=<%=selectedDate%>>
-                        <button type="submit" style="">S</button>
+                        <input type="text" name="dateInForm"  id="dateInForm" style="display:none" value=<%=selectedDate%>>
+                        <button type="submit" style="display:none">S</button>
                     </form>
                 </div>
                 <div class="selectedDoctor">
@@ -258,9 +258,9 @@
                 </div>
 
                 <form action="makeAppointment" method="post">
-                    <input type="text" name="date" id="trDate" style="">
-                    <input type="text" name="department" id="department" style="" value=<%=selectedDept%>>
-                    <input type="text" name="doctor" id="doctor" style="" value=<%=selectedDoctor%>>
+                    <input type="text" name="date" id="trDate" style="display:none">
+                    <input type="text" name="department" id="department" style="display:none" value=<%=selectedDept%>>
+                    <input type="text" name="doctor" id="doctor" style="display:none" value=<%=selectedDoctor%>>
                     <div style="">
                         <button type="submit" name="button" class="showButton" style="margin-top: 2em" onclick="check()">Show</button>
                     </div>

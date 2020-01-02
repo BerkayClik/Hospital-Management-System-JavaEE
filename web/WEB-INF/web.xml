@@ -53,7 +53,7 @@
 
     <servlet>
         <servlet-name>makeApp2</servlet-name>
-        <servlet-class>SetAppointmentServlet2</servlet-class>
+        <servlet-class>MakeAppServlet2</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>makeApp2</servlet-name>
@@ -193,5 +193,14 @@
     <servlet-mapping>
         <servlet-name>userStats</servlet-name>
         <url-pattern>/admin/userStats</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>filterAppointments</servlet-name>
+        <servlet-class>FilterAppServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>filterAppointments</servlet-name>
+        <url-pattern>/patient/filterApp</url-pattern>
     </servlet-mapping>
 </web-app>
