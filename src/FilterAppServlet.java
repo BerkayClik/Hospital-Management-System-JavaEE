@@ -51,6 +51,44 @@ public class FilterAppServlet extends HttpServlet {
         System.out.println(times);
         System.out.println(dNames);
         System.out.println(depNames);
+
+        /*
+        <table style="width:70%; margin: 0 auto; border-collapse: separate; border-spacing: 0 1em;">
+            <tr>
+                <th>User Name</th>
+                <th>Role</th>
+                <th>E-mail</th>
+            </tr>
+            <tr>
+                <td>01-01-2020</td>
+                <td>09:00:00</td>
+            </tr>
+            <tr>
+                <td>01-02-2020</td>
+                <td>16:00:00</td>
+            </tr>
+        </table>
+         */
+
+        String html = "<table style=\"width:70%; margin: 0 auto; border-collapse: separate; border-spacing: 0 1em;\">" +
+                "<tr>\n" +
+                "                <th>Time</th>\n" +
+                "                <th>Department</th>\n" +
+                "                <th>Doctor Name</th>\n" +
+                "            </tr>";
+
+        for(int i=0; i<times.size(); i++){
+            html += "<tr>" +
+                    "   <td>" + times.get(i) + "</td>" +
+                    "   <td>" + depNames.get(i) + "</td>" +
+                    "   <td>" + dNames.get(i) + "</td>" +
+                    "</tr>";
+        }
+
+        html += "</table>";
+
+        request.setAttribute("html", html);
+        request.getRequestDispatcher("filter_appointment.jsp").forward(request,response);
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

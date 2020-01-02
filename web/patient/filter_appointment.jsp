@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="../css/home.css">
-
+    <link rel="stylesheet" href="../css/appointment.css">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -107,73 +107,83 @@
 
         <div class="selectedDepartment" style="display: flex; justify-content: center;">
             <span style="font-family: sans-serif; padding-left: 9px; display:block; margin-right: 10px;">Select Department: </span>
-            <form action="filterApp" method="post" id="deptNames" style="margin-top: -2px; display: flex; justify-content: center">
-                <select onchange="setDepartment()" id="departments" name="departments" style="margin: 4px 20px 0 0;">
-                    <option value=""></option>
-                    <%
-                        boolean isFirstLoad = true;
+            <form action="filterApp" method="post" id="deptNames" style="margin-top: -2px;">
+                <div style="display: flex; justify-content: center">
+                    <select id="departments" name="departments" style="margin: 4px 20px 0 0;">
+                        <option value=""></option>
+                        <%
+                            boolean isFirstLoad = true;
 
-                        for(Cookie cookie : cookies){
-                            if(cookie.getName().equals("deptNames")){
-                                isFirstLoad = false;
-                                break;
-                            }
-                        }
-
-                        if(isFirstLoad){
-                            response.sendRedirect("/setDeptNames");
-                        }
-
-                        boolean isDeptName = false;
-
-                        for(Cookie cookie : cookies){
-                            if(cookie.getName().equals("deptNames")){
-                                isDeptName = true;
-                                break;
-                            }
-                        }
-                        if(isDeptName){
                             for(Cookie cookie : cookies){
                                 if(cookie.getName().equals("deptNames")){
-                                    String[] deptNames = cookie.getValue().split("%2F");
-                                    for(int i=0; i<deptNames.length; i++){
-                                        if(deptNames[i].contains("+")){
-                                            String deptName = deptNames[i].replace("+", " ");
-                                            if(selectedDept.equals("")){
-                                                out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
-                                            }
-                                            else{
-                                                if(selectedDept.equals(deptName)){
-                                                    out.println("<option value=\"" + deptName + "\" selected>" + deptName + "</option>");
-                                                }
-                                                else{
+                                    isFirstLoad = false;
+                                    break;
+                                }
+                            }
+
+                            if(isFirstLoad){
+                                response.sendRedirect("/setDeptNames");
+                            }
+
+                            boolean isDeptName = false;
+
+                            for(Cookie cookie : cookies){
+                                if(cookie.getName().equals("deptNames")){
+                                    isDeptName = true;
+                                    break;
+                                }
+                            }
+                            if(isDeptName){
+                                for(Cookie cookie : cookies){
+                                    if(cookie.getName().equals("deptNames")){
+                                        String[] deptNames = cookie.getValue().split("%2F");
+                                        for(int i=0; i<deptNames.length; i++){
+                                            if(deptNames[i].contains("+")){
+                                                String deptName = deptNames[i].replace("+", " ");
+                                                if(selectedDept.equals("")){
                                                     out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
                                                 }
-                                            }
-                                        }
-                                        else{
-                                            if(selectedDept.equals("")){
-                                                out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                                else{
+                                                    if(selectedDept.equals(deptName)){
+                                                        out.println("<option value=\"" + deptName + "\" selected>" + deptName + "</option>");
+                                                    }
+                                                    else{
+                                                        out.println("<option value=\"" + deptName + "\">" + deptName + "</option>");
+                                                    }
+                                                }
                                             }
                                             else{
-                                                if(selectedDept.equals(deptNames[i])){
-                                                    out.println("<option value=\"" + deptNames[i] + "\" selected>" + deptNames[i] + "</option>");
+                                                if(selectedDept.equals("")){
+                                                    out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
                                                 }
                                                 else{
-                                                    out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                                    if(selectedDept.equals(deptNames[i])){
+                                                        out.println("<option value=\"" + deptNames[i] + "\" selected>" + deptNames[i] + "</option>");
+                                                    }
+                                                    else{
+                                                        out.println("<option value=\"" + deptNames[i] + "\">" + deptNames[i] + "</option>");
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                    %>
-                </select>
-                <button type="submit" style="">S</button>
+                        %>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" name="button" class="showButton" style="margin-top: 2em">Show</button>
+                </div>
             </form>
         </div>
 
+        <div style="margin-left: -150px;">
+            <%
+                if(request.getAttribute("html") != null)
+                    out.println(request.getAttribute("html"));
+            %>
+        </div>
 
     </div>
 </div>
