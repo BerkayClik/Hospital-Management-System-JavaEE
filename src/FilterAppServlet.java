@@ -31,7 +31,7 @@ public class FilterAppServlet extends HttpServlet {
         try {
             String sql = "SELECT datetime, users.name, departments.name  FROM appointments inner join userdeprel inner join departments inner join users " +
                     " on appointments.d_id = userdeprel.u_id and userdeprel.dept_id = departments.dept_id and appointments.d_id = users.u_id " +
-                    " where p_id = (select u_id from users where email = ? ) and departments.name =  ?";
+                    " where p_id = (select u_id from users where email = ? ) and departments.name =  ? ORDER BY datetime asc";
             handler.init();
             PreparedStatement pstmt = handler.getConn().prepareStatement(sql);
             pstmt.setString(1,pEmail);
@@ -79,7 +79,7 @@ public class FilterAppServlet extends HttpServlet {
 
         for(int i=0; i<times.size(); i++){
             html += "<tr>" +
-                    "   <td>" + times.get(i) + "</td>" +
+                    "   <td>" + times.get(i).substring(0,8) + "</td>" +
                     "   <td>" + depNames.get(i) + "</td>" +
                     "   <td>" + dNames.get(i) + "</td>" +
                     "</tr>";
