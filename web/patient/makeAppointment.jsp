@@ -379,7 +379,7 @@
                 console.log("today= " + today);
                 if(isBefore(date, today)){
                     console.log("statement: " + isBefore(date, today));
-                    alert("Today is: " + today + ", you cannot select previous days");
+                    alert("Today is: " + today + ", you cannot select previous days or today");
                     return true;
                 }
                 else{
@@ -399,7 +399,7 @@
                         isBefore = true;
                     }
                     else{
-                        if(parseInt(selectedDate.split("-")[0]) < parseInt(today.split("-")[0])
+                        if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
                             && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
                             isBefore = true;
                         }

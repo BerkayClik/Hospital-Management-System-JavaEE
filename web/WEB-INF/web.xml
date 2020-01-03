@@ -203,4 +203,13 @@
         <servlet-name>filterAppointments</servlet-name>
         <url-pattern>/patient/filterApp</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>cancelApp</servlet-name>
+        <servlet-class>CancelAppServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cancelApp</servlet-name>
+        <url-pattern>/patient/cancelApp</url-pattern>
+    </servlet-mapping>
 </web-app>

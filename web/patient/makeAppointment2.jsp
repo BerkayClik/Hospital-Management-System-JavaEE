@@ -58,6 +58,7 @@
         if(request.getAttribute("doctorName") != null){
             selectedDoctor = (String) request.getAttribute("doctorName");
         }
+
 //        if(request.getAttribute("timeInForm") != null){
 //            selectedTimes = (String) request.getAttribute("");
 //        }
@@ -87,10 +88,20 @@
             }
         }
 
+        if(request.getAttribute("startTime") != null){
+            selectedTimesStart = (String) request.getAttribute("startTime");
+        }
+        if(request.getAttribute("endTime") != null){
+            selectedTimesEnd = (String) request.getAttribute("endTime");
+        }
 
+        if(request.getAttribute("error") != null){
     %>
+    <script type="text/javascript">
+        alert("Fill all inputs")
+    </script>
 
-    <%
+    <%}
         boolean success = false;
 
         for (int i=0; i<cookies.length; i++) {
@@ -464,7 +475,7 @@
             console.log("today= " + today);
             if(isBefore(date, today)){
                 console.log("statement: " + isBefore(date, today));
-                alert("Today is: " + today + ", you cannot select previous days");
+                alert("Today is: " + today + ", you cannot select previous days or today");
                 return true;
             }
             else{
@@ -484,7 +495,7 @@
                     isBefore = true;
                 }
                 else{
-                    if(parseInt(selectedDate.split("-")[0]) < parseInt(today.split("-")[0])
+                    if(parseInt(selectedDate.split("-")[0]) <= parseInt(today.split("-")[0])
                         && parseInt(selectedDate.split("-")[1]) == parseInt(today.split("-")[1])){
                         isBefore = true;
                     }

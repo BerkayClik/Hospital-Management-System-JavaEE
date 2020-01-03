@@ -46,6 +46,14 @@
             success = true;
         }
     }
+    if(request.getAttribute("done") != null){
+%>
+<script type="text/javascript">
+    alert("Appointment Cancelled");
+</script>
+
+
+<%}
     if(success){
         String value = "1";
 %>
@@ -182,6 +190,44 @@
     })
     function valChanged(d) {
         set();
+    }
+
+    function cancel(node){
+        console.log("cancelling");
+        let i = 0;
+        let li = node.parentElement;
+        document.getElementById('time').value = li.innerText;
+
+        console.log(li.innerText);
+        while (li.previousSibling){
+            i++;
+            li = li.previousSibling;
+            if(li.previousSibling.innerText == "Time")
+                break;
+        }
+        console.log(i);
+
+        let dateList = document.querySelectorAll('.result>ul')[0].firstElementChild;
+        let x = -1;
+        while(true){
+            dateList = dateList.nextSibling;
+            x++;
+            if(x==i)
+                break;
+        }
+        document.getElementById('trDate').value = dateList.innerText;
+
+        let doctorList = document.querySelectorAll('.result>ul')[1].firstElementChild;
+        x = -1;
+        while(true){
+            doctorList = doctorList.nextElementSibling;
+            x++;
+            if(x==i)
+                break;
+        }
+        document.getElementById('doctor').value = doctorList.innerText;
+
+        document.getElementsByClassName('showButton')[0].click();
     }
 
 </script>
