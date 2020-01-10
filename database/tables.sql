@@ -117,7 +117,12 @@ insert into cs202.users values(17,'Berna Turk','kU7h8C5LF2fnRxRy69G19g==','berna
 insert into cs202.users values(18,'Berkan Kaplan','XmZwPCc4bhcN4MeR9sENMA==','berkan.kaplan@ozu.edu.tr',2);
 insert into cs202.users values(19,'Cem Turan','wmaryEXBeIcLTy5DCBLj5A==','cem.turan@ozu.edu.tr',2);
 insert into cs202.users values(20,'Deniz Arslan','SUj3QCoMejgEmtoUX5VtBw==','deniz.arslan@ozu.edu.tr',2);
-insert into cs202.users values(21,'Ipek Ceylan','b901bi6bN9pV9Z89+3Jt7g==','ipek.ceylan@ozu.edu.tr',2);
+insert into cs202.users values(21,'Ipek Ceylan','b901bi6bN9pV9Z89+3Jt7g==','ipek.ceylan@ozu.edu.tr',4);
+
+insert into cs202.rooms(name) values('Room101');
+insert into cs202.rooms(name) values('Room102');
+insert into cs202.rooms(name) values('Room103');
+insert into cs202.rooms(name) values('Room104');
 
 
 
