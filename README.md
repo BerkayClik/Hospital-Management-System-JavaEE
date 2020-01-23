@@ -1,7 +1,7 @@
 # CS202
 
 The project consists of ​two phases​.
-In the first phase you will form your project groups, design and implement the database for this application. You have to form ​groups of 3 for this project. Your report should include UML Diagram of your Database, necessary DML and DDL statements, and a brief explanation about your design decisions. In the second part, you will implement the web application and its underlying components. Your application should connect and access to database.
+In the first phase you will form your project design and implement the database for this application. Your report should include UML Diagram of your Database, necessary DML and DDL statements, and a brief explanation about your design decisions. In the second part, you will implement the web application and its underlying components. Your application should connect and access to database.
 The mandatory requirement of the hospital management system:
 ❏ There must be separate user types. ​At least 3​ for patient, doctors and managers.
 ❏ Users can create a patient account from the home page with a sign-up functionality.
