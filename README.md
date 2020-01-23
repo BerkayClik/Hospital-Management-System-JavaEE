@@ -1,4 +1,11 @@
-# CS202
+#Tomcat + MySQL
+
+![Screen Shot 2020-01-23 at 05 01 07](https://user-images.githubusercontent.com/31419720/72950979-f5219500-3d9d-11ea-85a5-10595fa20b64.png)
+
+![Screen Shot 2020-01-23 at 05 04 34](https://user-images.githubusercontent.com/31419720/72950984-f9e64900-3d9d-11ea-8861-d6a93bb10a4c.png)
+![Screen Shot 2020-01-23 at 05 02 47](https://user-images.githubusercontent.com/31419720/72950991-fbb00c80-3d9d-11ea-8e32-904d58f135d0.png)
+
+
 
 The project consists of ​two phases​.
 In the first phase you will form your project design and implement the database for this application. Your report should include UML Diagram of your Database, necessary DML and DDL statements, and a brief explanation about your design decisions. In the second part, you will implement the web application and its underlying components. Your application should connect and access to database.
